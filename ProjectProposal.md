@@ -1,11 +1,11 @@
 # **Smart Grocery List Generator**
 ### Team Info and Roles
-Nicholas Graalum - Team Lead - Software Developer - graalumn@oregonstate.edu
-Matthew Sasten - Software Developer - sastenm@oregonstate.edu
-Andrew Chan - Software Developer - chanand@oregonstate.edu
-Kylan Jagels - Software Developer - jagelsky@oregonstate.edu
-Ryan Messenger - Software Developer - messengr@oregonstate.edu
-Aaryan Raghuvanshi - Software Developer - raghuvaa@oregonstate.edu
+- Nicholas Graalum - Team Lead - Software Developer - graalumn@oregonstate.edu
+- Matthew Sasten - Software Developer - sastenm@oregonstate.edu
+- Andrew Chan - Software Developer - chanand@oregonstate.edu
+- Kylan Jagels - Software Developer - jagelsky@oregonstate.edu
+- Ryan Messenger - Software Developer - messengr@oregonstate.edu
+- Aaryan Raghuvanshi - Software Developer - raghuvaa@oregonstate.edu
 ### Communication
 [Discord](https://discord.gg/zDAX2vdA)
 [GitHub](https://github.com/NicholasGraalum/CS362-Project)
