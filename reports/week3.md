@@ -1,3 +1,3 @@
 ### Team Report
 
-### Contributions
+Team worked on presentation and researched necessary dependencies and apis. 
