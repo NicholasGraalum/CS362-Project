@@ -138,12 +138,6 @@ Schedule under roles:
 |Back end tester||Test Profile API|Test Meal API|Test Food API||||
 
 
-
-
-
-
-
-
 ### External feedback
 Feedback will be most useful for testing our UI to make sure it is user friendly and intuitive. We will get this feedback by finding potential users and performing user tests.  
 ### Risks
@@ -193,9 +187,22 @@ By week
 3. Comparing plans and lists and implementing AI for meal suggestions and maybe more.
 
 ## Software Architecture
+### Architecture Pattern:
+**Layered architecture pattern:**  
+- **Presentation layer:** web interface hosted on website   
+  - Communicates to the business layer through REST API http requests.   
+
+- **Business layer:** backend server handling REST API requests (using express), executes necessary computations or API calls, replies with html page.  
+  - Communicates to Application layer by importing and calling database access functions  
+
+- **Application layer:** Data access layer (DAL) implements all necessary functions to access data so there are not SQL calls throughout program  
+  - Communicates to data layers through MySQL ip using sequelize library  
+
+- **Data layer:** MySQL database 
+
 ### Components:
 
-#### Web Pages
+#### Web Pages (presentation layer)
 1. **Main interface**: Displays the header, sidebar, and base layout. 
 a. ‘Meals’ button will redirect to a page with all of the meals  
 b. ‘Ingredients’ button will redirect to a page with individual ingredients to add to the shopping list  
@@ -218,30 +225,50 @@ b. “View meal” appears after entering meal request that will take user to th
 7. Profile page (tentative)
 8. Login/logout
 
-#### Data Base:
-- Recipe aka Meal plan
--- Name  
--- Image (link or file?)  
--- Number of servings  
--- Meal type (multivalued: breakfast, lunch, dinner)  
--- Category tags: (multivalued: vegan, vegetarian, gluten free, etc.)  
+#### Data Base (data layer):
+
+![Database ERD](images/database_ERD.png)
+
+  
+### Software Design
+
+#### webpages (presentation layer)
+
+Handlebars (technically on server): main handlebar template will include the header, sidebar, and base layout for every page. Partial templates will be used to render the subpages using data from the database.  
+
+#### Server (business layer)
+
+REST API implemented using Express to serve html pages from handlebars to client. REST API will handle calling other necessary functions for computing, accessing and filtering data, and calling nutrition API and Kroger API. 
+
+#### Data access layer
+
+Will use an ORM library called Sequelize to easily access the data from MySQL. We will start by implementing functions to return data for each table and add additional functions as necessary. This will allow anyone working on the program to easily access data, even if they aren't familiar with the database.
+
+#### Database specifications (data layer)
+
+Attribute specifications:
+- Recipe aka Meal plan  
+-- Name (varchar(20))  
+-- Image (link)  
+-- Number of servings (float)  
+-- Meal type (multivalued: breakfast, lunch, dinner) (varchar(20))  
+-- Category tags: (multivalued: vegan, vegetarian, gluten free, etc.) (varchar(20))  
 -- Macronutrients (Tentative. Will be derived for now. Might add to database later to save api calls)  
 -- Ingredients (relation)  
 -- Visibility (public or private)  
--- Description  
+-- Description (varchar(200))  
 - User  
--- Email  
--- Password  
+-- Email (varchar(100))  
+-- Password (varchar(100))  
 -- Profile info (Tentative. Might add profile info later)  
 - Ingredients   
--- Name  
--- Store_api_id (item id in kroger api)  
--- Nutrition_api_id (item id in usda fdc api)  
-  
-### Software Design
-Handlebars: main handlebar template will include the header, sidebar, and base layout for every page. Partial templates will be used to render the subpages using data from the database.  
-DataBase:
-MySQL: This will be used to make the database for the meals and ingredients. We are most comfortable with this service and it 
+-- Name (varchar(100))  
+-- Store_api_id (item id in kroger api) (int)  
+-- Nutrition_api_id (item id in usda fdc api) (int)  
+
+
+DataBase service:  
+MySQL: This will be used to make the database for the meals and ingredients. We are most comfortable with this service.
 
 ### Coding Guidelines
 All of these guidelines were taken from the google AI overview, slightly modified to stay inline with how our group operates. These all best fit our group as web development requires a lot of cross referencing with variable names and attributes. We can keep a consistent naming convention and system to all our code to better communicate and avoid common errors. Furthermore having language specific guidelines for functionality can help the team avoid loading times and keep a consistent mindset for the product.
