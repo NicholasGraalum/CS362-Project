@@ -10,7 +10,6 @@
 - Verified that openAI api will work for our purposes and found necessary functions for structured responses in documentation. Have yet to test.
 #### Matt:
 - Determine metadata needed for meal filtering.
-- Discuss user interface and overall design with other frontend developers.
 - Completed web page design architecture and basic interactions.
 #### Nick:
 - Worked on the project architecture document, coding guidelines and standards as well as the software design
