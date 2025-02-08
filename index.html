@@ -22,13 +22,17 @@
     -->
     <main class = "content">
       <!--
-        sidebar content that is the meals/ ingredients buttons
+        topnavigation bar for the profile, search, list, and settings
       -->
       <div class="topnav">
-        <a class="active" href="#list">List</a>
+        <input type="text" placeholder="Search">
+        <button id="list-viewer" class="action-button">List</button>
         <a href="#profile">Profile</a>
         <a href="#settings">Settings</a>
       </div>
+      <!--
+        sidebar content that is the meals/ ingredients buttons
+      -->
       <aside class ="side-bar-container">
         <button id= "meal-filter" class="action-button">Meals</button>
         <button id= "ingredient-filter" class="action-button">Ingredients</button>
