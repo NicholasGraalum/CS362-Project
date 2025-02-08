@@ -25,7 +25,7 @@ Overall the user base is aimed towards consumers of large grocery based companie
 
 
 ### Use Cases
-User can create a profile and login to save their data (Group)
+User can create a profile and login to save their data (Kylan) (database)
 - **Actors**: The user
 - **Triggers**: Clicks “Login / Sign-Up” button
 - **Preconditions**: The user must have a unique email address and username
@@ -79,7 +79,7 @@ Users can set frequently bought items to have them automatically added to the sh
 - **Extensions**: User can manually adjust auto-added items, system suggests frequency settings based on patterns (biweekly/monthly)
 - **Exceptions**: No past data, incorrect frequency calculation
 
-Ask for meal recommendations (Kylan Jagels)
+Ask for meal recommendations (Updated to be tentative stretch goal per ta rec)
 - **Actors**: The user
 - **Triggers**: The user clicks the meal recommendation button
 - **Preconditions**: The user has entered a meal recommendation request prompt describing what type of meal they want
@@ -188,17 +188,27 @@ By week
 
 ## Software Architecture
 ### Architecture Pattern:
-**Layered architecture pattern:**  
-- **Presentation layer:** web interface hosted on website   
-  - Communicates to the business layer through REST API http requests.   
-
-- **Business layer:** backend server handling REST API requests (using express), executes necessary computations or API calls, replies with html page.  
-  - Communicates to Application layer by importing and calling database access functions  
-
+**Layered architecture pattern**  
+- **Presentation layer:** web interface hosted on website     
+  - Communicates to the business layer through http requests.   
+- **Business layer:** backend server handling https request routing, executes necessary computations or API calls, renders on server side replies with html page.  
+  - Communicates to Application layer by importing and calling database access functions
+  - Alternative: REST API and client side rendering.  
+    - Client side rendering is better for dynamic interfaces and reduces server load
+    - We chose server side rendering because we are more familiar with it, it is simpler, and our interfaces will not require many dynamic aspects.   
 - **Application layer:** Data access layer (DAL) implements all necessary functions to access data so there are not SQL calls throughout program  
   - Communicates to data layers through MySQL ip using sequelize library  
+- **Data layer:** MySQL database   
+  - Alternative: NoSQL database like mongoDB  
+    - NoSQL databases are more flexible   
+    - We chose SQL database because it is better for structured data and queries and we are more familiar with using SQL databases.   
 
-- **Data layer:** MySQL database 
+**Assumptions:**
+- The server side is a monolith including business layer and application layer: routing functions, computation functions, and data access functions divided into files and imported where needed. 
+- SQL injection security is implemented through data access layer
+- Logged in users are handled by session variables. 
+- Handlebars server side rendering is sufficient for our interface. 
+
 
 ### Components:
 
@@ -225,26 +235,26 @@ b. “View meal” appears after entering meal request that will take user to th
 7. Profile page (tentative)
 8. Login/logout
 
+#### Express routing (business layer)
+- Local hosted server that takes http requests.
+- Each page listed in the web pages component will have a corresponding http request function 
+- The one exception is that the login page and landing page will be the same page, routed differently depending on if logged in.
+
+#### computation functions (business layer)
+- Meal macro calculator function: calls fdc nutrition api to calculate total macros for ingredients in meal.
+- Grocery list price calculator function: calls Kroger api to calculate total price for all items on list. 
+
+#### DAL (data access layer)
+- Functions to pull data for a specific entry in users, meals, or ingredients. 
+- Function for pulling meals with specific meal tags.
+- Function for pulling ingredients in a meal. 
+- Function for pulling meals favorited by user. 
+
+
 #### Data Base (data layer):
 
+ER Diagram:
 ![Database ERD](images/database_ERD.png)
-
-  
-### Software Design
-
-#### webpages (presentation layer)
-
-Handlebars (technically on server): main handlebar template will include the header, sidebar, and base layout for every page. Partial templates will be used to render the subpages using data from the database.  
-
-#### Server (business layer)
-
-REST API implemented using Express to serve html pages from handlebars to client. REST API will handle calling other necessary functions for computing, accessing and filtering data, and calling nutrition API and Kroger API. 
-
-#### Data access layer
-
-Will use an ORM library called Sequelize to easily access the data from MySQL. We will start by implementing functions to return data for each table and add additional functions as necessary. This will allow anyone working on the program to easily access data, even if they aren't familiar with the database.
-
-#### Database specifications (data layer)
 
 Attribute specifications:
 - Recipe aka Meal plan  
@@ -266,9 +276,25 @@ Attribute specifications:
 -- Store_api_id (item id in kroger api) (int)  
 -- Nutrition_api_id (item id in usda fdc api) (int)  
 
+  
+### Software Design
 
+#### webpages (presentation layer)
+
+Handlebars (technically on server): main handlebar template will include the header, sidebar, and base layout for every page. Partial templates will be used to render the subpages using data from the database.  
+
+#### Server (business layer)
+
+Express routing to serve html pages rendered from handlebars to client. Routing functions are responsible for handling calling other necessary functions for computing, calling DAL functions or FDC nutrition API and Kroger API to collect necessary data, and rendering html page with data and handlebars. 
+
+#### Data access layer
+
+Will use an ORM library called Sequelize to easily access the data from MySQL. We will start by implementing functions to return data for each table and add additional functions as necessary. This will allow anyone working on the program to easily access data, even if they aren't familiar with the database.
+
+#### Database specifications (data layer)
 DataBase service:  
 MySQL: This will be used to make the database for the meals and ingredients. We are most comfortable with this service.
+Responsibilities: respond with data when receiving SQL query requests.
 
 ### Coding Guidelines
 All of these guidelines were taken from the google AI overview, slightly modified to stay inline with how our group operates. These all best fit our group as web development requires a lot of cross referencing with variable names and attributes. We can keep a consistent naming convention and system to all our code to better communicate and avoid common errors. Furthermore having language specific guidelines for functionality can help the team avoid loading times and keep a consistent mindset for the product.
