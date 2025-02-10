@@ -12,6 +12,6 @@
 #### Matt:
 
 #### Nick:
-
+- made mockup of index.html and style.css for the landing page
 #### Ryan:
 
