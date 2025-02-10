@@ -87,11 +87,17 @@ Ask for meal recommendations (Updated to be tentative stretch goal per ta rec)
 - **List of steps**: User goes to the meal request page. User enters an appropriate meal request and clicks the request button. Gpt api generates a list of suggested meals. 
 - **Extensions**: The user leaves the page before clicking the request button: entered request is not saved.
 - **Exceptions**: The request prompt is not understood by the gpt ai: a default response is given with instructions for a correct prompt
+### Functional Requirements:
+1. System provides a way for users to create an account or log in with their credentials
+2. System allows adding meals while storing all meals added
+3. System filters meals based on user preferences 
+4. System provides an accurate price of the shopping list
 ### Non functional Requirements:
 **Reliability**: Consistently able to perform the functions based around the users profile, shopping lists, and meal plans.  
 **Quality**: Easy to use and provides accurate information.  
 **Scalability**: Can handle multiple API requests without a performance decrease. Uses an sql database to store data so it can easily be scaled up.  
 **Usability**: Has a responsive, clear design that gives users feedback on actions.  
+**Security**: Stores user data in a secure manner
 ### External Requirements
 **Error handling**: Invalid user inputs and actions are handled gracefully.  
 **Access**: Run on a server with a public URL that others can access  
