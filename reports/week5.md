@@ -3,7 +3,7 @@
 
 
 #### Andrew:
-
+- Worked on our slides for the mid-term presentation
 #### Kylan:
 - reworked our architecture description to fit a layered architecture pattern.
 - added architecture assumptions and alternatives to the living doc.
