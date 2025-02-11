@@ -388,6 +388,6 @@ Track all bugs on **GitHub Issues**
 
 
 #### Documentation plan
-Developer living documentation  
-User guide documentation  
-In-app information symbols  
+Developer living documentation and guides for future development. This will include code structure and architecture. Implemented as we develop new features
+User guide documentation. This will go over all the UI and different features and how to use them. Implemented at the end of development and as new features are implemented
+In-app information symbols and explanations. This will explain in the app how to do different things and use different features. Implemented during development and from user feedback.
