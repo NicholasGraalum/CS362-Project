@@ -203,7 +203,7 @@ By week
     - Client side rendering is better for dynamic interfaces and reduces server load
     - We chose server side rendering because we are more familiar with it, it is simpler, and our interfaces will not require many dynamic aspects.   
 - **Application layer:** Data access layer (DAL) implements all necessary functions to access data so there are not SQL calls throughout program  
-  - Communicates to data layers through MySQL ip using sequelize library  
+  - Communicates to data layers through MySQL ip by sending sql queries.  
 - **Data layer:** MySQL database   
   - Alternative: NoSQL database like mongoDB  
     - NoSQL databases are more flexible   
@@ -295,7 +295,7 @@ Express routing to serve html pages rendered from handlebars to client. Routing 
 
 #### Data access layer
 
-Will use an ORM library called Sequelize to easily access the data from MySQL. We will start by implementing functions to return data for each table and add additional functions as necessary. This will allow anyone working on the program to easily access data, even if they aren't familiar with the database.
+We will use the mysql2 library to send sql queries to access the data from MySQL. We will start by implementing functions to return data for each table and add additional functions as necessary. This will allow anyone working on the program to easily access data, even if they aren't familiar with the database.
 
 #### Database specifications (data layer)
 DataBase service:  
