@@ -374,10 +374,17 @@ Any available member is available to help and test wherever needed along the way
 
 
 #### Test Plan and Bugs
-**Unit Testing**: Test individual components (API handlers, DB queries etc.)  
-**Integration Testing**: Test interactions between components (UI and backend)  
-**Usability Testing**: Conduct user tests to evaluate UI/UX  
-**Bug Tracking**: Use GitHub Issues to log and resolve bugs.  
+Track all bugs on **GitHub Issues**
+**Functional Requirements:**
+  - **Unit Testing:** Verify meal macronutrient calculation functions. Verify shopping list price calculation functions
+  - **Integration Testing:** Test interactions between components (Verify all HHTP requests and API calls)  
+  - **Usability Testing:** Conduct user studies to evaluate the ease of use of our UI/UX
+  - **Black Box Testing:** Create a variety of personas to verify all functional requirements by testing as they would use the website
+  - **White Box Testing:** Verify that all of our backend functions are working by targeting potential bugs and edge cases
+  - **Bug Tracking:** Use GitHub Issues to log and resolve bugs.
+**Non-Functional Requirents:**
+  - **Responsiveness:** Measure server response time, especially for actions requiring API calls
+  - **Scalability:** Measure our SQL query response time on large datasets
 
 
 #### Documentation plan
