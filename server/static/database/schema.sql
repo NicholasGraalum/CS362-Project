@@ -21,7 +21,7 @@ CREATE TABLE Recipe
 
 CREATE TABLE Ingredient
 (
-  name INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
   store_api_id INT NOT NULL,
   nutrition_api_id INT NOT NULL,
   PRIMARY KEY (name)
