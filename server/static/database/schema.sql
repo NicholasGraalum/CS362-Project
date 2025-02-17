@@ -1,3 +1,4 @@
+-- schema 
 CREATE TABLE User
 (
   email VARCHAR(320) NOT NULL,
@@ -29,7 +30,7 @@ CREATE TABLE Ingredient
 
 CREATE TABLE includes
 (
-  amount INT NOT NULL,
+  amount FLOAT NOT NULL,
   r_id INT NOT NULL,
   i_name INT NOT NULL,
   PRIMARY KEY (r_id, i_name),
