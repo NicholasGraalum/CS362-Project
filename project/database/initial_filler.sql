@@ -24,7 +24,7 @@ INSERT INTO Ingredient (name, store_api_id, nutrition_api_id) VALUES
 ('Chickpeas', 109, 209);
 
 -- Insert Recipe-Ingredient Relationships (Multiple Ingredients per Recipe, Amount in Grams)
-INSERT INTO includes (amount, r_id, i_name) VALUES
+INSERT INTO Includes (amount, r_id, i_name) VALUES
 -- Spaghetti Bolognese (Recipe 1)
 (300.0, 1, 'Tomato'),    -- 300g tomatoes
 (10.0, 1, 'Garlic'),     -- 10g garlic (about 2 cloves)
@@ -44,7 +44,7 @@ INSERT INTO includes (amount, r_id, i_name) VALUES
 (20.0, 3, 'Olive Oil');  -- 20g olive oil
 
 -- Insert Favorite Recipes
-INSERT INTO favorites (email, r_id) VALUES
+INSERT INTO Favorites (email, r_id) VALUES
 ('alice@example.com', 2),
 ('bob@example.com', 1),
 ('charlie@example.com', 3);
@@ -56,7 +56,7 @@ INSERT INTO Recipe_meal_type (meal_type, r_id) VALUES
 ('Breakfast', 3);
 
 -- Insert Recipe Tags (Multiple Tags per Recipe)
-INSERT INTO Recipe_tags (tags, r_id) VALUES
+INSERT INTO Recipe_tags (tag, r_id) VALUES
 -- Spaghetti Bolognese (Recipe 1)
 ('Italian', 1),
 ('Pasta', 1),

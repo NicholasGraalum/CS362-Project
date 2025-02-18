@@ -28,7 +28,7 @@ CREATE TABLE Ingredient
   PRIMARY KEY (name)
 );
 
-CREATE TABLE includes
+CREATE TABLE Includes
 (
   amount FLOAT NOT NULL,
   r_id INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE includes
   FOREIGN KEY (i_name) REFERENCES Ingredient(name)
 );
 
-CREATE TABLE favorites
+CREATE TABLE Favorites
 (
   email VARCHAR(320) NOT NULL,
   r_id INT NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE Recipe_meal_type
 
 CREATE TABLE Recipe_tags
 (
-  tags VARCHAR(20) NOT NULL,
+  tag VARCHAR(20) NOT NULL,
   r_id INT NOT NULL,
-  PRIMARY KEY (tags, r_id),
+  PRIMARY KEY (tag, r_id),
   FOREIGN KEY (r_id) REFERENCES Recipe(id)
 );
