@@ -12,6 +12,7 @@
 - added slides for backend architecture components
 
 #### Matt:
+- Worked on the slides for the mid-term presentation
 
 #### Nick:
 - made mockup of index.html and style.css for the landing page

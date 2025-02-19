@@ -194,15 +194,16 @@ By week
 
 ## Software Architecture
 ### Architecture Pattern:
-**Layered architecture pattern**  
-- **Presentation layer:** web interface hosted on website     
+**Layered architecture pattern (or model/view/controller)**   
+<sub>we basically described model/view/controller architecture. It might make more sense to just call it that</sub> 
+- **Presentation layer: (view)** web interface hosted on website     
   - Communicates to the business layer through http requests.   
-- **Business layer:** backend server handling https request routing, executes necessary computations or API calls, renders on server side replies with html page.  
+- **Business layer: (controller)** backend server handling https request routing, executes necessary computations or API calls, renders on server side replies with html page.  
   - Communicates to Application layer by importing and calling database access functions
   - Alternative: REST API and client side rendering.  
     - Client side rendering is better for dynamic interfaces and reduces server load
     - We chose server side rendering because we are more familiar with it, it is simpler, and our interfaces will not require many dynamic aspects.   
-- **Application layer:** Data access layer (DAL) implements all necessary functions to access data so there are not SQL calls throughout program  
+- **Application layer: (models)** Data access layer (DAL) implements all necessary functions to access data so there are not SQL calls throughout program  
   - Communicates to data layers through MySQL ip by sending sql queries.  
 - **Data layer:** MySQL database   
   - Alternative: NoSQL database like mongoDB  
