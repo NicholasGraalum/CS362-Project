@@ -1,0 +1,16 @@
+<div class="meal" 
+  data-id={{id}}
+  data-name="{{name}}"
+  data-servings={{servings}}
+  data-mealType="{{#each mealType}}{{this}} {{/each}}"
+  data-categoryTags="{{#each categoryTags}}{{this}} {{/each}}"
+  data-ingredients="{{#each categoryTags}}{{this}} {{/each}}"
+  data-description="{{description}}"
+  data-image="{{image}}"
+>
+  <a href="{{id}}">
+    <img src="{{image}}" alt="Picture of {{name}}">
+    <p><a href="/meals/{{id}}">{{name}}</a></p>
+    <button class="add-ingredients-button">+</button>
+  </a>
+</div>
