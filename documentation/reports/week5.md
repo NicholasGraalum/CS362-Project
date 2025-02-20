@@ -13,6 +13,8 @@
 
 #### Matt:
 - Worked on the slides for the mid-term presentation
+- Created a basic outline for the meals page with html and CSS to display meals nicely in a grid
+- Created a handlebar template for the meals page
 
 #### Nick:
 - made mockup of index.html and style.css for the landing page

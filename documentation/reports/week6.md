@@ -13,6 +13,10 @@ We plan to finish our main use cases later this week and test the implementation
 - added data getters in recipe, ingredients, and user models
 
 #### Matt:
+- Created singleMeal page html, CSS, and handlebar
+- Added search, create meal, and add ingredients buttons to meals page
+- Added button to add ingredients to shopping list on singleMeal page
+- Created a search modal handlebar template and added it to the meals handlebar
 
 #### Nick:
 
