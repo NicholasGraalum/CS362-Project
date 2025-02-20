@@ -9,6 +9,15 @@ documentation/ : contains all term project documents
     LIVINGDOC  
 
 project/ : contains all term project code
+    controllers : contains controllers to handle incoming requests and send responses
+    database     : contains database for the website
+    models       : contains models for the structure of data in the database
+    routes       : defines the paths to map to the correct URL
+    static       : contains static files (html mockups and style.css)
+    views        : contains handlebar templates for webpages
+        partials    : contains partial handlebar templates
+    package.json : contains dependencies
+    server.js    : contains code for server
 ```
 ### Trello
 https://trello.com/invite/b/67858decd34bc68d48374ae3/ATTI51f3c84a6dd8d589092d403e5d5221d5AF41F0BE/cs-362-grocery-list
