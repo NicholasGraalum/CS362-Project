@@ -19,5 +19,5 @@ We plan to finish our main use cases later this week and test the implementation
 - Created a search modal handlebar template and added it to the meals handlebar
 
 #### Nick:
-
+- Edited the landing page and CSS
 #### Ryan:
