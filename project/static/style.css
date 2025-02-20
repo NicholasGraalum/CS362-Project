@@ -198,3 +198,127 @@ a:hover {
     text-align: center;
     color: #333;
 }
+
+/* Single Meal Page */
+.meal-page-header {  
+  display: flex;  
+  justify-content: space-around;  
+  align-items: center;  
+  width: 100%;  
+  margin-bottom: 20px;  
+}  
+
+.meal-page-header h1 {  
+  font-size: 36px;  
+  color: #007bff;  
+  margin: 0;  
+  align-items: center;
+}  
+
+.full-meal {
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;
+  width: 60%;
+  margin: auto;
+}  
+
+/* meal Page Details */  
+.meal-page-details {  
+  display: flex;  
+  flex-direction: row;
+  align-items: center;  
+  padding: 20px;  
+  background-color: #fff;  
+  border: 1px solid #ddd;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);  
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.meal-page-details#meal-page-tags {
+  margin-top: 20px;
+  justify-content: left;
+}
+  
+.meal-page-details h2 {  
+  font-size: 24px;  
+  color: #333;  
+  margin-bottom: 10px;  
+}  
+  
+.meal-page-details p {  
+  font-size: 18px;  
+  color: #555;  
+  margin-bottom: 0px;  
+  margin-top: 0px;
+}  
+   
+.meal-page-details p1 {  
+  font-size: 18px;  
+  color: #555;  
+  margin-bottom: 0px;  
+  margin-top: 0px;
+  text-align: center;
+}  
+   
+ /* meal Page Image */  
+.meal-page-image {  
+  width: 100%;  
+  height: 600px;  
+  object-fit: cover;  
+  border-radius: 30px;  
+  margin-bottom: -20px;  
+}  
+
+#meal-page-ingredients {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap:1%;
+  justify-content: space-between;
+}
+
+ /* meal Page Ingredients */  
+#meal-page-ingredients {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  padding: 20px;  
+  background-color: #fff;  
+  border: 1px solid #ddd;  
+  border-radius: 10px;  
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);  
+  margin-top: 20px;
+  flex-basis: content;
+  flex-grow: 0;
+}  
+   
+#meal-page-ingredients h2 {  
+  font-size: 24px;  
+  margin-bottom: 10px;  
+}  
+   
+#meal-page-ingredients li {  
+  font-size: 18px;  
+  color: #555;  
+  margin-bottom: 10px;
+}
+
+.add-ingredients-button {
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  padding: 5px 10px; 
+  cursor: pointer; 
+  border-radius: 5px;
+}
+
+#ingredients-header {
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+}
