@@ -399,6 +399,7 @@ We are using GitHub Actions for continuious integration. Every time a pull reque
 **Pros of GitHub Actions**
 - Built directly into GitHub, making setup and maintenance easier. No need for an extra service.
 - Pre-made workflow templates for a variety of products.
+
 **Cons of GitHub Actions**
 - Less detailed log output for debugging
 - Longer start time compared to other dedicated CI services
