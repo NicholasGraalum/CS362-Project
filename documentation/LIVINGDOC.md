@@ -392,3 +392,13 @@ Track all bugs on **GitHub Issues**
 Developer living documentation and guides for future development. This will include code structure and architecture. Implemented as we develop new features
 User guide documentation. This will go over all the UI and different features and how to use them. Implemented at the end of development and as new features are implemented
 In-app information symbols and explanations. This will explain in the app how to do different things and use different features. Implemented during development and from user feedback.
+
+#### Test-Automation and CI 
+We are using GitHub Actions for continuious integration. Every time a pull request is made or a change has been commited, The GitHub action event will be called, before getting the code from the repo, downloading dependencies, and running the mocha tests cases. This happenes through the /.github/workflows folder with the YAML script. 
+
+**Pros of GitHub Actions**
+- Built directly into GitHub, making setup and maintenance easier. No need for an extra service.
+- Pre-made workflow templates for a variety of products.
+**Cons of GitHub Actions**
+- Less detailed log output for debugging
+- Longer start time compared to other dedicated CI services
