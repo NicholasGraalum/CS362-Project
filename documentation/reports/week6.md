@@ -6,7 +6,9 @@ We plan to finish our main use cases later this week and test the implementation
 #### Aaryan:
 
 #### Andrew:
-
+- Worked on Kroger API integration with the backend code
+- Reasearched and implemented github actions for CI
+- Wrote the documentation portion for CI 
 #### Kylan:
 - setup basic local host server and file structure
 - setup local database and generated basic data for testing
