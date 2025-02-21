@@ -403,3 +403,10 @@ We are using GitHub Actions for continuious integration. Every time a pull reque
 **Cons of GitHub Actions**
 - Less detailed log output for debugging
 - Longer start time compared to other dedicated CI services
+
+**Pros of CircleCI**
+- Dedicated CI system that is faster than GitHub actions
+- Optimized for CI/CD efficiency
+
+**Cons of CircleCI**
+- Requires more set up configurations
