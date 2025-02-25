@@ -10,6 +10,7 @@ function initializeDatabase() {
     return new Database(dbPath, { verbose: console.log });
   } else {
     const db = new Database(dbPath, { verbose: console.log });
+    db.exec("PRAGMA foreign_keys = ON;");
     createSchema(db);
     insertFillerData(db);
     return db;

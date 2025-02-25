@@ -71,3 +71,25 @@ INSERT INTO Recipe_tags (tag, r_id) VALUES
 ('Healthy', 3),
 ('Vegan', 3),
 ('Salad', 3);
+
+-- Insert list items (amount in grams)
+-- Alice's favorite meal is Chicken Curry (Recipe 2)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('alice@example.com', 'Chicken', 500.0),
+('alice@example.com', 'Curry Powder', 15.0),
+('alice@example.com', 'Olive Oil', 30.0),
+('alice@example.com', 'Carrot', 100.0);
+
+-- Bob's favorite meal is Spaghetti Bolognese (Recipe 1)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('bob@example.com', 'Tomato', 300.0),
+('bob@example.com', 'Garlic', 10.0),
+('bob@example.com', 'Pasta', 200.0),
+('bob@example.com', 'Olive Oil', 30.0);
+
+-- Charlie's favorite meal is Vegan Salad (Recipe 3)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('charlie@example.com', 'Lettuce', 100.0),
+('charlie@example.com', 'Carrot', 50.0),
+('charlie@example.com', 'Chickpeas', 150.0),
+('charlie@example.com', 'Olive Oil', 20.0);
