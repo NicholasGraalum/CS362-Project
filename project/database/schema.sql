@@ -23,8 +23,8 @@ CREATE TABLE Recipe
 CREATE TABLE Ingredient
 (
   name VARCHAR(100) NOT NULL,
-  store_api_id INT NOT NULL,
-  nutrition_api_id INT NOT NULL,
+  store_api_id INT,
+  nutrition_api_id INT,
   PRIMARY KEY (name)
 );
 

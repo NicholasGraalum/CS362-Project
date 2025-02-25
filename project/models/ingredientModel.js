@@ -18,4 +18,54 @@ function getIngredientsInRecipe(id) {
   return stmt.all(id); 
 }
 
-module.exports = { getIngredient, getIngredientsInRecipe };
+// add ingredient
+function addIngredient(name, store_api_id = null, nutrition_api_id = null) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Ingredient (name, store_api_id, nutrition_api_id)
+          VALUES (?, ?, ?)
+      `);
+
+      return stmt.run(name, store_api_id, nutrition_api_id);
+
+  } catch (err) {
+      console.error('Error adding ingredient:', err.message);
+      throw err;  
+  }
+}
+
+// update store api id
+function updateIngredientStoreId(name, newStoreApiId) {
+  try {
+      const stmt = db.prepare(`
+          UPDATE Ingredient
+          SET store_api_id = ?
+          WHERE name = ?
+      `);
+
+      return stmt.run(newStoreApiId, name);
+
+  } catch (err) {
+      console.error('Error updating store API ID:', err.message);
+      throw err; 
+  }
+}
+
+// update nutrition api id
+function updateIngredientNutId(name, newNutritionApiId) {
+  try {
+      const stmt = db.prepare(`
+          UPDATE Ingredient
+          SET nutrition_api_id = ?
+          WHERE name = ?
+      `);
+
+      return stmt.run(newNutritionApiId, name);
+
+  } catch (err) {
+      console.error('Error updating nutrition API ID:', err.message);
+      throw err;  
+  }
+}
+
+module.exports = { getIngredient, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId };
