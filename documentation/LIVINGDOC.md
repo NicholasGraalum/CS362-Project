@@ -397,6 +397,36 @@ Developer living documentation and guides for future development. This will incl
 User guide documentation. This will go over all the UI and different features and how to use them. Implemented at the end of development and as new features are implemented
 In-app information symbols and explanations. This will explain in the app how to do different things and use different features. Implemented during development and from user feedback.
 
+#### User Documentation
+- Description: See Abstract Section.
+- Accessing the website: Currently, the website is set up to be accessed through localhost.
+- Using the website: See Web Pages under Architecture Components section.
+
+#### Developer Documentation
+- Obtaining source code: All source code is available in the github repository under the project directory.
+- Building the software:
+  + Clone the repository to your local machine
+  + Run 'npm i' in the terminal while in the project directory
+  + Run 'npm start' in the terminal while in the project directory to run the website on localhost
+
+### Structure
+```
+documentation/ : contains all term project documents  
+    reports/ : contains weekly team progress reports  
+    LIVINGDOC  
+
+project/ : contains all term project code
+    controllers : contains controllers to handle incoming requests and send responses
+    database     : contains database for the website
+    models       : contains models for the structure of data in the database
+    routes       : defines the paths to map to the correct URL
+    static       : contains static files (html mockups and style.css)
+    views        : contains handlebar templates for webpages
+        partials    : contains partial handlebar templates
+    package.json : contains dependencies
+    server.js    : contains code for server
+```
+
 #### Test-Automation and CI 
 We will be using Mocha as our test automation infrastructure along with the Chai, Supertest, and Cypress libraries. We chose Mocha because its flexibility allows testing synchronous functions, asynchronous functions, testing our http routes using Supertest, and simulating user flow through the website with Cypress. Developers can add new tests by adding to the /test folder and using the existing tests as examples. 
 
