@@ -409,7 +409,7 @@ In-app information symbols and explanations. This will explain in the app how to
   + Run 'npm i' in the terminal while in the project directory
   + Run 'npm start' in the terminal while in the project directory to run the website on localhost
 
-### Structure
+#### Structure
 ```
 documentation/ : contains all term project documents  
     reports/ : contains weekly team progress reports  
