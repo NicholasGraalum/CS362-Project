@@ -61,7 +61,7 @@ function addFavoriteRecipe(email, r_id) {
   }
 }
 
-function removeFavoriteMeal(email, r_id) {
+function removeFavoriteRecipe(email, r_id) {
   try {
       const stmt = db.prepare(`
           DELETE FROM Favorites
@@ -77,4 +77,4 @@ function removeFavoriteMeal(email, r_id) {
 }
 
 
-module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteMeal };
+module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe };

@@ -10,7 +10,7 @@ function getIngredient(name) {
 }
 
 /* 
-Returns array of ingredients in a recipe with id
+Returns array of ingredient objects in a recipe with id
 Returns empty array if no recipe of id or no ingredients in recipe
 */
 function getIngredientsInRecipe(id) {
@@ -68,4 +68,24 @@ function updateIngredientNutId(name, newNutritionApiId) {
   }
 }
 
-module.exports = { getIngredient, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId };
+/*
+Search for ingredient by name 
+Return list of matching ingredient name objects
+Return empty list if no matching
+*/
+function searchIngredientsByName(searchTerm) {
+    try {
+        const stmt = db.prepare(`
+            SELECT name FROM Ingredient
+            WHERE name LIKE ?
+        `);
+        return stmt.all(`%${searchTerm}%`);
+        
+    } catch (err) {
+        console.error('Error searching for ingredients:', err.message);
+        throw err;
+    }
+  }
+
+
+module.exports = { getIngredient, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId, searchIngredientsByName };

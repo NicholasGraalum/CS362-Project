@@ -109,10 +109,29 @@ function removeIngredientFromRecipe(r_id, i_name) {
   }
 }
 
+/*
+Search for recipe by name 
+*/
+function searchRecipesByName(searchTerm) {
+  try {
+      const stmt = db.prepare(`
+          SELECT * FROM Recipe
+          WHERE name LIKE ?
+      `);
+      return stmt.all(`%${searchTerm}%`);
+      
+  } catch (err) {
+      console.error('Error searching for meals:', err.message);
+      throw err;
+  }
+}
+
+
 
 
 module.exports = { 
                   getAllRecipes, getRecipeTags, getRecipeTypes, getRecipeById, getRecipesByTag, getRecipesByType, getFavoriteRecipes, 
                   addRecipe, addIngredientToRecipe, 
-                  removeIngredientFromRecipe 
+                  removeIngredientFromRecipe,
+                  searchRecipesByName 
                 };
