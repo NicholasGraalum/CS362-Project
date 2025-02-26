@@ -6,10 +6,10 @@
   data-categoryTags="{{#each categoryTags}}{{this}} {{/each}}"
   data-ingredients="{{#each categoryTags}}{{this}} {{/each}}"
   data-description="{{description}}"
-  data-image="{{image}}"
+  data-image="{{image_link}}"
 >
   <a href="{{id}}">
-    <img src="{{image}}" alt="Picture of {{name}}">
+    <img src="{{image_link}}" alt="Picture of {{name}}">
     <p><a href="/meals/{{id}}">{{name}}</a></p>
     <button class="add-ingredients-button">Add Ingredients</button>
   </a>
