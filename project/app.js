@@ -6,11 +6,14 @@ const app = express();
 
 // Import routes
 const userRoutes = require('./routes/userRoutes');
-const mealRoutes = require('./routes/mealRoutes');
+const mealRoutes = require('./routes/mealsRoutes');
 
 // Middleware
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/users', userRoutes);
@@ -26,7 +29,5 @@ app.engine('handlebars', exphbs.engine({ defaultLayout: false }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app; // Export the app for testing
