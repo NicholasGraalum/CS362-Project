@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const Handlebars = require("handlebars");
 
 const app = express();
 
@@ -16,6 +17,12 @@ const mealRoutes = require('./routes/mealRoutes');
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
+// Helper to set to proper case
+Handlebars.registerHelper("properCase", function (str) {
+    if (typeof str !== "string") return "";
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+});
 
 // Routes
 app.use('/users', userRoutes);
