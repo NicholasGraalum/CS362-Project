@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
-var Handlebars = require("handlebars")
 
 const app = express();
 
@@ -30,8 +29,5 @@ app.use((req, res) => {
 });
 
 
-
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app; // Export the app for testing
