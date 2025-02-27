@@ -1,4 +1,4 @@
-const db = require('../database/db'); 
+const { db } = require('../database/db'); 
 // const bcrypt = require('bcrypt'); // use later for secure password hashing
 
 /* 
@@ -29,5 +29,52 @@ function verifyUser(email, password) {
     return !!user;  // Return truthy or falsy value
 }
 
+// create new user
+function addUser(email, password, username) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO User (email, password, username)
+          VALUES (?, ?, ?)
+      `);
 
-module.exports = { getAllUsers, getUserByEmail, verifyUser };
+      return stmt.run(email, password, username);
+
+  } catch (err) {
+      console.error('Error adding user:', err.message);
+      throw err;  
+  }
+}
+
+// favorite a recipe
+function addFavoriteRecipe(email, r_id) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Favorites (email, r_id)
+          VALUES (?, ?)
+      `);
+
+      return stmt.run(email, r_id);
+
+  } catch (err) {
+      console.error('Error favoriting the meal:', err.message);
+      throw err; 
+  }
+}
+
+function removeFavoriteRecipe(email, r_id) {
+  try {
+      const stmt = db.prepare(`
+          DELETE FROM Favorites
+          WHERE email = ? AND r_id = ?
+      `);
+
+      return stmt.run(email, r_id);
+
+  } catch (err) {
+      console.error('Error removing favorite meal:', err.message);
+      throw err;  
+  }
+}
+
+
+module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe };

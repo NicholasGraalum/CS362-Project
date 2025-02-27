@@ -1,6 +1,7 @@
+// example test for example page
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../app');
+const app = require('../../app');
 
 describe('Users Route', () => {
   it('should return an HTML page with users', async () => {
