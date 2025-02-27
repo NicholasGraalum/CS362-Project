@@ -28,7 +28,7 @@ Handlebars.registerHelper("properCase", function (str) {
 app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
 app.use(express.json())
-app.use(express.static('static'))
+app.use(express.static('static'))   // Static folder used for express-handlebars
 
 // 404 Page
 app.use((req, res) => {
