@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {   // Waits until HTML is loaded
 
-  // IMPORTANT: This section of code contains the fetch request for adding all meal ingredients
-  // to the shopping list. Current endpoint is /meals/add-ingredients but can be changed, just ensure
-  // to update it here too. When the "add-ingredients-button" is clicked on the meals page, a fetch
-  // request is sent with the meal id in the request body. 
+  // FETCH request for add ingredients
+  // Trigger: add-ingredients-button click
+  // req body: id of meal to add to shopping list
   
   // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
@@ -81,17 +80,36 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
     searchForm.onsubmit = function (event) {
       event.preventDefault();
 
-      // DEBUG: use this values for filtering
-      console.log('Form submitted with values:', {
-        mealName: document.getElementById("meal-name")?.value,
-        mealTypes: [...document.querySelectorAll('input[name=\"meal-type\"]:checked')].map(cb => cb.value),
-        categoryTags: [...document.querySelectorAll('input[name=\"category-tags\"]:checked')].map(cb => cb.value),
-        });
+      // Capture form input values
+      const mealName = document.getElementById("meal-name")?.value;
+      const mealTypes = [...document.querySelectorAll('input[name="meal-type"]:checked')].map(cb => cb.value);
+      const categoryTags = [...document.querySelectorAll('input[name="category-tags"]:checked')].map(cb => cb.value);
 
-        modal.style.display = "none";   // Hide modal after submitting
+      // DEBUG: Log to verify captured values 
+      console.log('Form submitted with values:', { mealName, mealTypes, categoryTags });
+
+      /*
+      // Potential fetch for search
+      // Send data via fetch 
+      fetch("/meals/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mealName, mealTypes, categoryTags })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Server response:", data);
+        // Process the response data as needed
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+
+      */
+      modal.style.display = "none";   // Hide modal after submitting
     };
   } else {
-      console.log("Search modal elements not found on this page. Skipping search modal setup.");
+    console.log("Search modal elements not found on this page. Skipping search modal setup.");
   }
 
     // Create Meal Modal, get each element
@@ -139,6 +157,30 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
         event.target.parentElement.remove();
       }
     });
+
+
+    /*
+    // Potential fetch request for create meal
+    // On submit, send a fetch request with all meal data
+    // IMPORTANT: fetch request for creating a meal
+    mealModal.onsubmit = function (event) {
+      event.preventDefault(); // Stop default submission
+
+      const formData = new FormData(this); // Get all form inputs
+
+      fetch("/meals/create-meal", {  // Endpoint, can change if needed
+        method: "POST", // POST request
+        body: formData // Send form data without appending to URL
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Meal created:", data);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    }
+    */
   } else {
     console.log("Create meal modal elements not found on this page. Skipping create meal modal setup.");
   }
