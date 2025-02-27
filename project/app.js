@@ -24,6 +24,11 @@ Handlebars.registerHelper("properCase", function (str) {
     return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 });
 
+// Add a default home route so cypress test works for now
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to My App</h1><p>This is the homepage.</p>');
+});
+
 // Routes
 app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
