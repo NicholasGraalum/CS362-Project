@@ -1,9 +1,9 @@
 -- chatgpt generated filler data
 -- Insert Users
-INSERT INTO User (email, password, username) VALUES
-('alice@example.com', 'hashedpassword1', 'alice123'),
-('bob@example.com', 'hashedpassword2', 'bobcook'),
-('charlie@example.com', 'hashedpassword3', 'charliechef');
+INSERT INTO User (email, password, username, zipcode) VALUES
+('alice@example.com', 'hashedpassword1', 'alice123', 97333),
+('bob@example.com', 'hashedpassword2', 'bobcook', 97045),
+('charlie@example.com', 'hashedpassword3', 'charliechef', 97330);
 
 -- Insert Recipes
 INSERT INTO Recipe (name, id, image_link, description, visibility, servings, creator_email) VALUES

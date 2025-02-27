@@ -4,6 +4,7 @@ CREATE TABLE User
   email VARCHAR(320) NOT NULL,
   password VARCHAR(100) NOT NULL,
   username VARCHAR(20) NOT NULL,
+  zipcode INT NOT NULL,
   PRIMARY KEY (email)
 );
 
