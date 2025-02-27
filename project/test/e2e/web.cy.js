@@ -25,7 +25,7 @@ describe("Meal Page", () => {
           cy.url().should('include', href);  // It should match the href
   
           // Optionally, verify content on the meal detail page (e.g., check for meal name or id)
-          cy.contains('Meal Details');
+          cy.contains('Ingredients');
         });
     });
   });
