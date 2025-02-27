@@ -89,24 +89,35 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
       // DEBUG: Log to verify captured values 
       console.log('Form submitted with values:', { mealName, mealTypes, categoryTags });
 
-      /*
+      
       // Potential fetch for search
       // Send data via fetch 
-      fetch("/meals/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mealName, mealTypes, categoryTags })
+      const params = new URLSearchParams({
+        mealName,
+        mealTypes,
+        categoryTags
+      }).toString();
+      
+      // Send the GET request with query parameters
+      fetch(`/meals/search?${params}`, {
+        method: "GET", // No need for the body in a GET request
+        headers: { "Content-Type": "application/json" } // Optional, just in case you need it
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Server response:", data);
-        // Process the response data as needed
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
+        .then(response => response.text()) // Expect full HTML in the response
+        .then(html => {
+          // Replace the entire document with the new HTML response
+          document.open();
+          document.write(html);
+          document.close();
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+      
+      
+      
 
-      */
+      
       modal.style.display = "none";   // Hide modal after submitting
     };
   } else {
