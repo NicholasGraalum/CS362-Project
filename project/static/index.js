@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
 
   // FETCH request for add ingredients
   // Trigger: add-ingredients-button click
-  // req body: id of meal to add to shopping list
+  // Endpoint: /meals/add-ingredients
+  // Req body: id of meal to add to shopping list
   
   // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
