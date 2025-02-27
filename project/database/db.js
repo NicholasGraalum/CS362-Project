@@ -2,14 +2,15 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-const dbPath = path.resolve(__dirname, '../database/database_data.db');
+const newDbPath = path.resolve(__dirname, '../database/database_data.db');
 
 // Initialize database
-function initializeDatabase() {
+function initializeDatabase(dbPath) {
   if (fs.existsSync(dbPath)) {
     return new Database(dbPath, { verbose: console.log });
   } else {
     const db = new Database(dbPath, { verbose: console.log });
+    db.exec("PRAGMA foreign_keys = ON;");
     createSchema(db);
     insertFillerData(db);
     return db;
@@ -30,5 +31,5 @@ function insertFillerData(db) {
 }
 
 // Exporting the initialized database object
-const db = initializeDatabase();
-module.exports = db;
+const db = initializeDatabase(newDbPath);
+module.exports = { db, initializeDatabase };

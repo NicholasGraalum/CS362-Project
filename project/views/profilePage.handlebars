@@ -1,0 +1,29 @@
+<main>
+    {{!-- Create the div class for the Profile page --}}
+    <div class="Profile"
+        data-name="{{username}}"
+        data-email="{{email}}"
+        data-zip="{{zipcode}}">
+        
+        <div class="profile-page-header">
+            <h1>Profile Page</h1>
+        </div>
+
+        {{!-- Profile details as well as buttons to change the given data --}}
+        <div class="profile-details">
+            {{#if username}} 
+                <p>Username: {{username}} </p> 
+                <button type="button" class="edit-button" aria-label="edit-username">Change Username</button>    
+            {{/if}}
+            {{#if email}} 
+                <p>Email: {{email}} </p> 
+                <button type="button" class="edit-button" aria-label="edit-email">Change Email</button>
+            {{/if}}
+            {{#if zipcode}} 
+                <p>Zipcode: {{zipcode}} </p> 
+                <button type="button" class="edit-button" aria-label="edit-zipcode">Change Zipcode</button>
+            {{/if}}
+        </div>
+
+    </div>
+</main>
