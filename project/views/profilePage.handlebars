@@ -1,0 +1,19 @@
+<main>
+    {{!-- Create the div class for the Profile page --}}
+    <div class="Profile"
+        data-name="{{username}}"
+        data-email="{{email}}"
+        data-zip="{{zipcode}}">
+        
+        <div class="profile-page-header">
+            <h1>Profile Page</h1>
+        </div>
+
+        <div class="profile-details">
+            {{#if username}} <p>Username: {{username}}</p> {{/if}}
+            {{#if email}} <p>Email: {{email}}</p> {{/if}}
+            {{#if zipcode}} <p>Zipcode: {{zipcode}}</p> {{/if}}
+        </div>
+
+    </div>
+</main>
