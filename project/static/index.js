@@ -1,19 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {   // Waits until HTML is loaded
 
-  // Get all add meal ingredients button 
+  // IMPORTANT: This section of code contains the fetch request for adding all meal ingredients
+  // to the shopping list. Current endpoint is /meals/add-ingredients but can be changed, just ensure
+  // to update it here too. When the "add-ingredients-button" is clicked on the meals page, a fetch
+  // request is sent with the meal id in the request body. 
+  
+  // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
+    // Add a click event listener to each button
     button.addEventListener("click", function () {
-
-      // On click, search for the closest meal div
+      // Find the closest "meal" div
       const mealDiv = this.closest(".meal");
 
-      if (mealDiv) {      // Ensure there is a meal div and get id
-        const id = mealDiv.getAttribute("data-id");
+      if (mealDiv) {
+        // Retrieve the meal ID from 'data-id' attribute
+        const mealId = mealDiv.getAttribute("data-id");
 
-        console.log(id)
+        // Ensure that a valid meal ID exists before sending the request
+        if (!mealId) {
+          console.error("Meal ID is missing.");
+          return;
+        }
+
+        // Send an HTTP POST request to the backend to add ingredients
+        fetch("/meals/add-ingredients", {   // The endpoint where the request is sent
+          method: "POST",   // POST request
+          headers: {
+            "Content-Type": "application/json", // Request body contains JSON data
+          },
+            body: JSON.stringify({ id: mealId }), // Convert the meal ID into a JSON-formatted string
+        })
+
+        .then(response => {
+          // Check if the response status is OK
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // Parse the response body as JSON
+        })
+        .then(data => {
+          // Log the successful response data to the console for debugging
+          console.log("Server response:", data);
+        })
+        .catch(error => {
+          // Catch and log any errors that occur during the fetch request
+          console.error("Error sending request:", error);
+        });
       }
-    })
-  })
+    });
+  });
+
+
 
   // Meal search modal, get each element
   const openModalButton = document.getElementById("search-meals");
