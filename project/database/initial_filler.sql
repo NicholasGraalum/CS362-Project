@@ -7,21 +7,21 @@ INSERT INTO User (email, password, username) VALUES
 
 -- Insert Recipes
 INSERT INTO Recipe (name, id, image_link, description, visibility, servings, creator_email) VALUES
-('Spaghetti Bolognese', 1, 'https://picsum.photos/200', 'Classic Italian pasta dish.', 'public', 4, 'alice@example.com'),
-('Chicken Curry', 2, 'https://picsum.photos/200', 'Spicy and creamy chicken curry.', 'public', 3, 'bob@example.com'),
-('Vegan Salad', 3, 'https://picsum.photos/200', 'Healthy and fresh mixed greens.', 'private', 2, 'charlie@example.com');
+('Spaghetti Bolognese', 1, 'https://images.unsplash.com/photo-1622973536968-3ead9e780960', 'Classic Italian pasta dish.', 'public', 4, 'alice@example.com'),
+('Chicken Curry', 2, 'https://images.unsplash.com/photo-1594610352113-ad218529cfb7', 'Spicy and creamy chicken curry.', 'public', 3, 'bob@example.com'),
+('Vegan Salad', 3, 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082', 'Healthy and fresh mixed greens.', 'private', 2, 'charlie@example.com');
 
 -- Insert Ingredients (Assuming 'name' should be VARCHAR)
 INSERT INTO Ingredient (name, store_api_id, nutrition_api_id) VALUES
-('Tomato', 101, 201),
-('Chicken', 102, 202),
-('Lettuce', 103, 203),
-('Garlic', 104, 204),
-('Pasta', 105, 205),
-('Curry Powder', 106, 206),
-('Olive Oil', 107, 207),
-('Carrot', 108, 208),
-('Chickpeas', 109, 209);
+('Tomato', 0000000004799, 1999634),
+('Chicken', 0029082900000, 2646170),
+('Lettuce', 0000000004640, 2346391),
+('Garlic',  0000000004608, 1104647),
+('Pasta', 0001111085004, 169736),
+('Curry Powder', 106, 170924),
+('Olive Oil', 0007321000011, 748608),
+('Carrot', 0000000004562, 2258586),
+('Chickpeas', 109, 2644288);
 
 -- Insert Recipe-Ingredient Relationships (Multiple Ingredients per Recipe, Amount in Grams)
 INSERT INTO Includes (amount, r_id, i_name) VALUES
@@ -71,3 +71,25 @@ INSERT INTO Recipe_tags (tag, r_id) VALUES
 ('Healthy', 3),
 ('Vegan', 3),
 ('Salad', 3);
+
+-- Insert list items (amount in grams)
+-- Alice's favorite meal is Chicken Curry (Recipe 2)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('alice@example.com', 'Chicken', 500.0),
+('alice@example.com', 'Curry Powder', 15.0),
+('alice@example.com', 'Olive Oil', 30.0),
+('alice@example.com', 'Carrot', 100.0);
+
+-- Bob's favorite meal is Spaghetti Bolognese (Recipe 1)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('bob@example.com', 'Tomato', 300.0),
+('bob@example.com', 'Garlic', 10.0),
+('bob@example.com', 'Pasta', 200.0),
+('bob@example.com', 'Olive Oil', 30.0);
+
+-- Charlie's favorite meal is Vegan Salad (Recipe 3)
+INSERT INTO On_list (email, i_name, amount) VALUES
+('charlie@example.com', 'Lettuce', 100.0),
+('charlie@example.com', 'Carrot', 50.0),
+('charlie@example.com', 'Chickpeas', 150.0),
+('charlie@example.com', 'Olive Oil', 20.0);
