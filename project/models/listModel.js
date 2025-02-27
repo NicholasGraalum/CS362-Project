@@ -1,4 +1,4 @@
-const db = require('../database/db'); 
+const { db } = require('../database/db'); 
 
 /* 
 Returns array of all ingredients in list of given user

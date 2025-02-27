@@ -1,4 +1,4 @@
-const db = require('../database/db'); 
+const { db } = require('../database/db'); 
 // const bcrypt = require('bcrypt'); // use later for secure password hashing
 
 /* 

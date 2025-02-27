@@ -10,11 +10,23 @@
     "handlebars": "^4.7.8"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node server.js",
+    
+    "test:unit": "mocha test/unit --recursive",
+    "test:integration": "mocha test/integration --recursive",
+    "test:validation": "mocha test/validation --recursive",
+
+    "test:e2e": "start-server-and-test start http://localhost:3000 'npx cypress run'",
+    "cypress:open": "start-server-and-test start http://localhost:3000 'npx cypress open'",
+
+    "test": "npm run test:unit && npm run test:integration && npm run test:validation && npm run test:e2e"
   },
   "devDependencies": {
     "chai": "^4.3.4",
+    "cypress": "^14.1.0",
+    "fs-extra": "^11.3.0",
     "mocha": "^11.1.0",
+    "start-server-and-test": "^2.0.10",
     "supertest": "^7.0.0"
   }
 }
