@@ -2,14 +2,14 @@
   <div class="full-meal" data-id="{{id}}" data-name="{{name}}" data-servings="{{servings}}"
     data-categoryTags='["Vegan", "Gluten Free"]' data-mealType="{{#each mealType}}{{this}} {{/each}}"
     data-ingredients="{{#each categoryTags}}{{this}} {{/each}}" data-description="{{description}}" 
-    data-image="{{image}}" 
+    data-image="{{image_link}}" 
     data-calories="{{calories}}">
 
     <div class="meal-page-header">
       <h1>{{name}}</h1>
     </div>
 
-    <img class="meal-page-image" src="{{image}}" alt="Picture of {{name}}">
+    <img class="meal-page-image" src="{{image_link}}" alt="Picture of {{name}}">
     <div class="meal-page-details">
       <p1>Description: {{description}}</p1>
     </div>

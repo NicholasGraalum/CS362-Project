@@ -375,14 +375,18 @@ Any available member is available to help and test wherever needed along the way
 
 
 #### Test Plan and Bugs
-Track all bugs on **GitHub Issues**
+Track all bugs on **GitHub Issues**  
 **Functional Requirements:**
-  - **Unit Testing:** Verify meal macronutrient calculation functions. Verify shopping list price calculation functions
-  - **Integration Testing:** Test interactions between components (Verify all HHTP requests and API calls)  
-  - **Usability Testing:** Conduct user studies to evaluate the ease of use of our UI/UX
-  - **Black Box Testing:** Create a variety of personas to verify all functional requirements by testing as they would use the website
-  - **White Box Testing:** Verify that all of our backend functions are working by targeting potential bugs and edge cases
-  - **Bug Tracking:** Use GitHub Issues to log and resolve bugs.
+  - **Unit Testing:** Verify meal macronutrient calculation functions. Verify shopping list price calculation functions. Test rendering of individual handlebars by hardcoding data in the test. Verify data access models pull correct data. 
+  - **Integration Testing:** Test interactions between components (Verify all HTTP requests and API calls render)  
+
+  - **Validation Testing:** Check that pages satisfy the requirements by checking the html response for required data 
+  - **System Testing:** Check that the system works as a whole by using the Cypress library to write a test to simulate user flow through the website.
+
+  - **Black Box Testing: (probably won't do this anymore)** Create a variety of personas to verify all functional requirements by testing as they would use the website
+ 
+  - **Bug Tracking:** Use GitHub Issues to log and resolve bugs.  
+
 **Non-Functional Requirents:**
   - **Responsiveness:** Measure server response time, especially for actions requiring API calls
   - **Scalability:** Measure our SQL query response time on large datasets
@@ -393,7 +397,39 @@ Developer living documentation and guides for future development. This will incl
 User guide documentation. This will go over all the UI and different features and how to use them. Implemented at the end of development and as new features are implemented
 In-app information symbols and explanations. This will explain in the app how to do different things and use different features. Implemented during development and from user feedback.
 
+#### User Documentation
+- Description: See Abstract Section.
+- Accessing the website: Currently, the website is set up to be accessed through localhost.
+- Using the website: See Web Pages under Architecture Components section.
+
+#### Developer Documentation
+- Obtaining source code: All source code is available in the github repository under the project directory.
+- Building the software:
+  + Clone the repository to your local machine
+  + Run 'npm i' in the terminal while in the project directory
+  + Run 'npm start' in the terminal while in the project directory to run the website on localhost
+
+#### Structure
+```
+documentation/ : contains all term project documents  
+    reports/ : contains weekly team progress reports  
+    LIVINGDOC  
+
+project/ : contains all term project code
+    controllers : contains controllers to handle incoming requests and send responses
+    database     : contains database for the website
+    models       : contains models for the structure of data in the database
+    routes       : defines the paths to map to the correct URL
+    static       : contains static files (html mockups and style.css)
+    views        : contains handlebar templates for webpages
+        partials    : contains partial handlebar templates
+    package.json : contains dependencies
+    server.js    : contains code for server
+```
+
 #### Test-Automation and CI 
+We will be using Mocha as our test automation infrastructure along with the Chai, Supertest, and Cypress libraries. We chose Mocha because its flexibility allows testing synchronous functions, asynchronous functions, testing our http routes using Supertest, and simulating user flow through the website with Cypress. Developers can add new tests by adding to the /test folder and using the existing tests as examples. 
+
 We are using GitHub Actions for continuious integration. Every time a pull request is made or a change has been commited, The GitHub action event will be called, before getting the code from the repo, downloading dependencies, and running the mocha tests cases. This happenes through the /.github/workflows folder with the YAML script. 
 
 **Pros of GitHub Actions**
