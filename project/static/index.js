@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {   // Waits until HTML is loaded
+
+  // Get all add meal ingredients button 
+  document.querySelectorAll(".add-ingredients-button").forEach(button => {
+    button.addEventListener("click", function () {
+
+      // On click, search for the closest meal div
+      const mealDiv = this.closest(".meal");
+
+      if (mealDiv) {      // Ensure there is a meal div and get id
+        const id = mealDiv.getAttribute("data-id");
+
+        console.log(id)
+      }
+    })
+  })
+
   // Meal search modal, get each element
   const openModalButton = document.getElementById("search-meals");
   const closeModalButton = document.getElementById("close-search-modal");
