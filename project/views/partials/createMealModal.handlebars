@@ -2,29 +2,29 @@
   <div class="modal-content">
     <span id="close-meal-modal" class="close-button">&times;</span>
     <h2>Create a New Meal</h2>
-    <form id="meal-form" action="/meals/create" method="POST">
+    <form id="meal-form">
       <div class="form-group">
         <label for="meal-name">Meal Name:</label>
-        <input type="text" id="meal-name" name="name" placeholder="Enter meal name" required>
+        <input type="text" id="meal-name" name="meal-name" placeholder="Enter meal name" required>
       </div>
       
       <div class="form-group">
         <label for="meal-description">Description:</label>
-        <textarea id="meal-description" name="description" placeholder="Enter meal description" required></textarea>
+        <textarea id="meal-description" name="meal-description" placeholder="Enter meal description" required></textarea>
       </div>
       
       <div class="form-group">
         <label for="meal-image">Image Link:</label>
-        <input type="text" id="meal-image" name="image_link" placeholder="Enter image URL">
+        <input type="text" id="meal-image" name="meal-image" placeholder="Enter image URL">
       </div>
       
       <div class="form-group">
         <label>Meal Type:</label>
         <div>
-          <label><input type="checkbox" name="mealType[]" value="breakfast"> Breakfast</label>
-          <label><input type="checkbox" name="mealType[]" value="lunch"> Lunch</label>
-          <label><input type="checkbox" name="mealType[]" value="dinner"> Dinner</label>
-          <label><input type="checkbox" name="mealType[]" value="snack"> Snack</label>
+          <label><input type="checkbox" name="meal-type" value="breakfast"> Breakfast</label>
+          <label><input type="checkbox" name="meal-type" value="lunch"> Lunch</label>
+          <label><input type="checkbox" name="meal-type" value="dinner"> Dinner</label>
+          <label><input type="checkbox" name="meal-type" value="snack"> Snack</label>
         </div>
       </div>
       
@@ -41,11 +41,11 @@
       <div class="form-group">
         <label>Category Tags:</label>
         <div>
-          <label><input type="checkbox" name="categoryTags[]" value="vegan"> Vegan</label>
-          <label><input type="checkbox" name="categoryTags[]" value="vegetarian"> Vegetarian</label>
-          <label><input type="checkbox" name="categoryTags[]" value="high-protein"> High Protein</label>
-          <label><input type="checkbox" name="categoryTags[]" value="low-calorie"> Low Calorie</label>
-          <label><input type="checkbox" name="categoryTags[]" value="gluten-free"> Gluten Free</label>
+          <label><input type="checkbox" name="category-tags" value="vegan"> Vegan</label>
+          <label><input type="checkbox" name="category-tags" value="vegetarian"> Vegetarian</label>
+          <label><input type="checkbox" name="category-tags" value="high-protein"> High Protein</label>
+          <label><input type="checkbox" name="category-tags" value="low-calorie"> Low Calorie</label>
+          <label><input type="checkbox" name="category-tags" value="gluten-free"> Gluten Free</label>
         </div>
       </div>
       
@@ -58,20 +58,6 @@
           </div>
         </div>
         <button type="button" id="add-ingredient">+ Add Ingredient</button>
-      </div>
-
-      <div class="form-group">
-        <label for="visibility">Meal Visibility:</label>
-        <select name="visibility" id="visibility" required>
-          <option value="public" selected>Public</option>
-          <option value="private">Private</option>
-        </select>
-      </div>
-
-
-      <div class="form-group">
-        <label for="creator_email">Your Email:</label>
-        <input type="email" id="creator_email" name="creator_email" placeholder="Enter your email" required>
       </div>
       
       <button type="submit" class="submit-button">Create Meal</button>

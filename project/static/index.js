@@ -165,82 +165,10 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
 
     // Remove ingredient input field when button is clicked (used ChatGPT to help)
     ingredientsList.addEventListener("click", function (event) {
-      console.log("Extracted Visibility:", document.getElementById("visibility")?.value);
       if (event.target.classList.contains("remove-ingredient")) {
         event.target.parentElement.remove();
       }
     });
-
-    // ✅ Ensure meal creation form is handled using JavaScript
-    const mealForm = document.getElementById("meal-form");
-
-    if (mealForm) {
-      mealForm.addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent default form submission
-          
-          console.log("🚀 Form submit event triggered!"); // Debugging log
-  
-          const formData = new FormData(mealForm);
-          const jsonData = {};
-          
-          // Normalize field names to match backend expectations
-          formData.forEach((value, key) => {
-            let newKey = key
-            .replace("meal-name", "name")
-            .replace("meal-description", "description")
-            .replace("meal-image", "image_link")
-            .replace("meal-type", "mealType")
-            .replace("category-tags", "categoryTags")
-            .replace("ingredients", "ingredients");
-            
-            if (jsonData[newKey]) {
-              jsonData[newKey] = [].concat(jsonData[newKey], value);
-            } else {
-              jsonData[newKey] = value;
-            }
-          });
-          
-          // Ensure multi-select values (checkboxes) are arrays
-          jsonData["mealType"] = jsonData["mealType"] ? [].concat(jsonData["mealType"]) : [];
-          jsonData["categoryTags"] = jsonData["categoryTags"] ? [].concat(jsonData["categoryTags"]) : [];
-          jsonData["ingredients"] = jsonData["ingredients"] ? [].concat(jsonData["ingredients"]) : [];
-          
-          // Ensure visibility field is captured
-          jsonData["visibility"] = document.getElementById("visibility")?.value || "public";
-
-          Object.keys(jsonData).forEach(key => {
-            if (Array.isArray(jsonData[key]) && jsonData[key].length === 0) {
-                delete jsonData[key]; // Remove empty arrays
-            }
-          });
-          
-          console.log("✅ Final JSON Data to Send:", jsonData); // Debugging log
-          
-          // ✅ Send data via Fetch as JSON
-          fetch("/meals/create", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(jsonData),
-          })
-          .then(response => {
-            console.log("📡 Sending fetch request now...");
-            if (response.ok) {
-              console.log("✅ Meal created successfully! Redirecting...");
-              window.location.href = "/meals"; // Redirect on success
-              } else {
-                return response.text().then(text => { throw new Error(text); });
-              }
-            })
-            .catch(error => console.error("❌ Error submitting form:", error));
-
-      });
-  } else {
-      console.log("❌ mealForm not found on page!");
-  }
-  
-
-
-    
 
 
     /*
