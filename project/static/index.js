@@ -1,10 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {   // Waits until HTML is loaded
+// Event listener for the meals page and the meal modal
+document.addEventListener("DOMContentLoaded", function () {
 
   // FETCH request for add ingredients
   // Trigger: add-ingredients-button click
   // Endpoint: /meals/add-ingredients
   // Req body: id of meal to add to shopping list
-  
+
   // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
     // Add a click event listener to each button
@@ -185,4 +186,197 @@ document.addEventListener("DOMContentLoaded", function () {   // Waits until HTM
   } else {
     console.log("Create meal modal elements not found on this page. Skipping create meal modal setup.");
   }
+
+  // Handle Events with login page
+  const loginButton = document.getElementById("submit-login");
+  const createProfileLink = document.getElementById("create-profile");
+  const submitEmail = document.getElementById("submit-email");
+  const submitPassword = document.getElementById("submit-password");
+
+  if (loginButton && createProfileLink && submitEmail && submitPassword) {
+
+  }
+});
+
+// Event listener for the login page
+document.addEventListener("DOMContentLoaded", function () {   
+  
+  // Handle Events with login page
+  const loginButton = document.getElementById("submit-login");
+  const createProfileButton = document.getElementById("create-profile");
+  const submitEmail = document.getElementById("submit-email");
+  const submitPassword = document.getElementById("submit-password");
+
+  if (loginButton && createProfileButton && submitEmail && submitPassword) {
+
+    // Login function
+    loginButton.addEventListener("click", function () {
+      const email = submitEmail.value.trim();
+      const password = submitPassword.value.trim();
+
+      // Validate input fields
+      if (!email || !password) {
+        alert("Please enter both email and password.");
+        return;
+      }
+
+      // Send login request
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Login failed. Please check your credentials.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert("Login successful!");
+        window.location.href = "/meals"; // Redirect after login
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert(error.message);
+      });
+    });
+
+    // Redirect to profile creation page
+    createProfileButton.addEventListener("click", function () {
+      window.location.href = "/createProfile";
+    });
+
+  }
+
+});
+
+// Event listener for the create profile page
+document.addEventListener("DOMContentLoaded", function () {   
+
+  /*** PROFILE CREATION PAGE EVENTS ***/
+  const createProfileButton = document.querySelector("[aria-label='create-login']");
+  const usernameInput = document.querySelector("[aria-label='enter-username']");
+  const passwordInput = document.querySelector("[aria-label='enter-password']");
+  const emailInput = document.querySelector("[aria-label='enter-email']");
+  const zipcodeInput = document.querySelector("[aria-label='enter-zipcode']");
+
+  if (createProfileButton && usernameInput && passwordInput && emailInput && zipcodeInput) {
+    console.log("Profile creation page detected. Setting up event listeners.");
+
+    // Create Profile Function
+    createProfileButton.addEventListener("click", function () {
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+      const email = emailInput.value.trim();
+      const zipcode = zipcodeInput.value.trim();
+
+      // Validate input fields
+      if (!username || !password || !email || !zipcode) {
+        alert("All fields are required.");
+        return;
+      }
+
+      // Send create profile request
+      fetch("/createProfile/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, email, zipcode }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Profile creation failed. Please try again.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert("Profile created successfully!");
+        window.location.href = "/meals"; // Redirect after creation
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert(error.message);
+      });
+    });
+
+  } else {
+    console.log("Profile creation elements not found. Skipping setup.");
+  }
+
+});
+
+// Event listener for the profile page
+document.addEventListener("DOMContentLoaded", function () {   
+
+  /*** PROFILE PAGE EVENTS ***/
+  const profileDiv = document.querySelector(".Profile");
+
+  if (profileDiv) {
+    console.log("Profile page detected. Setting up event listeners.");
+
+    const editUsernameButton = document.querySelector("[aria-label='edit-username']");
+    const editZipcodeButton = document.querySelector("[aria-label='edit-zipcode']");
+    
+    // Fetch current profile data from dataset attributes
+    let currentUsername = profileDiv.dataset.name;
+    let currentEmail = profileDiv.dataset.email;
+    let currentZipcode = profileDiv.dataset.zip;
+
+    /*** Function to Edit Username ***/
+    function editUsername() {
+      const newUsername = prompt("Enter a new username:", currentUsername);
+      
+      if (newUsername && newUsername.trim() !== currentUsername) {
+        updateProfile({ username: newUsername.trim() });
+      }
+    }
+
+    /*** Function to Edit Zipcode ***/
+    function editZipcode() {
+      const newZipcode = prompt("Enter a new zipcode:", currentZipcode);
+
+      if (newZipcode && /^\d{5}$/.test(newZipcode.trim())) { // Ensure valid 5-digit zipcode
+        updateProfile({ zipcode: newZipcode.trim() });
+      } else {
+        alert("Please enter a valid 5-digit Zipcode.");
+      }
+    }
+
+    /*** Function to Update Profile Data ***/
+    function updateProfile(updatedData) {
+      fetch("/profile/update", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Update failed. Please try again.");
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert("Profile updated successfully!");
+        location.reload(); // Reload page to reflect changes
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert(error.message);
+      });
+    }
+
+    // Event Listeners
+    if (editUsernameButton) {
+      editUsernameButton.addEventListener("click", editUsername);
+    }
+    if (editZipcodeButton) {
+      editZipcodeButton.addEventListener("click", editZipcode);
+    }
+
+  } else {
+    console.log("Profile page elements not found. Skipping setup.");
+  }
+
 });
