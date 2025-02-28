@@ -1,3 +1,12 @@
+// Event listener for main handlebar buttons
+document.addEventListener("DOMContentLoaded", function () {
+  const baseUrl = "http://localhost:3000";
+
+  document.getElementById("profile-viewer").addEventListener("click", function () {
+    window.location.href = baseUrl + "/profile"
+  })
+});
+
 // Event listener for the meals page and the meal modal
 document.addEventListener("DOMContentLoaded", function () {
 
