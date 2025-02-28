@@ -4,13 +4,14 @@ CREATE TABLE User
   email VARCHAR(320) NOT NULL,
   password VARCHAR(100) NOT NULL,
   username VARCHAR(20) NOT NULL,
+  zipcode INT NOT NULL,
   PRIMARY KEY (email)
 );
 
 CREATE TABLE Recipe
 (
   name VARCHAR(80) NOT NULL,
-  id INT NOT NULL,
+  id INTEGER,
   image_link VARCHAR(300),
   description VARCHAR(200),
   visibility VARCHAR(20) NOT NULL,

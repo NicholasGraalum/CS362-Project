@@ -2,16 +2,29 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const Handlebars = require("handlebars");
+const session = require("express-session");
 
 const app = express();
+
+// session for tracking logged in user 
+app.use(session({
+  secret: "for_security_reasons_this_should_be_hidden_but_oh_well",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set true if using HTTPS
+}));
 
 // Import routes
 const userRoutes = require('./routes/userRoutes');
 const mealRoutes = require('./routes/mealsRoutes');
+const loginRoutes = require('./routes/loginRoutes');
+// const ingredientsRoutes = require('./routes/ingredientsRoutes');
+// const profileRoutes = require('./routes/profileRoutes');
+// const listRoutes = require('./routes/listRoutes');
 
 // Middleware
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Set handlebars as view engine
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
@@ -32,7 +45,11 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
-app.use(express.json())
+app.use('/login', loginRoutes);
+// app.use('/ingredients', ingredientsRoutes);
+// app.use('/profile', profileRoutes);
+// app.use('/list', listRoutes);
+
 app.use(express.static('static'))   // Static folder used for express-handlebars
 
 // 404 Page

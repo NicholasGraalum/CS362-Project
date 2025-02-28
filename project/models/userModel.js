@@ -2,7 +2,7 @@ const { db } = require('../database/db');
 // const bcrypt = require('bcrypt'); // use later for secure password hashing
 
 /* 
-Returns array of all users
+Returns array with an object for each user
 */
 function getAllUsers() {
   const stmt = db.prepare('SELECT * FROM User');
@@ -30,14 +30,14 @@ function verifyUser(email, password) {
 }
 
 // create new user
-function addUser(email, password, username) {
+function addUser(email, password, username, zipcode) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO User (email, password, username)
-          VALUES (?, ?, ?)
+          INSERT INTO User (email, password, username, zipcode)
+          VALUES (?, ?, ?, ?)
       `);
 
-      return stmt.run(email, password, username);
+      return stmt.run(email, password, username, zipcode);
 
   } catch (err) {
       console.error('Error adding user:', err.message);
@@ -76,5 +76,26 @@ function removeFavoriteRecipe(email, r_id) {
   }
 }
 
+function updateZipcode(userId, newZipcode) {
+  try {
+      // Ensure zipcode is an integer
+      if (!Number.isInteger(newZipcode)) {
+          throw new Error("Zipcode must be an integer");
+      }
 
-module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe };
+      const stmt = db.prepare(`
+          UPDATE User 
+          SET zipcode = ?
+          WHERE id = ?
+      `);
+
+      return stmt.run(newZipcode, userId);
+
+  } catch (err) {
+      console.error('Error updating zipcode:', err.message);
+      throw err;
+  }
+}
+
+
+module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe, updateZipcode };

@@ -1,15 +1,15 @@
 -- chatgpt generated filler data
 -- Insert Users
-INSERT INTO User (email, password, username) VALUES
-('alice@example.com', 'hashedpassword1', 'alice123'),
-('bob@example.com', 'hashedpassword2', 'bobcook'),
-('charlie@example.com', 'hashedpassword3', 'charliechef');
+INSERT INTO User (email, password, username, zipcode) VALUES
+('alice@example.com', 'hashedpassword1', 'alice123', 97333),
+('bob@example.com', 'hashedpassword2', 'bobcook', 97045),
+('charlie@example.com', 'hashedpassword3', 'charliechef', 97330);
 
 -- Insert Recipes
-INSERT INTO Recipe (name, id, image_link, description, visibility, servings, creator_email) VALUES
-('Spaghetti Bolognese', 1, 'https://images.unsplash.com/photo-1622973536968-3ead9e780960', 'Classic Italian pasta dish.', 'public', 4, 'alice@example.com'),
-('Chicken Curry', 2, 'https://images.unsplash.com/photo-1594610352113-ad218529cfb7', 'Spicy and creamy chicken curry.', 'public', 3, 'bob@example.com'),
-('Vegan Salad', 3, 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082', 'Healthy and fresh mixed greens.', 'private', 2, 'charlie@example.com');
+INSERT INTO Recipe (name, image_link, description, visibility, servings, creator_email) VALUES
+('Spaghetti Bolognese', 'https://images.unsplash.com/photo-1622973536968-3ead9e780960', 'Classic Italian pasta dish.', 'public', 4, 'alice@example.com'),
+('Chicken Curry', 'https://images.unsplash.com/photo-1594610352113-ad218529cfb7', 'Spicy and creamy chicken curry.', 'public', 3, 'bob@example.com'),
+('Vegan Salad', 'https://images.unsplash.com/photo-1515543237350-b3eea1ec8082', 'Healthy and fresh mixed greens.', 'private', 2, 'charlie@example.com');
 
 -- Insert Ingredients (Assuming 'name' should be VARCHAR)
 INSERT INTO Ingredient (name, store_api_id, nutrition_api_id) VALUES

@@ -1,7 +1,7 @@
 const { db } = require('../database/db'); 
 
 /* 
-Returns array of all recipes
+Returns array of all recipes objects
 */
 function getAllRecipes() {
   const stmt = db.prepare('SELECT * FROM Recipe');
@@ -9,7 +9,7 @@ function getAllRecipes() {
 }
 
 /*
-Returns array of all tags of recipe with id
+Returns array of all tags objects of recipe with id
 Return empty array if no tags
 */
 function getRecipeTags(id) {
@@ -18,7 +18,7 @@ function getRecipeTags(id) {
 }
 
 /*
-Returns array of all types of recipe with id
+Returns array of all types objects of recipe with id
 Return empty array if no tags
 */
 function getRecipeTypes(id) {
@@ -27,7 +27,7 @@ function getRecipeTypes(id) {
 }
 
 /* 
-Return single recipe with id
+Return single recipe object with id
 Returns null if no matching recipe
 */
 function getRecipeById(id) {
@@ -35,8 +35,8 @@ function getRecipeById(id) {
     return stmt.get(id) || null; 
 }
 
-/* 
-Returns array of recipes with tag
+/*
+Returns array of recipes objects with tag
 Returns empty array if no matching recipes
 */
 function getRecipesByTag(tag) {
@@ -45,16 +45,16 @@ function getRecipesByTag(tag) {
 }
 
 /* 
-Returns array of recipes with type
+Returns array of recipes objects with type
 Returns empty array if no matching recipes
 */
 function getRecipesByType(type) {
   const stmt = db.prepare('SELECT r.* FROM Recipe r JOIN Recipe_meal_type rt ON r.id=rt.r_id WHERE rt.meal_type = ?');
-  return stmt.all(type); 
+  return stmt.all(type);
 }
 
 /* 
-Returns array of recipes favorited by user with email
+Returns array of recipes objects favorited by user with email
 Returns empty array if no recipies favorited by user or no user with email
 */
 function getFavoriteRecipes(email) {
@@ -64,14 +64,14 @@ function getFavoriteRecipes(email) {
 
 
 // create new recipe
-function addRecipe(id, image_link = null, description = null, visibility, servings, creator_email, name) {
+function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO Recipe (id, image_link, description, visibility, servings, creator_email, name)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO Recipe (image_link, description, visibility, servings, creator_email, name)
+          VALUES (?, ?, ?, ?, ?, ?)
       `);
 
-      return stmt.run(id, image_link, description, visibility, servings, creator_email, name);
+      return stmt.run(image_link, description, visibility, servings, creator_email, name);
   } catch (err) {
       console.error('Error adding recipe:', err.message);
       throw err;  
@@ -126,6 +126,29 @@ function searchRecipesByName(searchTerm) {
   }
 }
 
+/*
+Search for recipe by name, tag, and type 
+Return array of recipe objects matching search
+Returns empty array if no matching recipes
+*/
+function searchRecipes(searchTerm, tags, types) {
+  try {
+      const stmt = db.prepare(`
+          SELECT r.* 
+          FROM Recipe r 
+          JOIN Recipe_tags rt ON r.id = rt.r_id 
+          JOIN Recipe_meal_type rmt ON r.id = rmt.r_id
+          WHERE r.name LIKE ? 
+          AND rt.tag IN (${tags.map(() => '?').join(',')}) 
+          AND rmt.meal_type IN (${types.map(() => '?').join(',')})
+      `);
+      return stmt.all(`%${searchTerm}%`, ...tags, ...types);
+      
+  } catch (err) {
+      console.error('Error searching for meals:', err.message);
+      throw err;
+  }
+}
 
 
 
@@ -133,5 +156,5 @@ module.exports = {
                   getAllRecipes, getRecipeTags, getRecipeTypes, getRecipeById, getRecipesByTag, getRecipesByType, getFavoriteRecipes, 
                   addRecipe, addIngredientToRecipe, 
                   removeIngredientFromRecipe,
-                  searchRecipesByName 
+                  searchRecipesByName, searchRecipes 
                 };
