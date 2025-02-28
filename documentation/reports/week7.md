@@ -5,7 +5,10 @@
 #### Aaryan:
 
 #### Andrew:
-
+- Implemented github actions
+- Added functions that allows user to travel to the /profile page and update their zip code
+- Started on working on the ingredients list and the functions to call and calculate estimated price
+- Updated index.js and profile handelbar and profile route to ensure users can access their profile and program will call correct functions
 #### Kylan:
 - automated testing with Mocha (and Chai, Supertest, and Cypress): research, setup, documentation, and made examples  
 - made necessary update, search, add, delete functions for ingredients, recipe, and user models  
