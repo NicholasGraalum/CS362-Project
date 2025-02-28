@@ -1,9 +1,20 @@
 // Event listener for main handlebar buttons
 document.addEventListener("DOMContentLoaded", function () {
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "http://localhost:3000";  // base URL, change depending on where the server is hosted
 
+  // Redirect when profile button is clicked
   document.getElementById("profile-viewer").addEventListener("click", function () {
     window.location.href = baseUrl + "/profile"
+  })
+
+  // Redirect when list button is clicked
+  document.getElementById("list-viewer").addEventListener("click", function () {
+    window.location.href = baseUrl + "/list"
+  })
+
+  // Redirect when settings button is clicked
+  document.getElementById("settings-viewer").addEventListener("click", function () {
+    window.location.href = baseUrl + "/settings"
   })
 });
 
