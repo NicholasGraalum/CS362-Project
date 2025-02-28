@@ -9,7 +9,7 @@ function initializeDatabase(dbPath) {
   if (fs.existsSync(dbPath)) {
     return new Database(dbPath, { verbose: console.log });
   } else {
-    const db = new Database(dbPath, { verbose: console.log });
+    const db = new Database(dbPath);
     db.exec("PRAGMA foreign_keys = ON;");
     createSchema(db);
     insertFillerData(db);

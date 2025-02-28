@@ -11,7 +11,7 @@ CREATE TABLE User
 CREATE TABLE Recipe
 (
   name VARCHAR(80) NOT NULL,
-  id INT NOT NULL,
+  id INTEGER,
   image_link VARCHAR(300),
   description VARCHAR(200),
   visibility VARCHAR(20) NOT NULL,
