@@ -20,7 +20,10 @@
             {{/if}}
             {{#if zipcode}} 
                 <p>Zipcode: {{zipcode}} </p> 
-                <button type="button" class="edit-button" aria-label="edit-zipcode">Change Zipcode</button>
+                <input type="text" class="text-box" id="type-zipcode"></input>
+                {{!-- <button type="button" class="edit-button" aria-label="edit-zipcode" id="change-zipcode">Change Zipcode</button> --}}
+                <button type="button" id="change-zipcode">Change Zipcode</button>
+                <p>StoreID: {{storeID}} </p>
             {{/if}}
         </div>
 

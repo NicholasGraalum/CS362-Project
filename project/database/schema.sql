@@ -5,6 +5,7 @@ CREATE TABLE User
   password VARCHAR(100) NOT NULL,
   username VARCHAR(20) NOT NULL,
   zipcode INT NOT NULL,
+  storeID INT NOT NULL,
   PRIMARY KEY (email)
 );
 

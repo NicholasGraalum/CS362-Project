@@ -76,7 +76,7 @@ function removeFavoriteRecipe(email, r_id) {
   }
 }
 
-function updateZipcode(userId, newZipcode) {
+function updateZipcode(email, newZipcode) {
   try {
       // Ensure zipcode is an integer
       if (!Number.isInteger(newZipcode)) {
@@ -86,10 +86,10 @@ function updateZipcode(userId, newZipcode) {
       const stmt = db.prepare(`
           UPDATE User 
           SET zipcode = ?
-          WHERE id = ?
+          WHERE email = ?
       `);
 
-      return stmt.run(newZipcode, userId);
+      return stmt.run(newZipcode, email);
 
   } catch (err) {
       console.error('Error updating zipcode:', err.message);
@@ -97,5 +97,26 @@ function updateZipcode(userId, newZipcode) {
   }
 }
 
+function updateStoreID(email, storeID) {
+  try {
+      // Ensure storeID is an integer
+      if (!Number.isInteger(storeID)) {
+          throw new Error("StoreID invalid");
+      }
+  
+      const stmt = db.prepare(`
+          UPDATE User 
+          SET storeID = ?
+          WHERE email = ?
+      `);
+  
+      return stmt.run(storeID, email);
+  
+  } catch (err) {
+      console.error('Error updating storeID:', err.message);
+      throw err;
+  }
+}
 
-module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe, updateZipcode };
+
+module.exports = { getAllUsers, getUserByEmail, verifyUser, addUser, addFavoriteRecipe, removeFavoriteRecipe, updateZipcode, updateStoreID };

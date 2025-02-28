@@ -3,8 +3,10 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const Handlebars = require("handlebars");
 const session = require("express-session");
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 // session for tracking logged in user 
 app.use(session({
@@ -19,7 +21,7 @@ const userRoutes = require('./routes/userRoutes');
 const mealRoutes = require('./routes/mealsRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 // const ingredientsRoutes = require('./routes/ingredientsRoutes');
-// const profileRoutes = require('./routes/profileRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 // const listRoutes = require('./routes/listRoutes');
 
 // Middleware
@@ -47,7 +49,7 @@ app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
 app.use('/login', loginRoutes);
 // app.use('/ingredients', ingredientsRoutes);
-// app.use('/profile', profileRoutes);
+app.use('/profile', profileRoutes);
 // app.use('/list', listRoutes);
 
 app.use(express.static('static'))   // Static folder used for express-handlebars
