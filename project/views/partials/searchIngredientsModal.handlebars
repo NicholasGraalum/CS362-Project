@@ -1,0 +1,16 @@
+{{!-- Search modal for the ingredients --}}
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        {{!-- Add a close button to the modal as well as a title and form --}}
+        <span id="close-search-modal" class="close-button">&times;</span>
+        <h2>Search Ingredients</h2>
+        <form id="search-form">
+            {{!-- Add a search bar to all a search of the specified ingredients --}}
+            <label for="ingredient-name">Ingredient name</label>
+            <input type="text" id="ingredient-name" name="ingredient-name" placeholder="Enter ingredient name">
+
+            {{!-- Add a search button --}}
+            <button type="submit" class="submit-button">Search</button>
+        </form>
+    </div>
+</div>
