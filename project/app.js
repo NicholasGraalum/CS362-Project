@@ -5,11 +5,15 @@ const Handlebars = require("handlebars");
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Import routes
 const userRoutes = require('./routes/userRoutes');
 const mealRoutes = require('./routes/mealsRoutes');
 
-// Middleware
+// // Middleware
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 

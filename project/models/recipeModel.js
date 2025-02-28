@@ -64,19 +64,20 @@ function getFavoriteRecipes(email) {
 
 
 // create new recipe
-function addRecipe(id, image_link = null, description = null, visibility, servings, creator_email, name) {
+function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO Recipe (id, image_link, description, visibility, servings, creator_email, name)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO Recipe (image_link, description, visibility, servings, creator_email, name)
+          VALUES (?, ?, ?, ?, ?, ?)
       `);
 
-      return stmt.run(id, image_link, description, visibility, servings, creator_email, name);
+      return stmt.run(image_link, description, visibility, servings, creator_email, name);
   } catch (err) {
-      console.error('Error adding recipe:', err.message);
+      console.error('🚨 Error adding recipe:', err.message);
       throw err;  
   }
 }
+
 
 // add ingredient to recipe
 function addIngredientToRecipe(r_id, i_name, amount) {

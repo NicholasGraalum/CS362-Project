@@ -70,19 +70,38 @@ function searchMeals(req, res) {
 // Create a New Meal (Ignoring Ingredients)
 function createMeal(req, res) {
     try {
-        const { name, description, image_link, visibility, servings, creator_email } = req.body;
+        console.log("\n✅ FULL REQUEST RECEIVED:");
+        console.log("➡️ HEADERS:", req.headers);
+        console.log("➡️ BODY TYPE:", typeof req.body);
+        console.log("➡️ RAW BODY:", JSON.stringify(req.body, null, 2));
+
+        let { name, description, image_link, visibility, servings, creator_email, calories, mealType, categoryTags } = req.body;
+
+        console.log("\n✅ EXTRACTED FIELDS:");
+        console.log("➡️ Name:", name);
+        console.log("➡️ Description:", description);
+        console.log("➡️ Image:", image_link);
+        console.log("➡️ Visibility:", visibility);
+        console.log("➡️ Servings:", servings);
+        console.log("➡️ Creator Email:", creator_email);
 
         if (!name || !visibility || !servings || !creator_email) {
+            console.error("❌ MISSING REQUIRED FIELDS:", { name, visibility, servings, creator_email });
             return res.status(400).send("Missing required fields.");
         }
 
-        recipeModel.addRecipe(null, image_link, description, visibility, servings, creator_email, name);
-        res.redirect('/meals'); // Redirect to meals page after adding
+        // Insert into database (if everything is correct)
+        const newMeal = recipeModel.addRecipe(null, image_link, description, visibility, servings, creator_email, name);
+        res.redirect('/meals');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+        console.error("🚨 ERROR IN createMeal:", error);
+        res.status(500).send("Internal Server Error");
     }
 }
+
+
+
+
 
 // Add Meal Ingredients to the Shopping List
 function addMealToList(req, res) {
