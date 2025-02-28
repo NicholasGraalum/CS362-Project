@@ -16,8 +16,8 @@
 - Filled out Developer Documentation and updated README.md with directory structure
 - Fixed bugs where meals and single meal webpages were not displaying correctly
 - Added create meal modal with CSS and javascript
-- Created index.js and added basic logic for meal search and create meal modals
-- Created handlebar helper to display text with proper case
+- Created index.js and added basic logic for meal search and create meal modal buttons
+- Set up fetch request for adding all meal ingredients to shopping list
 
 #### Nick:
 
