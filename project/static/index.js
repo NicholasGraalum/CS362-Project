@@ -1,3 +1,22 @@
+// Event listener for main handlebar buttons
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Redirect when profile button is clicked
+  document.getElementById("profile-viewer").addEventListener("click", function () {
+    window.location.href = "/profile"
+  })
+
+  // Redirect when list button is clicked
+  document.getElementById("list-viewer").addEventListener("click", function () {
+    window.location.href = "/list"
+  })
+
+  // Redirect when settings button is clicked
+  document.getElementById("settings-viewer").addEventListener("click", function () {
+    window.location.href = "/settings"
+  })
+});
+
 // Event listener for the meals page and the meal modal
 document.addEventListener("DOMContentLoaded", function () {
 
