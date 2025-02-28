@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create Meal Modal, get each element
     const mealModal = document.getElementById("meal-modal");
+    const mealModalForm = document.getElementById("meal-form");
     const openMealModalButton = document.getElementById("create-meal");
     const closeMealModal = document.getElementById("close-meal-modal");
     const addIngredientButton = document.getElementById("add-ingredient");
@@ -172,16 +173,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /*
+    
     // Potential fetch request for create meal
     // On submit, send a fetch request with all meal data
     // IMPORTANT: fetch request for creating a meal
-    mealModal.onsubmit = function (event) {
+    mealModalForm.onsubmit = function (event) {
       event.preventDefault(); // Stop default submission
 
       const formData = new FormData(this); // Get all form inputs
 
-      fetch("/meals/create-meal", {  // Endpoint, can change if needed
+      fetch("/meals/create", {  // Endpoint, can change if needed
         method: "POST", // POST request
         body: formData // Send form data without appending to URL
       })
@@ -193,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error:", error);
       });
     }
-    */
+    
   } else {
     console.log("Create meal modal elements not found on this page. Skipping create meal modal setup.");
   }

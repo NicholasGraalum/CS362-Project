@@ -71,13 +71,14 @@ function searchMeals(req, res) {
 // Create a New Meal (Ignoring Ingredients)
 function createMeal(req, res) {
     try {
-        const { name, description, image_link, visibility, servings, creator_email } = req.body;
+        console.log(req.body);
+        const { name, description, image_link, visibility, servings } = req.body;
 
         if (!name || !visibility || !servings || !creator_email) {
             return res.status(400).send("Missing required fields.");
         }
 
-        recipeModel.addRecipe(null, image_link, description, visibility, servings, creator_email, name);
+        recipeModel.addRecipe(image_link, description, visibility, servings, req.session.userEmail, name);
         res.redirect('/meals'); // Redirect to meals page after adding
     } catch (error) {
         console.error(error);
