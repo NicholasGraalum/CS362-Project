@@ -7,18 +7,16 @@
     "better-sqlite3": "^11.8.1",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
     "handlebars": "^4.7.8"
   },
   "scripts": {
     "start": "node server.js",
-    
     "test:unit": "mocha test/unit --recursive",
     "test:integration": "mocha test/integration --recursive",
     "test:validation": "mocha test/validation --recursive",
-
     "test:e2e": "start-server-and-test start http://localhost:3000 'npx cypress run'",
     "cypress:open": "start-server-and-test start http://localhost:3000 'npx cypress open'",
-
     "test": "npm run test:unit && npm run test:integration && npm run test:validation && npm run test:e2e"
   },
   "devDependencies": {

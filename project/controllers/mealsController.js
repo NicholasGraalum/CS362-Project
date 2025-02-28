@@ -3,6 +3,7 @@ const ingredientModel = require('../models/ingredientModel');
 
 function getAllMeals(req, res) {
     try {
+        console.log('current logged in user is %s', req.session.userEmail);
         const meals = recipeModel.getAllRecipes();  // Fetch all recipes
         res.render('mealsPage', { meals }); // Render mealsPage.handlebars
     } catch (error) {
