@@ -399,3 +399,56 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+
+// document.getElementById('change-zipcode').addEventListener('click', async () => {
+//   const zip = document.getElementById('type-zipcode').value;
+//   if (!zip) {
+//     console.error("Zip code is required");
+//     return;
+//   }
+  
+//   try {
+//     const response = await fetch(`/profile/setStore?zip=${zip}`);
+//     const data = await response.json();
+//     console.log('Store update response:', data);
+    
+//   } catch (error) {
+//     console.error('Error updating store:', error);
+//   }
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const zipInput = document.getElementById('type-zipcode');
+
+  if (zipInput) { // Ensure elements exist
+    document.getElementById('change-zipcode').addEventListener('click', async () => {
+      const zip = document.getElementById('type-zipcode').value;
+      if (!zip) {
+        console.error("Zip code is required");
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/profile/setStore?zip=${zip}`);
+        const data = await response.json();
+        console.log('Store update response:', data);
+        
+      } catch (error) {
+        console.error('Error updating store:', error);
+      }
+    });
+    //   try {
+    //     const response = await fetch(`/setStore?zip=${zip}`, { method: 'GET' });
+    //     const data = await response.json();
+
+    //     if (response.ok) {
+    //       alert(`Store updated successfully! Store ID: ${data.storeID}`);
+    //     } else {
+    //       alert(`Error: ${data.error}`);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error updating store:", error);
+    //   }
+    // });
+  }
+});
