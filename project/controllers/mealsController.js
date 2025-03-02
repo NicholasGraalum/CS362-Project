@@ -47,20 +47,14 @@ function getSingleMeal(req, res) {
 function searchMeals(req, res) {
     console.log("searched route");
     try {
-        const { mealName, mealTypes, categoryTags } = req.query; // Get query parameters
-        console.log(mealName);
-        let meals;
-        if (mealName) {
-            meals = recipeModel.searchRecipesByName(mealName);
-            console.log("searched by name");
-        } else if (categoryTags) {
-            meals = recipeModel.getRecipesByTag(categoryTags);
-            console.log("searched by tag");
-        } else {
-            meals = recipeModel.getAllRecipes();
-            console.log("showing all meals");
-        }
+        let { mealName, mealTypes, categoryTags } = req.query; // Get query parameters
 
+        // turn param strings into param lists
+        mealTypes = mealTypes.length === 0 ? [] : mealTypes.split(',');
+        categoryTags = categoryTags.length === 0 ? [] : categoryTags.split(',');
+
+        const meals = recipeModel.searchRecipes(mealName, categoryTags, mealTypes);
+     
         res.render('mealsPage', { meals });
     } catch (error) {
         console.error(error);
