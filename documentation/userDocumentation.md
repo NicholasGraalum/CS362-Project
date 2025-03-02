@@ -3,9 +3,12 @@
 Smart Cart is grocery list based webpage. It will allow you to create meals with specific ingredients as well as add individual ingredients to your list. This includes a system to show you a kroger based store in your area based on your zipcode, which will allow you to view the prices of the given products in your list.
 
 ## Accessing the website:
-Currently in order to access the website you must connect to localhost:
-
-http://localhost:3000
+In order to start the webpage, you must install the correct dependices as well as the server basis, this includes the following:
+1) clone the github repo with your perfereed method into your computer
+2) cd into the **./project** folder in the repo
+3) run **npm install** in your command console to install the the npm dependincies and modules
+4) run **npm start** to start the npm modules
+5) run **node server.js** and access the wepage via **http://localhost:3000**
 
 This will take you to the landing page. 
 
