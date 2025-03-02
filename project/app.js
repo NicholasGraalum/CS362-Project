@@ -23,7 +23,7 @@ const mealRoutes = require('./routes/mealsRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const ingredientsRoutes = require('./routes/ingredientsRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-// const listRoutes = require('./routes/listRoutes');
+const listRoutes = require('./routes/listRoutes');
 
 // Middleware
 app.use(express.json());
