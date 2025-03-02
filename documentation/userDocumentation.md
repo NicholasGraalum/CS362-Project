@@ -32,3 +32,22 @@ N/A
 
 ### Profile page:
 To access the profile page you have to click the *Profile* button in the top right of the navbar. In order to enter the profile page you must enter or create an account. When creating account you will enter a username, email address, a password as well as a zipcode. When you enter the profile page you will find your username as well as a *change username* button, there is also an email section that shows your email address that is connected to your account, there is also a zipcode section that you can change to your current zipcode to show the prices of the current kroger store. 
+
+## Reporting bugs:
+For reporting a bug please use the github issues section of the products page:
+**https://github.com/NicholasGraalum/CS362-Project/issues**
+
+When you enter this section please navigate to the **new issue** button and click it. After this add a title for the bug in the format of, **Date : Webpage**, date being the current date the issue was found and webpage being the page that the issue was located in. 
+
+After the title please provide the following information about the bug and the circumstance of the bug:
+- Whether or not the bug can be reproduced
+    - If the bug can be reproduced give steps on how the bug can be reproduced
+    - What were the actual results from the steps of reproducing the bug and what is the expected result.
+- The type of bug:
+    - Page not found: If the page trying to be accessed cannot be accessed
+    - Database error: If there is no given information and the webpage console throws a database error
+    - Formatting error: There was an error in the formatting of data, this could include the meal page or ingredients page data.
+    - Interface error: There is an error with the interface in sending to a specific page, or there are certain buttons that do not work in the interface. 
+    - Other: If none of the listed categories above pretain to the current bug.
+- A summary of what happed, what type of issue occured because of the bug, what is it interfering with. 
+- Which version of the webpage did this occur on. This can be located in the top navbar by the title of the webpage.
