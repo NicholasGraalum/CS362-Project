@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add a click event listener to each button
     button.addEventListener("click", function () {
       // Find the closest "meal" div
-      const mealDiv = this.closest(".meal");
+      const mealDiv = this.closest(".meal") || this.closest(".full-meal");
 
       if (mealDiv) {
         // Retrieve the meal ID from 'data-id' attribute
@@ -52,15 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 
         .then(response => {
+          // check if redirected for not logged in 
+          if (response.status === 302 || response.redirected) {
+            // If redirected, manually redirect to the login page
+            window.location.href = '/login';  // This redirects the browser to the login page
+            return;  // Exit from the promise chain since the redirect is handled
+          }
+
           // Check if the response status is OK
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
+          } else {
+            alert("Ingredients added successfully!");
           }
-          return response.json(); // Parse the response body as JSON
         })
         .then(data => {
           // Log the successful response data to the console for debugging
           console.log("Server response:", data);
+
         })
         .catch(error => {
           // Catch and log any errors that occur during the fetch request

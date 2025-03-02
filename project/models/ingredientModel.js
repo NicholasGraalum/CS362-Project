@@ -14,7 +14,7 @@ Returns array of ingredient objects in a recipe with id
 Returns empty array if no recipe of id or no ingredients in recipe
 */
 function getIngredientsInRecipe(id) {
-  const stmt = db.prepare('SELECT i.* FROM Ingredient i JOIN Includes inc ON i.name=inc.i_name WHERE inc.r_id = ?');
+  const stmt = db.prepare('SELECT i.*, inc.amount FROM Ingredient i JOIN Includes inc ON i.name=inc.i_name WHERE inc.r_id = ?');
   return stmt.all(id); 
 }
 

@@ -83,19 +83,26 @@ function createMeal(req, res) {
 // Add Meal Ingredients to the Shopping List
 function addMealToList(req, res) {
     try {
-        const { user_email } = req.body;  // Assume user is logged in
-        const mealId = req.params.id;
+        const user_email = req.session.userEmail;
 
-        const ingredients = ingredientModel.getIngredientsInRecipe(mealId);
-        if (!ingredients.length) {
-            return res.status(404).send("No ingredients found for this meal.");
+        // check if user logged in 
+        if (user_email) {   // if so add
+            const mealId = req.body.id;
+
+            const ingredients = ingredientModel.getIngredientsInRecipe(mealId);
+            if (!ingredients.length) {
+                return res.status(404).send("No ingredients found for this meal.");
+            }
+
+            ingredients.forEach(ingredient => {
+                listModel.addToList(user_email, ingredient.name, ingredient.amount); // Add each ingredient to the list
+            });
+            res.status(200).json({ message: 'Ingredients added successfully!' });
+        } else {    // if not logged in, redirect to login page
+            console.log("not logged in");
+            res.redirect(`/login`); 
         }
-
-        ingredients.forEach(ingredient => {
-            listModel.addToList(user_email, ingredient.name, 1); // Add each ingredient to the list
-        });
-
-        res.redirect(`/meals/${mealId}`); // Redirect back to the meal page
+        
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
