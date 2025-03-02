@@ -64,14 +64,28 @@ function getFavoriteRecipes(email) {
 
 
 // create new recipe
-function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name) {
+function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name, tags, types) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Recipe (image_link, description, visibility, servings, creator_email, name)
           VALUES (?, ?, ?, ?, ?, ?)
       `);
 
-      return stmt.run(image_link, description, visibility, servings, creator_email, name);
+      const result = stmt.run(image_link, description, visibility, servings, creator_email, name);
+      const id = result.lastInsertRowid;
+
+      // add all tags
+      tags.forEach(tag => {
+        addTagToRecipe(id, tag);
+      });
+
+      // add all types
+      types.forEach(type => {
+        addTypeToRecipe(id, type);
+      });
+
+      return id;
+
   } catch (err) {
       console.error('Error adding recipe:', err.message);
       throw err;  
@@ -132,21 +146,60 @@ Return array of recipe objects matching search
 Returns empty array if no matching recipes
 */
 function searchRecipes(searchTerm, tags, types) {
+
+  // Handle empty searchterm
+  const searchPattern = (!searchTerm || searchTerm.length === 0) ? '%' : `%${searchTerm}%`;
+
   try {
+      // Handle empty tag or type param lists
+      let tagFilter = tags.length > 0 ? `AND LOWER(rt.tag) IN (${tags.map(() => 'LOWER(?)').join(',')})` : "";
+      let typeFilter = types.length > 0 ? `AND LOWER(rmt.meal_type) IN (${types.map(() => 'LOWER(?)').join(',')})` : "";
+      
       const stmt = db.prepare(`
-          SELECT r.* 
+          SELECT DISTINCT r.* 
           FROM Recipe r 
           JOIN Recipe_tags rt ON r.id = rt.r_id 
           JOIN Recipe_meal_type rmt ON r.id = rmt.r_id
-          WHERE r.name LIKE ? 
-          AND rt.tag IN (${tags.map(() => '?').join(',')}) 
-          AND rmt.meal_type IN (${types.map(() => '?').join(',')})
+          WHERE LOWER(r.name) LIKE LOWER(?) 
+          ${tagFilter} 
+          ${typeFilter}
       `);
-      return stmt.all(`%${searchTerm}%`, ...tags, ...types);
-      
+
+      return stmt.all(searchPattern, ...tags, ...types);
+        
   } catch (err) {
       console.error('Error searching for meals:', err.message);
       throw err;
+  }
+}
+
+// add tag to recipe
+function addTagToRecipe(r_id, tag) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Recipe_tags (tag, r_id)
+          VALUES (?, ?)
+      `);
+
+      return stmt.run(tag, r_id);
+  } catch (err) {
+      console.error('Error adding tag to recipe:', err.message);
+      throw err;  
+  }
+}
+
+// add type to recipe
+function addTypeToRecipe(r_id, type) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Recipe_meal_type (meal_type, r_id)
+          VALUES (?, ?)
+      `);
+
+      return stmt.run(type, r_id);
+  } catch (err) {
+      console.error('Error adding type to recipe:', err.message);
+      throw err;  
   }
 }
 
@@ -154,7 +207,7 @@ function searchRecipes(searchTerm, tags, types) {
 
 module.exports = { 
                   getAllRecipes, getRecipeTags, getRecipeTypes, getRecipeById, getRecipesByTag, getRecipesByType, getFavoriteRecipes, 
-                  addRecipe, addIngredientToRecipe, 
+                  addRecipe, addIngredientToRecipe, addTagToRecipe, addTypeToRecipe,
                   removeIngredientFromRecipe,
                   searchRecipesByName, searchRecipes 
                 };
