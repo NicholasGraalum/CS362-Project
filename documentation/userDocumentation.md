@@ -8,7 +8,7 @@ In order to start the webpage, you must install the correct dependices as well a
 2) cd into the **./project** folder in the repo
 3) run **npm install** in your command console to install the the npm dependincies and modules
 4) run **npm start** to start the npm modules
-5) run **node server.js** and access the wepage via **http://localhost:3000**
+5) access the wepage via **http://localhost:3000**
 
 This will take you to the landing page. 
 
