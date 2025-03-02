@@ -137,6 +137,7 @@ function searchRecipes(searchTerm, tags, types) {
   const searchPattern = (!searchTerm || searchTerm.length === 0) ? '%' : `%${searchTerm}%`;
 
   try {
+      // Handle empty tag or type param lists
       let tagFilter = tags.length > 0 ? `AND LOWER(rt.tag) IN (${tags.map(() => 'LOWER(?)').join(',')})` : "";
       let typeFilter = types.length > 0 ? `AND LOWER(rmt.meal_type) IN (${types.map(() => 'LOWER(?)').join(',')})` : "";
       
