@@ -64,14 +64,28 @@ function getFavoriteRecipes(email) {
 
 
 // create new recipe
-function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name) {
+function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name, tags, types) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Recipe (image_link, description, visibility, servings, creator_email, name)
           VALUES (?, ?, ?, ?, ?, ?)
       `);
 
-      return stmt.run(image_link, description, visibility, servings, creator_email, name);
+      const result = stmt.run(image_link, description, visibility, servings, creator_email, name);
+      const id = result.lastInsertRowid;
+
+      // add all tags
+      tags.forEach(tag => {
+        addTagToRecipe(id, tag);
+      });
+
+      // add all types
+      types.forEach(type => {
+        addTypeToRecipe(id, type);
+      });
+
+      return id;
+
   } catch (err) {
       console.error('Error adding recipe:', err.message);
       throw err;  
@@ -159,11 +173,41 @@ function searchRecipes(searchTerm, tags, types) {
   }
 }
 
+// add tag to recipe
+function addTagToRecipe(r_id, tag) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Recipe_tags (tag, r_id)
+          VALUES (?, ?)
+      `);
+
+      return stmt.run(tag, r_id);
+  } catch (err) {
+      console.error('Error adding tag to recipe:', err.message);
+      throw err;  
+  }
+}
+
+// add type to recipe
+function addTypeToRecipe(r_id, type) {
+  try {
+      const stmt = db.prepare(`
+          INSERT INTO Recipe_meal_type (meal_type, r_id)
+          VALUES (?, ?)
+      `);
+
+      return stmt.run(type, r_id);
+  } catch (err) {
+      console.error('Error adding type to recipe:', err.message);
+      throw err;  
+  }
+}
+
 
 
 module.exports = { 
                   getAllRecipes, getRecipeTags, getRecipeTypes, getRecipeById, getRecipesByTag, getRecipesByType, getFavoriteRecipes, 
-                  addRecipe, addIngredientToRecipe, 
+                  addRecipe, addIngredientToRecipe, addTagToRecipe, addTypeToRecipe,
                   removeIngredientFromRecipe,
                   searchRecipesByName, searchRecipes 
                 };

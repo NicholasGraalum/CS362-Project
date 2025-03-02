@@ -158,11 +158,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const mealModalForm = document.getElementById("meal-form");
     const openMealModalButton = document.getElementById("create-meal");
     const closeMealModal = document.getElementById("close-meal-modal");
-    const addIngredientButton = document.getElementById("add-ingredient");
-    const ingredientsList = document.getElementById("ingredients-list");
+    // const addIngredientButton = document.getElementById("add-ingredient");
+    // const ingredientsList = document.getElementById("ingredients-list");
 
   // Check if the current page has these ID's (if not, don't create interaction functions)
-  if (mealModal && openMealModalButton && closeMealModal && addIngredientButton && ingredientsList) {
+  if (mealModal && openMealModalButton && closeMealModal) {
 
     // Function to open meal modal
     function openMealModal() {
@@ -186,19 +186,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Add new ingredient input field when button is clicked (used ChatGPT to help)
-    addIngredientButton.addEventListener("click", function () {
-        const ingredientItem = document.createElement("div");
-        ingredientItem.classList.add("ingredient-item");
-        ingredientItem.innerHTML = '<input type="text" name="ingredients[]" placeholder="Enter ingredient" required> <button type="button" class="remove-ingredient">&times;</button>';
-        ingredientsList.appendChild(ingredientItem);
-    });
+    // addIngredientButton.addEventListener("click", function () {
+    //     const ingredientItem = document.createElement("div");
+    //     ingredientItem.classList.add("ingredient-item");
+    //     ingredientItem.innerHTML = '<input type="text" name="ingredients[]" placeholder="Enter ingredient" required> <button type="button" class="remove-ingredient">&times;</button>';
+    //     ingredientsList.appendChild(ingredientItem);
+    // });
 
     // Remove ingredient input field when button is clicked (used ChatGPT to help)
-    ingredientsList.addEventListener("click", function (event) {
-      if (event.target.classList.contains("remove-ingredient")) {
-        event.target.parentElement.remove();
-      }
-    });
+    // ingredientsList.addEventListener("click", function (event) {
+    //   if (event.target.classList.contains("remove-ingredient")) {
+    //     event.target.parentElement.remove();
+    //   }
+    // });
 
 
     
@@ -210,13 +210,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const formData = new FormData(this); // Get all form inputs
 
+      const bodyData = {
+        name: formData.get("meal-name"),
+        description: formData.get("meal-description"),
+        image_link: formData.get("meal-image"),
+        mealTypes: formData.getAll("meal-type"), // Array of selected meal types
+        visibility: "public",
+        servings: parseInt(formData.get("servings"), 10),
+        categoryTags: formData.getAll("category-tags") // Array of selected tags
+      };
+
+      const json_data = JSON.stringify(bodyData);
+      console.log(json_data);
+
       fetch("/meals/create", {  // Endpoint, can change if needed
         method: "POST", // POST request
-        body: formData // Send form data without appending to URL
+        headers: {
+          "Content-Type": "application/json"  // Set the Content-Type to application/json
+        },
+        body: json_data // Send form data without appending to URL
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 302 || response.redirected) {
+          // If redirected, manually redirect to the login page
+          window.location.href = '/login';  // This redirects the browser to the login page
+          return;  
+
+        }
+        
+        return response.json()
+      })
       .then(data => {
-        console.log("Meal created:", data);
+        if (data && data.id) {  // Check if the id is present in the response
+          console.log("Meal created with ID:", data.id);
+      
+          // Redirect to /meals/{id} using the ID returned from the server
+          window.location.href = `/meals/${data.id}`;
+        }
       })
       .catch(error => {
         console.error("Error:", error);

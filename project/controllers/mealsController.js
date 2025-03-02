@@ -64,19 +64,37 @@ function searchMeals(req, res) {
 
 // Create a New Meal (Ignoring Ingredients)
 function createMeal(req, res) {
+    console.log("adding meal");
     try {
-        console.log(req.body);
-        const { name, description, image_link, visibility, servings } = req.body;
+        const user_email = req.session.userEmail;
 
-        if (!name || !visibility || !servings || !creator_email) {
-            return res.status(400).send("Missing required fields.");
+        if (user_email) {
+            console.log(req.body);
+            const { name, description, image_link, mealTypes, visibility, servings, categoryTags } = req.body;
+
+            console.log("Received Data:");
+            console.log("image_link:", image_link);
+            console.log("description:", description);
+            console.log("visibility:", visibility);
+            console.log("servings:", servings);
+            console.log("user_email:", user_email);
+            console.log("name:", name);
+
+            if (!name || !visibility || !servings) {
+                return res.status(400).send("Missing required fields.");
+            }
+            
+            const new_id = recipeModel.addRecipe(image_link, description, visibility, servings, user_email, name, categoryTags, mealTypes);
+            
+            return res.status(200).json({ id: new_id });
+        } else {
+            console.log("not logged in");
+            return res.status(303).redirect(`/login`); 
         }
-
-        recipeModel.addRecipe(image_link, description, visibility, servings, req.session.userEmail, name);
-        res.redirect('/meals'); // Redirect to meals page after adding
+        
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
     }
 }
 
