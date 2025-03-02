@@ -1,6 +1,16 @@
 // Event listener for main handlebar buttons
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Reditect when the meals button is clicked
+  document.getElementById("meals-viewer").addEventListener("click", function () {
+    window.location.href = "/meals"
+  })
+
+  // Redirect when the ingredients button is clicked
+  document.getElementById("ingredients-viewer").addEventListener("click", function () {
+    window.location.href = "/ingredients"
+  })
+
   // Redirect when profile button is clicked
   document.getElementById("profile-viewer").addEventListener("click", function () {
     window.location.href = "/profile"

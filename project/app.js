@@ -17,12 +17,13 @@ app.use(session({
 }));
 
 // Import routes
+const landingRoutes = require('./routes/landingRoutes')
 const userRoutes = require('./routes/userRoutes');
 const mealRoutes = require('./routes/mealsRoutes');
 const loginRoutes = require('./routes/loginRoutes');
-// const ingredientsRoutes = require('./routes/ingredientsRoutes');
+const ingredientsRoutes = require('./routes/ingredientsRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-// const listRoutes = require('./routes/listRoutes');
+const listRoutes = require('./routes/listRoutes');
 
 // Middleware
 app.use(express.json());
@@ -41,14 +42,15 @@ Handlebars.registerHelper("properCase", function (str) {
 
 // Add a default home route so cypress test works for now
 app.get('/', (req, res) => {
-  res.send('<h1>Welcome to My App</h1><p>This is the homepage.</p>');
+  res.redirect('/landing');
 });
 
 // Routes
+app.use('/landing', landingRoutes);
 app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
 app.use('/login', loginRoutes);
-// app.use('/ingredients', ingredientsRoutes);
+app.use('/ingredients', ingredientsRoutes);
 app.use('/profile', profileRoutes);
 // app.use('/list', listRoutes);
 
