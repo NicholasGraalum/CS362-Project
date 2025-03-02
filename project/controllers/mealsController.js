@@ -47,20 +47,14 @@ function getSingleMeal(req, res) {
 function searchMeals(req, res) {
     console.log("searched route");
     try {
-        const { mealName, mealTypes, categoryTags } = req.query; // Get query parameters
-        console.log(mealName);
-        let meals;
-        if (mealName) {
-            meals = recipeModel.searchRecipesByName(mealName);
-            console.log("searched by name");
-        } else if (categoryTags) {
-            meals = recipeModel.getRecipesByTag(categoryTags);
-            console.log("searched by tag");
-        } else {
-            meals = recipeModel.getAllRecipes();
-            console.log("showing all meals");
-        }
+        let { mealName, mealTypes, categoryTags } = req.query; // Get query parameters
 
+        // turn param strings into param lists
+        mealTypes = mealTypes.length === 0 ? [] : mealTypes.split(',');
+        categoryTags = categoryTags.length === 0 ? [] : categoryTags.split(',');
+
+        const meals = recipeModel.searchRecipes(mealName, categoryTags, mealTypes);
+     
         res.render('mealsPage', { meals });
     } catch (error) {
         console.error(error);
@@ -70,38 +64,63 @@ function searchMeals(req, res) {
 
 // Create a New Meal (Ignoring Ingredients)
 function createMeal(req, res) {
+    console.log("adding meal");
     try {
-        console.log(req.body);
-        const { name, description, image_link, visibility, servings } = req.body;
+        const user_email = req.session.userEmail;
 
-        if (!name || !visibility || !servings || !creator_email) {
-            return res.status(400).send("Missing required fields.");
+        if (user_email) {
+            console.log(req.body);
+            const { name, description, image_link, mealTypes, visibility, servings, categoryTags } = req.body;
+
+            console.log("Received Data:");
+            console.log("image_link:", image_link);
+            console.log("description:", description);
+            console.log("visibility:", visibility);
+            console.log("servings:", servings);
+            console.log("user_email:", user_email);
+            console.log("name:", name);
+
+            if (!name || !visibility || !servings) {
+                return res.status(400).send("Missing required fields.");
+            }
+            
+            const new_id = recipeModel.addRecipe(image_link, description, visibility, servings, user_email, name, categoryTags, mealTypes);
+            
+            return res.status(200).json({ id: new_id });
+        } else {
+            console.log("not logged in");
+            return res.status(303).redirect(`/login`); 
         }
-
-        recipeModel.addRecipe(image_link, description, visibility, servings, req.session.userEmail, name);
-        res.redirect('/meals'); // Redirect to meals page after adding
+        
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
     }
 }
 
 // Add Meal Ingredients to the Shopping List
 function addMealToList(req, res) {
     try {
-        const { user_email } = req.body;  // Assume user is logged in
-        const mealId = req.params.id;
+        const user_email = req.session.userEmail;
 
-        const ingredients = ingredientModel.getIngredientsInRecipe(mealId);
-        if (!ingredients.length) {
-            return res.status(404).send("No ingredients found for this meal.");
+        // check if user logged in 
+        if (user_email) {   // if so add
+            const mealId = req.body.id;
+
+            const ingredients = ingredientModel.getIngredientsInRecipe(mealId);
+            if (!ingredients.length) {
+                return res.status(404).send("No ingredients found for this meal.");
+            }
+
+            ingredients.forEach(ingredient => {
+                listModel.addToList(user_email, ingredient.name, ingredient.amount); // Add each ingredient to the list
+            });
+            res.status(200).json({ message: 'Ingredients added successfully!' });
+        } else {    // if not logged in, redirect to login page
+            console.log("not logged in");
+            res.redirect(`/login`); 
         }
-
-        ingredients.forEach(ingredient => {
-            listModel.addToList(user_email, ingredient.name, 1); // Add each ingredient to the list
-        });
-
-        res.redirect(`/meals/${mealId}`); // Redirect back to the meal page
+        
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

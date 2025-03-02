@@ -16,6 +16,6 @@ router.get('/', mealsController.getAllMeals);
 router.get('/:id', mealsController.getSingleMeal);
 
 // Route to add a meal’s ingredients to the shopping list
-router.post('/:id/add-to-list', mealsController.addMealToList);
+router.post('/add-ingredients', mealsController.addMealToList);
 
 module.exports = router;
