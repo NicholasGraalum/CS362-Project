@@ -16,15 +16,16 @@ When using the website there are 4 main pages:
 - '/list': this can be accessed by clicking the *list* button on the top nav bar of the webpage
 - '/profile': this can be accessed by clicking the circle with the word *profile* in it
 
-Meals page:
+## Meals page:
 In the meals page you will find containers holding different types of meals with an image as well as a name associated with it. In these containers also is a *add ingredients* button which will add the ingredients of the current meal to your list. When you click the name of the chosen meal you will be redirected to the page containing the meal chosen. On this page it will show the ingredients in the meal as well as the meal type and the number of servings. There will also be a small description of the meal. If you click the plus (+) icon by the ingredients button, it will add the ingredients to your list. 
 
 Back in the main meals page, you will see two more buttons, *search meals* and *create meal*. In the search meals button you will find a pop up that gives you a primary search bar to search by name. As well as two sections, the meal type and the category tag. Meal type is of the selection: Breackfast, Lunch, Dinner and Snack. Category type is of the selection: Vegan, Vegetarian, High Protein, Low Calorie and Gluten free. When you select the respective options and or give a specific name it will display the valid options. Inside of the create meal pop up there will be a *Meal name* section for you to include the name of the meal you wish to add, a *Description* section to include what the meal is, an *Image link* section for a link to the image you wish to display, a *Meal Type* section to inlcude the previousaly mentioned meal types, a *Servings* section to include the amount of servings in the meal, a *Calories per serving* section to include the calories contained in each serving, a *Category tags* section for the previously mentioned categories it can be and finally an add ingredients button to include the ingredients in the meal. 
 
-Ingredients page:
-N\A
+## Ingredients page:
+N/A
 
-List page:
-N\A
+## List page:
+N/A
 
-Profile page:
+## Profile page:
+To access the profile page you have to click the *Profile* button in the top right of the navbar. In order to enter the profile page you must enter or create an account. When creating account you will enter a username, email address, a password as well as a zipcode. When you enter the profile page you will find your username as well as a *change username* button, there is also an email section that shows your email address that is connected to your account, there is also a zipcode section that you can change to your current zipcode to show the prices of the current kroger store. 
