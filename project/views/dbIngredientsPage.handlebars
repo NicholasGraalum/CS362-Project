@@ -1,0 +1,13 @@
+<main>
+    <div class="ingredients-bar">
+      <h2>Ingredients</h2>
+      <h2><button id="search-ingredients">Search Ingredients</button></h2>
+    </div>
+    <div class="ingredients-grid" id="all-ingredients-grid">
+        {{#each ingredients}}
+        {{> dbIngredient}}
+        {{/each}}
+    </div>
+</main>
+
+{{> searchIngredientsModal}}
