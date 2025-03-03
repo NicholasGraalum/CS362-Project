@@ -1,0 +1,40 @@
+<main>
+  <div class="full-meal" data-id="{{id}}" data-name="{{name}}" data-servings="{{servings}}"
+    data-categoryTags='["Vegan", "Gluten Free"]' data-mealType="{{#each mealType}}{{this}} {{/each}}"
+    data-ingredients="{{#each categoryTags}}{{this}} {{/each}}" data-description="{{description}}" 
+    data-image="{{image}}" 
+    data-calories="{{calories}}">
+
+    <div class="meal-page-header">
+      <h1>{{name}}</h1>
+    </div>
+
+    <img class="meal-page-image" src="{{image}}" alt="Picture of {{name}}">
+    <div class="meal-page-details">
+      <p1>Description: {{description}}</p1>
+    </div>
+
+    <div class="meal-page-details">
+      <p>Servings: {{servings}}</p>
+      <p>Calories/Serving: {{calories}}</p>
+      <p>Meal type: {{#each mealType}} {{#properCase this}} {{/properCase}},  {{/each}}</p>
+    </div>
+
+    <div id="meal-page-ingredients">
+      <div id="ingredients-header">
+        <button class="add-ingredients-button">+</button>
+        <h2>Ingredients</h2>
+      </div>
+      <ul>
+        {{#each ingredients}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class="recipe-page-details" id="recipe-page-tags">
+        <p>Tags: {{#each categoryTags}} {{#properCase this}} {{/properCase}},  {{/each}}</p>
+    </div>
+  </div>
+
+</main>
