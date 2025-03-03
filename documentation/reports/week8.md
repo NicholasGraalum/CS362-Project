@@ -6,7 +6,11 @@
 #### Andrew:
 
 #### Kylan:
-
+- made meal filtering and search fully functional
+    - added validation test for meal filtering
+- made add meal to database fully functional
+- made add meal ingredients to shopping list fully functional
+- added functionality for adding ingredients to existing meals (only meal creator can add ingredients)
 
 #### Matt:
 
