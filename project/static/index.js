@@ -35,6 +35,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Endpoint: /meals/add-ingredients
   // Req body: id of meal to add to shopping list
 
+  const meals = document.querySelectorAll('.meal');
+
+  meals.forEach(function(meal) {
+    meal.addEventListener('click', function() {
+      const mealId = meal.getAttribute('data-id');
+      window.location.href = `/meals/${mealId}`;
+    });
+  });
+
   // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
     // Add a click event listener to each button
