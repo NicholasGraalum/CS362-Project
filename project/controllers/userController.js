@@ -20,11 +20,13 @@ function createUser(req, res) {
   }
   
   try {
+
+    const storeID = 12345
     // Call the user model to create a new user
-    userModel.addUser(email, password, username, zipcode);
+    userModel.addUser(email, password, username, zipcode, storeID);
     
     // Redirect to login page with success message
-    res.redirect('/login?success=Profile created successfully! Please log in.');
+    res.redirect('/login');
   } catch (error) {
     // Handle errors (e.g., duplicate email)
     res.render('createProfile', { 
