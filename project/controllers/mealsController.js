@@ -113,7 +113,7 @@ function addMealToList(req, res) {
             }
 
             ingredients.forEach(ingredient => {
-                listModel.addToList(user_email, ingredient.name, ingredient.amount); // Add each ingredient to the list
+                listModel.addToList(user_email, ingredient.name, ingredient.amount, ingredient.store_api_id); // Add each ingredient to the list
             });
             res.status(200).json({ message: 'Ingredients added successfully!' });
         } else {    // if not logged in, redirect to login page

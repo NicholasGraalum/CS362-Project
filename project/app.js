@@ -52,7 +52,7 @@ app.use('/meals', mealRoutes);
 app.use('/login', loginRoutes);
 app.use('/ingredients', ingredientsRoutes);
 app.use('/profile', profileRoutes);
-// app.use('/list', listRoutes);
+app.use('/list', listRoutes);
 
 app.use(express.static('static'))   // Static folder used for express-handlebars
 
