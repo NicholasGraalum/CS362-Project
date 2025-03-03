@@ -19,5 +19,16 @@ project/ : contains all term project code
     package.json : contains dependencies
     server.js    : contains code for server
 ```
+
+### Building and Testing the System
+- Clone this repository to your local machine ```git clone https://github.com/NicholasGraalum/CS362-Project.git```
+- Navigate to the project/ directory inside the local repository ```cd CS362-Project/project/```
+- Install dependencies ```npm i```
+- Run tests ```npm t```
+
+### Running the System
+- After building and testing, run ```npm start```
+- Paste ```http://localhost:3000``` into your web browser
+
 ### Trello
 https://trello.com/invite/b/67858decd34bc68d48374ae3/ATTI51f3c84a6dd8d589092d403e5d5221d5AF41F0BE/cs-362-grocery-list
