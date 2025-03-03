@@ -35,6 +35,26 @@ document.addEventListener("DOMContentLoaded", function () {
   // Endpoint: /meals/add-ingredients
   // Req body: id of meal to add to shopping list
 
+  // Select all meal divs/cards
+  const meals = document.querySelectorAll('.meal');
+
+  // Add event listener to each meal
+  meals.forEach(function(meal) {
+    meal.addEventListener('click', function(event) {
+
+      // Check if the clicked element is the add ingredients button
+      if (event.target.closest('.add-ingredients-button')) {
+
+        // Prevent the redirect if the button is clicked
+        event.stopPropagation();
+        return;
+      }
+      // Redirect to singleMeal page
+      const mealId = meal.getAttribute('data-id');
+      window.location.href = `/meals/${mealId}`;
+    });
+  });
+
   // Select all buttons with the class "add-ingredients-button"
   document.querySelectorAll(".add-ingredients-button").forEach(button => {
     // Add a click event listener to each button
