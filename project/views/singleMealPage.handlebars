@@ -17,12 +17,19 @@
     <div class="meal-page-details">
       <p>Servings: {{servings}}</p>
       <p>Calories/Serving: {{calories}}</p>
-      <p>Meal type: {{#each mealType}} {{#properCase this}} {{/properCase}},  {{/each}}</p>
+      <p>Meal type: {{#each mealType}} {{#properCase this}} {{/properCase}}{{#unless @last}},  {{/unless}}{{/each}}</p>
     </div>
 
     <div id="meal-page-ingredients">
+      <button class="add-ingredients-button">Add to List</button>
       <div id="ingredients-header">
-        <button class="add-ingredients-button">+</button>
+
+
+        {{#if editable}}
+          <a href="/db-ingredients/{{id}}"><button class="add-db-ingredients-button" >+</button></a>
+        {{/if}}
+        
+
         <h2>Ingredients</h2>
       </div>
       <ul>
@@ -33,7 +40,7 @@
     </div>
 
     <div class="recipe-page-details" id="recipe-page-tags">
-        <p>Tags: {{#each categoryTags}} {{#properCase this}} {{/properCase}},  {{/each}}</p>
+        <p>Tags: {{#each categoryTags}} {{#properCase this}} {{/properCase}}{{#unless @last}},  {{/unless}}{{/each}}</p>
     </div>
   </div>
 

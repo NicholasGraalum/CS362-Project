@@ -79,9 +79,9 @@ function removeFavoriteRecipe(email, r_id) {
 function updateZipcode(email, newZipcode) {
   try {
       // Ensure zipcode is an integer
-      if (!Number.isInteger(newZipcode)) {
-          throw new Error("Zipcode must be an integer");
-      }
+    //   if (!Number.isInteger(newZipcode)) {
+    //       throw new Error("Zipcode must be an integer");
+    //   }
 
       const stmt = db.prepare(`
           UPDATE User 
