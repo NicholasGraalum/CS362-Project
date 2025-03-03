@@ -23,6 +23,13 @@
     <div id="meal-page-ingredients">
       <button class="add-ingredients-button">Add to List</button>
       <div id="ingredients-header">
+
+
+        {{#if editable}}
+          <button class="add-db-ingredients-button">+</button>
+        {{/if}}
+        
+
         <h2>Ingredients</h2>
       </div>
       <ul>
