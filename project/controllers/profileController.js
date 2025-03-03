@@ -87,6 +87,33 @@ async function setStore(req, res) {
     }
 }
 
+// async function createProfile(req, res) {
+//     try {
+//         const { username, password, email, zipcode } = req.body;
+
+//         if (!username || !password || !email || !zipcode) {
+//             return res.status(400).send('All fields are required');
+//         }
+
+//         // Check if user already exists
+//         const existingUser = userModel.getUserByEmail(email);
+//         if (existingUser) {
+//             return res.status(400).send('User with this email already exists');
+//         }
+
+//         // Create new user
+//         userModel.createUser(username, password, email, zipcode);
+
+//         // Redirect to login page after successful profile creation
+//         res.redirect('/login');
+
+//     } catch (error) {
+//         console.error('Error creating profile:', error);
+//         res.status(500).send('Server error while creating profile');
+//     }
+// }
+
+
 //STILL NEED STUFF TO CHANGE USERNAME
 
 module.exports = {displayPage, setStore};

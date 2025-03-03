@@ -24,6 +24,7 @@ const loginRoutes = require('./routes/loginRoutes');
 const ingredientsRoutes = require('./routes/ingredientsRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const listRoutes = require('./routes/listRoutes');
+const createProfileRoutes = require('./routes/createProfileRoutes');
 
 // Middleware
 app.use(express.json());
@@ -52,6 +53,7 @@ app.use('/meals', mealRoutes);
 app.use('/login', loginRoutes);
 app.use('/ingredients', ingredientsRoutes);
 app.use('/profile', profileRoutes);
+app.use('/create-profile', createProfileRoutes);
 // app.use('/list', listRoutes);
 
 app.use(express.static('static'))   // Static folder used for express-handlebars
