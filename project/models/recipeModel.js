@@ -94,9 +94,6 @@ function addRecipe(image_link = null, description = null, visibility, servings, 
 
 // add ingredient to recipe
 function addIngredientToRecipe(r_id, i_name, amount) {
-  console.log(r_id);
-  console.log(i_name);
-  console.log(amount);
   try {
       const stmt = db.prepare(`
           INSERT INTO Includes (amount, r_id, i_name)

@@ -10,15 +10,6 @@ function getIngredient(name) {
 }
 
 /* 
-Returns array of ingredient objects in a database
-Returns empty array if no ingredients in database
-*/
-function getAllIngredients() {
-    const stmt = db.prepare("SELECT * FROM Ingredient");
-    return stmt.all();
-}
-
-/* 
 Returns array of ingredient objects in a recipe with id
 Returns empty array if no recipe of id or no ingredients in recipe
 */
@@ -97,4 +88,4 @@ function searchIngredientsByName(searchTerm) {
   }
 
 
-module.exports = { getIngredient, getAllIngredients, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId, searchIngredientsByName };
+module.exports = { getIngredient, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId, searchIngredientsByName };
