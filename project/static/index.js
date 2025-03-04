@@ -533,3 +533,64 @@ document.addEventListener('DOMContentLoaded', () => {
     // });
   }
 });
+
+// Select all buttons with the class "add-ingredients-button"
+document.querySelectorAll(".add-to-meal-button").forEach(button => {
+  // Add a click event listener to each button
+  button.addEventListener("click", function () {
+    // Find the meal id stored on the page
+    const page = document.getElementById("page");
+    const ingredient = this.closest(".ingredient")
+
+    if (page && ingredient) {
+      // Retrieve the meal ID from 'data-mealID' attribute
+      const mealId = page.getAttribute("data-mealID");
+
+      // Get the ingredient name from the data attribute
+      const ingredientName = ingredient.dataset.name;
+
+      // Get the input field inside the current ingredient div
+      const quantityInput = ingredient.querySelector("input[type='number']").value;
+
+      // Ensure that a valid meal ID exists before sending the request
+      if (!mealId || !ingredientName || !quantityInput) {
+        console.error("Couldn't find request data in dom.");
+        return;
+      }
+
+      // Send an HTTP POST request to the backend to add ingredient to meal
+      fetch("/db-ingredients/add-to-meal", {   // The endpoint where the request is sent
+        method: "POST",   // POST request
+        headers: {
+          "Content-Type": "application/json", // Request body contains JSON data
+        },
+          body: JSON.stringify({ id: mealId, i_name: ingredientName, amount: quantityInput }), 
+      })
+
+      .then(response => {
+        // check if redirected for not logged in 
+        if (response.status === 302 || response.redirected) {
+          // If redirected, manually redirect to the login page
+          window.location.href = '/login';  // This redirects the browser to the login page
+          return;  // Exit from the promise chain since the redirect is handled
+        }
+
+        // Check if the response status is OK
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        } else {
+          window.location.href = `/meals/${mealId}`;
+        }
+      })
+      .then(data => {
+        // Log the successful response data to the console for debugging
+        console.log("Server response:", data);
+
+      })
+      .catch(error => {
+        // Catch and log any errors that occur during the fetch request
+        console.error("Error sending request:", error);
+      });
+    }
+  });
+});
