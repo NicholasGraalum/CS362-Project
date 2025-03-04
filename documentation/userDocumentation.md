@@ -24,7 +24,29 @@ Back in the main meals page, you will see two more buttons, *search meals* and *
 Ingredients page:
 N\A
 
-List page:
-N\A
 
-Profile page:
+### Accessing the Website
+- Clone the repository ```git clone https://github.com/NicholasGraalum/CS362-Project.git```
+- Navigate to the project/ directory inside the local repository ```cd CS362-Project/project/``
+- Install dependencies ```npm i```
+- After building and testing, run ```npm start```
+- Paste ```http://localhost:3000``` into your web browser
+
+### Operational Use Cases
+- "Meals" and "Profile" buttons on the top navigation bar redirect to corresponding pages
+- Profile Page:
+  + Redirects to login page if the user is not logged in
+  + Displays user information
+- Login Page:
+  + Text boxes for email and password to login (To test, Email: alice@example.com, Password: hashedpassword1)
+  + (Create Profile not operational)
+- Meals Page:
+  + Current meals in database will display in a grid
+  + "Search Meals" button displays modal to filter meals
+  + "Create Meal" button creates new meal and adds it to the data base (must be logged in)
+  + "Add to List" button adds all ingredients in a meal to the shopping list (must be logged in)
+  + Clicking on a meal card will redirect to a new page displaying more information about the meal
+- Single Meal Page:
+  + Displays name, picture, description, servings, calories, meal types, ingredients, and tags
+  + Clicking "Add to List" adds all ingredients to shopping list
+
