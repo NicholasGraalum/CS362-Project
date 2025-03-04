@@ -25,6 +25,8 @@ function getSingleMeal(req, res) {
             return res.status(404).render('404'); // If meal not found, show 404 page
         }
 
+        const editable = (meal.creator_email === req.session.userEmail);
+
         res.render('singleMealPage', {
             id: meal.id,
             name: meal.name,
@@ -34,7 +36,8 @@ function getSingleMeal(req, res) {
             calories: meal.calories || 'N/A', // Assuming calories field exists
             ingredients: ingredients.map(i => i.name), // Pass only ingredient names
             categoryTags: tags.map(i => i.tag),     // turn to list
-            mealType: types.map(i => i.meal_type)
+            mealType: types.map(i => i.meal_type),
+            editable: editable
         });
 
     } catch (error) {
