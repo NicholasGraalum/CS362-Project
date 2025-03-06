@@ -1,6 +1,15 @@
 // Event listener for main handlebar buttons
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Hamburger menu handling
+  const hamburger = document.getElementById("hamburger-menu");
+  const mobileNav = document.getElementById("mobile-nav");
+
+  hamburger.addEventListener("click", function () {
+    this.classList.toggle("change");
+    mobileNav.classList.toggle("active");
+  })
+  
   // Reditect when the meals button is clicked
   document.getElementById("meals-viewer").addEventListener("click", function () {
     window.location.href = "/meals"
@@ -20,11 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("list-viewer").addEventListener("click", function () {
     window.location.href = "/list"
   })
-
-  // Redirect when settings button is clicked
-  document.getElementById("settings-viewer").addEventListener("click", function () {
-    window.location.href = "/settings"
-  })
+  
 });
 
 // Event listener for the meals page and the meal modal
@@ -53,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const mealId = meal.getAttribute('data-id');
       window.location.href = `/meals/${mealId}`;
     });
+    
   });
 
   // Select all buttons with the class "add-ingredients-button"

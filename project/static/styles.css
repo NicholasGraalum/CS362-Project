@@ -18,9 +18,13 @@ header {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Site Title */
 .site-title {
   display: flex;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.2); /* Adjust transparency as needed */
+  padding: 10px 20px;
+  border-radius: 80% 20% 80% 20% / 0% 100% 0% 100% ;
 }
 
 .site-title a {
@@ -72,19 +76,74 @@ header .topbar {
   border: 2px solid #007bff;
 }
 
-/* Settings Button as Smaller Cog */
-#settings-viewer {
-  font-size: 0;
-  width: 30px;
-  height: 30px;
+/* Hamburger menu for main format */
+/* Hamburger Menu */
+.hamburger-menu {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hamburger-menu div {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 15px;
+  background: #007bff;
+  width: 200px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/126/126472.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  border: none;
-} 
+  text-align: center;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav ul li {
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+
+.mobile-nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: block;
+}
+
+.mobile-nav ul li:hover {
+  background-color: #0056b3;
+}
+
+/* Show menu when active */
+.mobile-nav.active {
+  display: block;
+}
+
+/* Rotate bars for animation */
+.change .bar1 {
+  transform: translateY(11px) rotate(-45deg);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  transform: translateY(-11px) rotate(45deg);
+}
 
 /* Main Content */
 .content {
@@ -99,6 +158,8 @@ header .topbar {
   justify-content: space-between;
 }
 
+
+/* Landing page content */
 .goals, .documents, .howtouse {
   flex: 1;
   background: #ffffff;
@@ -117,16 +178,10 @@ p {
   line-height: 1.6;
 }
 
-/* Links */
 a {
   text-decoration: none;
   color: #007bff;
 }
-
-a:hover {
-  text-decoration: underline;
-}
-
 
 /* Matt added */
 .meals {
