@@ -22,6 +22,7 @@ const userRoutes = require('./routes/userRoutes');
 const mealRoutes = require('./routes/mealsRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const ingredientsRoutes = require('./routes/ingredientsRoutes');
+const dbIngredientsRoutes = require('./routes/dbIngredientsRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const listRoutes = require('./routes/listRoutes');
 
@@ -51,8 +52,9 @@ app.use('/users', userRoutes);
 app.use('/meals', mealRoutes);
 app.use('/login', loginRoutes);
 app.use('/ingredients', ingredientsRoutes);
+app.use('/db-ingredients', dbIngredientsRoutes);
 app.use('/profile', profileRoutes);
-// app.use('/list', listRoutes);
+app.use('/list', listRoutes);
 
 app.use(express.static('static'))   // Static folder used for express-handlebars
 

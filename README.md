@@ -9,7 +9,7 @@ documentation/ : contains all term project documents
     LIVINGDOC  
 
 project/ : contains all term project code
-    controllers : contains controllers to handle incoming requests and send responses
+    controllers  : contains controllers to handle incoming requests and send responses
     database     : contains database for the website
     models       : contains models for the structure of data in the database
     routes       : defines the paths to map to the correct URL
@@ -19,5 +19,37 @@ project/ : contains all term project code
     package.json : contains dependencies
     server.js    : contains code for server
 ```
+
+### Building and Testing the System
+- Clone this repository to your local machine ```git clone https://github.com/NicholasGraalum/CS362-Project.git```
+- Navigate to the project/ directory inside the local repository ```cd CS362-Project/project/```
+- Install dependencies ```npm i```
+- Run tests ```npm t```
+
+### Running the System
+- After building and testing, run ```npm start```
+- Paste ```http://localhost:3000``` into your web browser
+- Refer to documentation/userDocumentation.md for information on how to use the website
+
+### Operational Use Cases
+- "Meals," "List," and "Profile" buttons on the top navigation bar redirect to corresponding pages
+- Profile Page:
+  + Redirects to login page if the user is not logged in
+  + Displays user information
+- Login Page:
+  + Text boxes for email and password to login (To test, Email: alice@example.com, Password: hashedpassword1)
+  + (Create Profile not operational)
+- Meals Page:
+  + Current meals in database will display in a grid
+  + "Search Meals" button displays modal to filter meals
+  + "Create Meal" button creates new meal and adds it to the data base (must be logged in)
+  + "Add to List" button adds all ingredients in a meal to the shopping list (must be logged in)
+  + Clicking on a meal card will redirect to a new page displaying more information about the meal
+- Single Meal Page:
+  + Displays name, picture, description, servings, calories, meal types, ingredients, and tags
+  + Clicking "Add to List" adds all ingredients to shopping list
+- List Page:
+  + Displays all ingredients added to shopping list with the total price
+
 ### Trello
 https://trello.com/invite/b/67858decd34bc68d48374ae3/ATTI51f3c84a6dd8d589092d403e5d5221d5AF41F0BE/cs-362-grocery-list

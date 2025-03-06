@@ -1,0 +1,12 @@
+{{!-- Make a modal for the boxes of the ingredients on the ingredients page --}}
+<div class="ingredient"
+    {{!-- Include the data associated with the current ingredient --}}
+    data-name={{name}}
+>
+    {{!-- Include the name of the ingredient as well as a quantity based add button --}}
+    <p>{{name}}</p>
+    <div class="quantity-button">
+        <button type="submit" class="add-to-meal-button">Add</button>
+        <input type="number" id="quantity" value="1" min="1">
+    </div>
+</div>

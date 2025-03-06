@@ -78,8 +78,8 @@ async function setStore(req, res) {
         // Update the user's storeID in the database using the userModel function
         userModel.updateStoreID(req.session.userEmail, storeID);
         console.log("Change successful. ID:", storeID)
-        // userModel.updateZipcode(req.session.userEmail, zip);
-        // console.log("Change successful. zip:", zip)    
+        userModel.updateZipcode(req.session.userEmail, zip);
+        console.log("Change successful. zip:", zip)    
             
         res.json({ message: "Store updated successfully", storeID });
     } catch (error) {
@@ -87,6 +87,7 @@ async function setStore(req, res) {
     }
 }
 
+//ALSO ADD SOMETHING TO REFRESH PAGE AFTER CHANGING SOMETHING 
 //STILL NEED STUFF TO CHANGE USERNAME
 
 module.exports = {displayPage, setStore};

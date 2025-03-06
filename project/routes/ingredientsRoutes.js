@@ -3,6 +3,8 @@ const router = express.Router();
 
 const ingredientsController = require("../controllers/ingredientsController");
 
-router.get('/stores', ingredientsController.getProducts);
+router.get('/', ingredientsController.displayPage);
+router.get('/search', ingredientsController.getProducts);
+
 
 module.exports = router;

@@ -1,9 +1,9 @@
 -- chatgpt generated filler data
 -- Insert Users
 INSERT INTO User (email, password, username, zipcode, storeID) VALUES
-('alice@example.com', 'hashedpassword1', 'alice123', 97333, 70100070),
-('bob@example.com', 'hashedpassword2', 'bobcook', 97045, 70100242),
-('charlie@example.com', 'hashedpassword3', 'charliechef', 97086, 70100694);
+('alice@example.com', 'hashedpassword1', 'alice123', '97333', 70100070),
+('bob@example.com', 'hashedpassword2', 'bobcook', '97045', 70100242),
+('charlie@example.com', 'hashedpassword3', 'charliechef', '97086', 70100694);
 
 -- Insert Recipes
 INSERT INTO Recipe (name, image_link, description, visibility, servings, creator_email) VALUES
@@ -13,15 +13,15 @@ INSERT INTO Recipe (name, image_link, description, visibility, servings, creator
 
 -- Insert Ingredients (Assuming 'name' should be VARCHAR)
 INSERT INTO Ingredient (name, store_api_id, nutrition_api_id) VALUES
-('Tomato', 0000000004799, 1999634),
-('Chicken', 0029082900000, 2646170),
-('Lettuce', 0000000004640, 2346391),
-('Garlic',  0000000004608, 1104647),
-('Pasta', 0001111085004, 169736),
-('Curry Powder', 106, 170924),
-('Olive Oil', 0007321000011, 748608),
-('Carrot', 0000000004562, 2258586),
-('Chickpeas', 109, 2644288);
+('Tomato', '0000000004799', 1999634), --2.29
+('Chicken', '0029082900000', 2646170), --8.99
+('Lettuce', '0000000004640', 2346391), --2.29
+('Garlic', '0000000004608', 1104647),
+('Pasta', '0001111085004', 169736),
+('Curry Powder', '0001111002398', 170924),
+('Olive Oil', '0007321000011', 748608),
+('Carrot', '0000000004562', 2258586),
+('Chickpeas', '0001111084769', 2644288);
 
 -- Insert Recipe-Ingredient Relationships (Multiple Ingredients per Recipe, Amount in Grams)
 INSERT INTO Includes (amount, r_id, i_name) VALUES
@@ -74,22 +74,22 @@ INSERT INTO Recipe_tags (tag, r_id) VALUES
 
 -- Insert list items (amount in grams)
 -- Alice's favorite meal is Chicken Curry (Recipe 2)
-INSERT INTO On_list (email, i_name, amount) VALUES
-('alice@example.com', 'Chicken', 500.0),
-('alice@example.com', 'Curry Powder', 15.0),
-('alice@example.com', 'Olive Oil', 30.0),
-('alice@example.com', 'Carrot', 100.0);
+INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
+('alice@example.com', 'Chicken', '0029082900000', 500.0),
+('alice@example.com', 'Curry Powder', '0001111002398', 15.0),
+('alice@example.com', 'Olive Oil', '0007321000011', 30.0),
+('alice@example.com', 'Carrot', '0000000004562', 100.0);
 
 -- Bob's favorite meal is Spaghetti Bolognese (Recipe 1)
-INSERT INTO On_list (email, i_name, amount) VALUES
-('bob@example.com', 'Tomato', 300.0),
-('bob@example.com', 'Garlic', 10.0),
-('bob@example.com', 'Pasta', 200.0),
-('bob@example.com', 'Olive Oil', 30.0);
+INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
+('bob@example.com', 'Tomato', '0000000004799', 300.0),
+('bob@example.com', 'Garlic', '0000000004608', 10.0),
+('bob@example.com', 'Pasta', '0001111085004', 200.0),
+('bob@example.com', 'Olive Oil', '0007321000011', 30.0);
 
 -- Charlie's favorite meal is Vegan Salad (Recipe 3)
-INSERT INTO On_list (email, i_name, amount) VALUES
-('charlie@example.com', 'Lettuce', 100.0),
-('charlie@example.com', 'Carrot', 50.0),
-('charlie@example.com', 'Chickpeas', 150.0),
-('charlie@example.com', 'Olive Oil', 20.0);
+INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
+('charlie@example.com', 'Lettuce', '0000000004640', 100.0),
+('charlie@example.com', 'Carrot', '0000000004562', 50.0),
+('charlie@example.com', 'Chickpeas', '0001111084769', 150.0),
+('charlie@example.com', 'Olive Oil', '0007321000011', 20.0);
