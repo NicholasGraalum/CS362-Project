@@ -6,14 +6,16 @@ const newDbPath = path.resolve(__dirname, '../database/database_data.db');
 
 // Initialize database
 function initializeDatabase(dbPath) {
+  let db;
   if (fs.existsSync(dbPath)) {  // if database file exists, connect
-    return new Database(dbPath, { verbose: console.log });
-  } else {
-    let db = new Database(dbPath);  // if no database at path, make one
+    db = new Database(dbPath, { verbose: console.log });
+  } else {  // if no database at path, create one
+    db = new Database(dbPath);
     db.exec("PRAGMA foreign_keys = ON;");
     createSchema(db);
     insertFillerData(db);
   }
+  return db;
 }
 
 // Schema and data initialization functions

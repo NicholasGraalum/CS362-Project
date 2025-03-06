@@ -9,7 +9,7 @@ const { expect } = chai;
 const { getAllUsers } = require('../../models/userModel');
 
 describe('Database Model - Unit Test with Temporary Database', () => {
-  const tempDbPath = path.join(__dirname, 'test-temp.db');
+  const tempDbPath = path.join(__dirname, 'user-test-temp.db');
   const testDb = initializeDatabase(tempDbPath);  // initialize test database
 
   // Cleanup after all tests run
