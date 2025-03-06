@@ -1,9 +1,9 @@
-const { db } = require('../database/db'); 
+const { db: defaultDb } = require('../database/db'); 
 
 /* 
 Returns array of all recipes objects
 */
-function getAllRecipes() {
+function getAllRecipes(db = defaultDb) {
   const stmt = db.prepare('SELECT * FROM Recipe');
   return stmt.all(); 
 }
@@ -12,7 +12,7 @@ function getAllRecipes() {
 Returns array of all tags objects of recipe with id
 Return empty array if no tags
 */
-function getRecipeTags(id) {
+function getRecipeTags(id, db = defaultDb) {
   const stmt = db.prepare('SELECT tag FROM Recipe_tags WHERE r_id = ?');
   return stmt.all(id);
 }
@@ -21,7 +21,7 @@ function getRecipeTags(id) {
 Returns array of all types objects of recipe with id
 Return empty array if no tags
 */
-function getRecipeTypes(id) {
+function getRecipeTypes(id, db = defaultDb) {
   const stmt = db.prepare('SELECT meal_type FROM Recipe_meal_type WHERE r_id = ?');
   return stmt.all(id);
 }
@@ -30,7 +30,7 @@ function getRecipeTypes(id) {
 Return single recipe object with id
 Returns null if no matching recipe
 */
-function getRecipeById(id) {
+function getRecipeById(id, db = defaultDb) {
     const stmt = db.prepare('SELECT * FROM Recipe WHERE id = ?');
     return stmt.get(id) || null; 
 }
@@ -39,7 +39,7 @@ function getRecipeById(id) {
 Returns array of recipes objects with tag
 Returns empty array if no matching recipes
 */
-function getRecipesByTag(tag) {
+function getRecipesByTag(tag, db = defaultDb) {
   const stmt = db.prepare('SELECT r.* FROM Recipe r JOIN Recipe_tags rt ON r.id=rt.r_id WHERE rt.tag = ?');
   return stmt.all(tag); 
 }
@@ -48,7 +48,7 @@ function getRecipesByTag(tag) {
 Returns array of recipes objects with type
 Returns empty array if no matching recipes
 */
-function getRecipesByType(type) {
+function getRecipesByType(type, db = defaultDb) {
   const stmt = db.prepare('SELECT r.* FROM Recipe r JOIN Recipe_meal_type rt ON r.id=rt.r_id WHERE rt.meal_type = ?');
   return stmt.all(type);
 }
@@ -57,14 +57,14 @@ function getRecipesByType(type) {
 Returns array of recipes objects favorited by user with email
 Returns empty array if no recipies favorited by user or no user with email
 */
-function getFavoriteRecipes(email) {
+function getFavoriteRecipes(email, db = defaultDb) {
   const stmt = db.prepare('SELECT r.* FROM Recipe r JOIN Favorites f ON r.id=f.r_id WHERE f.email = ?');
   return stmt.all(email); 
 }
 
 
 // create new recipe
-function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name, tags, types) {
+function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name, tags, types, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Recipe (image_link, description, visibility, servings, creator_email, name)
@@ -93,7 +93,7 @@ function addRecipe(image_link = null, description = null, visibility, servings, 
 }
 
 // add ingredient to recipe
-function addIngredientToRecipe(r_id, i_name, amount) {
+function addIngredientToRecipe(r_id, i_name, amount, db = defaultDb) {
   console.log(r_id);
   console.log(i_name);
   console.log(amount);
@@ -111,7 +111,7 @@ function addIngredientToRecipe(r_id, i_name, amount) {
 }
 
 // remove ingredient from recipe
-function removeIngredientFromRecipe(r_id, i_name) {
+function removeIngredientFromRecipe(r_id, i_name, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           DELETE FROM Includes
@@ -129,7 +129,7 @@ function removeIngredientFromRecipe(r_id, i_name) {
 /*
 Search for recipe by name 
 */
-function searchRecipesByName(searchTerm) {
+function searchRecipesByName(searchTerm, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           SELECT * FROM Recipe
@@ -148,7 +148,7 @@ Search for recipe by name, tag, and type
 Return array of recipe objects matching search
 Returns empty array if no matching recipes
 */
-function searchRecipes(searchTerm, tags, types) {
+function searchRecipes(searchTerm, tags, types, db = defaultDb) {
 
   // Handle empty searchterm
   const searchPattern = (!searchTerm || searchTerm.length === 0) ? '%' : `%${searchTerm}%`;
@@ -177,7 +177,7 @@ function searchRecipes(searchTerm, tags, types) {
 }
 
 // add tag to recipe
-function addTagToRecipe(r_id, tag) {
+function addTagToRecipe(r_id, tag, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Recipe_tags (tag, r_id)
@@ -192,7 +192,7 @@ function addTagToRecipe(r_id, tag) {
 }
 
 // add type to recipe
-function addTypeToRecipe(r_id, type) {
+function addTypeToRecipe(r_id, type, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Recipe_meal_type (meal_type, r_id)

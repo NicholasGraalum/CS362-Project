@@ -9,23 +9,22 @@ const { expect } = chai;
 const { getAllUsers } = require('../../models/userModel');
 
 describe('Database Model - Unit Test with Temporary Database', () => {
-  let db;
   const tempDbPath = path.join(__dirname, 'test-temp.db');
+  const testDb = initializeDatabase(tempDbPath);  // initialize test database
 
-  beforeEach(() => {
-    db = initializeDatabase(tempDbPath); // Create test database
-  });
-
-  afterEach(() => {
-    db.close(); // Close test database
+  // Cleanup after all tests run
+  after(() => {
+    if (testDb) {
+      testDb.close();
+    }
     if (fs.existsSync(tempDbPath)) {
-      fs.unlinkSync(tempDbPath); // Delete test database file
+      fs.unlinkSync(tempDbPath);
     }
   });
 
   it('GetAllUsers should retrieve all users from the test database', () => {
     // Fetch all users
-    const users = getAllUsers();
+    const users = getAllUsers(testDb);
 
     // Assertions
     expect(users).to.be.an('array');
