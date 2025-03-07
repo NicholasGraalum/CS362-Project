@@ -30,14 +30,14 @@ async function getToken() {
 
 // Function to handle fetching products by store and ingredient
 async function getPrice(req) {
-    const list = await listModel.getUserList(req.session.userEmail);
+    const list = listModel.getUserList(req.session.userEmail);
     console.log(list);
     // if (!list || list.length === 0) {
     //     return 0;
     // }
     
     // Retrieve the user's store ID.
-    const user = await userModel.getUserByEmail(req.session.userEmail);
+    const user = userModel.getUserByEmail(req.session.userEmail);
 
     // if (!user || !user.storeID) {
     //     // If there is no store ID, you may choose to return 0 or handle this case differently.
@@ -99,4 +99,22 @@ async function displayPage(req, res) {
     res.render('listPage', {list: list, totalPrice: totalPrice}); 
 }
 
-module.exports = {displayPage};
+async function deleteItem(req,res) {
+    const i_name = req.query.ingredient;
+    if (!i_name) {
+        return res.status(400).send('Ingredient name is required for deletion.');
+    }
+
+    try {
+        // Remove the ingredient from the list using the model function
+        // This function should remove the entire record from the On_list table for this user and ingredient.
+        listModel.removeFromList(req.session.userEmail, i_name);
+        // After successful deletion, redirect back to the list page.
+        res.redirect('/list');
+    } catch (error) {
+        console.error('Error removing ingredient from list:', error);
+        res.status(500).send('Error removing ingredient from list');
+    }
+}
+
+module.exports = {displayPage, deleteItem};

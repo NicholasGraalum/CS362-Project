@@ -22,19 +22,19 @@ function addIngredientToMeal(req, res) {
 
         // check if user logged in and created the meal
         if (user_email && user_email === meal.creator_email) {   // if so add
-            
+
 
             const i_name = req.body.i_name;
             const amount = req.body.amount;
 
             recipeModel.addIngredientToRecipe(mealId, i_name, amount);
-            
+
             res.status(200).json({ message: 'Ingredients added successfully!' });
         } else {    // if not logged in, redirect to login page
             console.log("not logged in");
             res.redirect(`/login`); 
         }
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

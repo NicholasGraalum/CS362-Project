@@ -32,7 +32,7 @@ project/ : contains all term project code
 - Refer to documentation/userDocumentation.md for information on how to use the website
 
 ### Operational Use Cases
-- "Meals" and "Profile" buttons on the top navigation bar redirect to corresponding pages
+- "Meals," "List," and "Profile" buttons on the top navigation bar redirect to corresponding pages
 - Profile Page:
   + Redirects to login page if the user is not logged in
   + Displays user information
@@ -48,6 +48,8 @@ project/ : contains all term project code
 - Single Meal Page:
   + Displays name, picture, description, servings, calories, meal types, ingredients, and tags
   + Clicking "Add to List" adds all ingredients to shopping list
+- List Page:
+  + Displays all ingredients added to shopping list with the total price
 
 ### Trello
 https://trello.com/invite/b/67858decd34bc68d48374ae3/ATTI51f3c84a6dd8d589092d403e5d5221d5AF41F0BE/cs-362-grocery-list

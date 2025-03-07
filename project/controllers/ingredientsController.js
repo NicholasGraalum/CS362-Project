@@ -64,11 +64,26 @@ async function getToken() {
 
 // Function to handle fetching products by store and ingredient
 async function getProducts(req, res) {
+    if (!req.session || !req.session.userEmail) {
+        return res.redirect('/login');
+    }
+
     try {
-        const { storeId, ingredient } = req.query;
+        const ingredient = req.query.ingredient;
+        if (!ingredient) {
+            return res.render('ingredientsPage', { 
+                products: [], 
+                error: "Please enter an ingredient." 
+            });
+        }
+
+        const user = userModel.getUserByEmail(req.session.userEmail);
+
+        const storeId = user.storeID;
+
         const token = await getToken();
         const response = await fetch(
-            `https://api.kroger.com/v1/products?filter.term=${ingredient}&filter.locationId=${storeId}&filter.limit=50`,
+            `https://api.kroger.com/v1/products?filter.term=${ingredient}&filter.locationId=${storeId}&filter.limit=20`,
             {
                 headers: {
                     'Accept': 'application/json',
@@ -77,12 +92,42 @@ async function getProducts(req, res) {
             }
         );
         const data = await response.json();
-        // console.log('Full product response:', data);
-        res.json(data);
+
+
+        const products = (data.data || []).map(product => {
+            let image_link = 'defaultImage.png';
+            if (product.images && product.images.length > 0 && product.images[0].sizes && product.images[0].sizes.length > 0) {
+              image_link = product.images[0].sizes[0].url;
+            }
+            
+            let price = "N/A";
+            if (product.items && product.items.length > 0 && product.items[0].price) {
+              price = product.items[0].price.promo || product.items[0].price.regular;
+            }
+          
+            return {
+              id: product.productId,
+              name: product.description,
+              price: price,
+              image_link: image_link
+            };
+          });
+
+
+
+        res.render('ingredientsPage', { 
+            //products: data.data, 
+            products,
+            //searchTerm: ingredient 
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
 
+function displayPage(req, res) {
+    res.render('ingredientsPage'); 
+  }
+
 // Export the functions so they can be used in your routes file
-module.exports = {getProducts};
+module.exports = {displayPage, getProducts};

@@ -548,7 +548,7 @@ document.querySelectorAll(".add-to-meal-button").forEach(button => {
 
       // Get the ingredient name from the data attribute
       const ingredientName = ingredient.dataset.name;
-      
+
       // Get the input field inside the current ingredient div
       const quantityInput = ingredient.querySelector("input[type='number']").value;
 
