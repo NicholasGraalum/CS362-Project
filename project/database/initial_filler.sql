@@ -334,3 +334,10 @@ INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
 ('alice@example.com', 'Onion', '0000000004093', 100.0),
 ('alice@example.com', 'Carrot', '0000000004562', 50.0);
 
+-- Bob's loves eating chicken
+INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
+('bob@example.com', 'Chicken Breast', '0029082900000', 2);
+
+-- Charlie loves eating ground beef
+INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
+('charlie@example.com', 'Ground Beef', '0085955700407', 2);
