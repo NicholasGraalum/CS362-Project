@@ -32,18 +32,17 @@
         {{!-- Back button (Only on Login Page) --}}
         {{#if isLoginPage}}
           <button id="back-button" class="back-button" onclick="window.history.back();">←</button>
+        {{/if}}
           {{!-- Hamburger menu --}}
           <div id="hamburger-menu" class="hamburger-menu">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
           </div>
-        {{/if}}
       </div>
     </header>
 
     {{!-- Mobile nav (Only if not on Login Page) --}}
-    {{#if isLoginPage}}
       <nav id="mobile-nav" class="mobile-nav">
         <ul>
           <li><button id="meals-viewer" class="action-button">Meals</button></li>
@@ -51,7 +50,6 @@
           <li><button id="list-viewer" class="action-button">List</button></li>
         </ul>
       </nav>
-    {{/if}}
 
     <main>
       {{{body}}}
