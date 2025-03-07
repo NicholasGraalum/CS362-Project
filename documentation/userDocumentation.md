@@ -10,7 +10,9 @@ In order to start the webpage, you must install the correct dependices as well a
 4) run **npm start** to start the npm modules
 5) access the wepage via **http://localhost:3000**
 
-### Using the website:
+This will take you to the landing page. 
+
+## Using the website:
 When using the website there are 4 main pages:
 - '/meals': this can be accessed by clicking the **meals** button on the top nav bar of the webpage
 - '/ingredients':  this can be accessed by clicking the **ingredients** button on the top nav bar of the webpage
