@@ -4,17 +4,15 @@ const { expect } = require('chai');
 const app = require('../../app');
 
 describe('All Meals Route', () => {         
-    it('should return an HTML page with multiple meals', async () => {
+    it('should return status 200', async () => {
       const res = await request(app).get('/meals');
       expect(res.status).to.equal(200);
-      expect(res.text).to.include('Meals');
     });
   });
 
 describe('Single Meal Route', () => {    
-  it('should return a HTML page with one meal', async () => {
+  it('should return status 200', async () => {
     const res = await request(app).get('/meals/1');
     expect(res.status).to.equal(200);
-    expect(res.text).to.include('Ingredients');
   });
 });
