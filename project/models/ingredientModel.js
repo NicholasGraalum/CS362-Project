@@ -1,10 +1,10 @@
-const { db } = require('../database/db'); 
+const { db: defaultDb } = require('../database/db'); 
 
 /*
 Returns ingredient data given name
 Returns null if no ingredient with name
 */
-function getIngredient(name) {
+function getIngredient(name, db = defaultDb) {
     const stmt = db.prepare("SELECT * FROM Ingredient WHERE name = ?");
     return stmt.get(name) || null;
 }
@@ -13,7 +13,7 @@ function getIngredient(name) {
 Returns array of ingredient objects in a database
 Returns empty array if no ingredients in database
 */
-function getAllIngredients() {
+function getAllIngredients(db = defaultDb) {
     const stmt = db.prepare("SELECT * FROM Ingredient");
     return stmt.all();
 }
@@ -22,13 +22,13 @@ function getAllIngredients() {
 Returns array of ingredient objects in a recipe with id
 Returns empty array if no recipe of id or no ingredients in recipe
 */
-function getIngredientsInRecipe(id) {
+function getIngredientsInRecipe(id, db = defaultDb) {
   const stmt = db.prepare('SELECT i.*, inc.amount FROM Ingredient i JOIN Includes inc ON i.name=inc.i_name WHERE inc.r_id = ?');
   return stmt.all(id); 
 }
 
 // add ingredient
-function addIngredient(name, store_api_id = null, nutrition_api_id = null) {
+function addIngredient(name, store_api_id = null, nutrition_api_id = null, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Ingredient (name, store_api_id, nutrition_api_id)
@@ -44,7 +44,7 @@ function addIngredient(name, store_api_id = null, nutrition_api_id = null) {
 }
 
 // update store api id
-function updateIngredientStoreId(name, newStoreApiId) {
+function updateIngredientStoreId(name, newStoreApiId, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           UPDATE Ingredient
@@ -61,7 +61,7 @@ function updateIngredientStoreId(name, newStoreApiId) {
 }
 
 // update nutrition api id
-function updateIngredientNutId(name, newNutritionApiId) {
+function updateIngredientNutId(name, newNutritionApiId, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           UPDATE Ingredient
@@ -82,7 +82,7 @@ Search for ingredient by name
 Return list of matching ingredient name objects
 Return empty list if no matching
 */
-function searchIngredientsByName(searchTerm) {
+function searchIngredientsByName(searchTerm, db = defaultDb) {
     try {
         const stmt = db.prepare(`
             SELECT name FROM Ingredient

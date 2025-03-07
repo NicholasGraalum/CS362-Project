@@ -58,19 +58,18 @@ INSERT INTO Recipe_meal_type (meal_type, r_id) VALUES
 -- Insert Recipe Tags (Multiple Tags per Recipe)
 INSERT INTO Recipe_tags (tag, r_id) VALUES
 -- Spaghetti Bolognese (Recipe 1)
-('Italian', 1),
-('Pasta', 1),
+('High Protein', 1),
+('Healthy', 1),
 ('Comfort Food', 1),
 
 -- Chicken Curry (Recipe 2)
-('Spicy', 2),
-('Curry', 2),
-('Chicken', 2),
+('Gluten Free', 2),
+('High Protein', 2),
 
 -- Vegan Salad (Recipe 3)
 ('Healthy', 3),
 ('Vegan', 3),
-('Salad', 3);
+('Low Calorie', 3);
 
 -- Insert list items (amount in grams)
 -- Alice's favorite meal is Chicken Curry (Recipe 2)
