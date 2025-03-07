@@ -17,7 +17,6 @@
 
     <div class="meal-page-details">
       <p>Servings: {{servings}}</p>
-      <p>Calories/Serving: {{calories}}</p>
       <p>Meal type: {{#each mealType}} {{#properCase this}} {{/properCase}}{{#unless @last}},  {{/unless}}{{/each}}</p>
     </div>
 
