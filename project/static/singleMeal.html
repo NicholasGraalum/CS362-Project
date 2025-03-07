@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Smart Cart</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="site-title">
+        <a href="#">Smart Cart</a>
+      </div>
+      <div class="topbar">
+        <button id="list-viewer" class="action-button">List</button>
+        <button id="profile-viewer" class="action-button">Profile</button>
+        <button id="settings-viewer" class="action-button">Settings</button>
+      </div>
+    </header>
+    
+    <main>
+      <div class="full-meal" data-id="001" data-name="Chicken and Rice" data-servings="4"
+        data-categoryTags='["Vegan", "Gluten Free"]' data-mealType='["lunch", "dinner"]'
+        data-ingredients='["Chicken", "Rice", "Sauce"]' data-description="A simple and healthy chicken dish" 
+        data-image="https://easyhealthyrecipes.com/wp-content/uploads/2022/06/grilled-chicken-rice-16-1024x1536.jpg" 
+        data-calories="480">
+
+        <div class="meal-page-header">
+          <h1>Chicken and Rice</h1>
+        </div>
+
+        <img class="meal-page-image" src="https://easyhealthyrecipes.com/wp-content/uploads/2022/06/grilled-chicken-rice-16-1024x1536.jpg" alt="Chicken and Rice">
+        <div class="meal-page-details">
+            <p1>Description: A simple and healthy chicken dish</p1>
+        </div>
+
+        <div class="meal-page-details">
+          <p>Servings: 4</p>
+          <p>Calories/Serving: 480</p>
+          <p>Meal type: Lunch, Dinner</p>
+        </div>
+
+        <div id="meal-page-ingredients">
+          <div id="ingredients-header">
+            <button class="add-ingredients-button">+</button>
+            <h2>Ingredients</h2>
+          </div>
+          <ul>
+            <li>Chicken</li>
+            <li>Rice</li>
+            <li>Sauce</li>
+          </ul>
+        </div>
+
+        <div class="recipe-page-details" id="recipe-page-tags">
+            <p>Tags: Vegan, Gluten Free</p>
+        </div>
+      </div>
+
+  </main>
+  </body>
+</html>
