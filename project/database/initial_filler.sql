@@ -133,9 +133,6 @@ INSERT INTO Includes (amount, r_id, i_name) VALUES
 (5.0, 7, 'Garlic'),
 (20.0, 7, 'Olive Oil'),
 
-
-
-
 -- Recipe 8: Chickpea Curry
 (150.0, 8, 'Chickpeas'),
 (100.0, 8, 'Tomato'),
@@ -206,9 +203,6 @@ INSERT INTO Includes (amount, r_id, i_name) VALUES
 (200.0, 16, 'Chickpeas'),
 (50.0, 16, 'Garlic'),
 (20.0, 16, 'Olive Oil');
-
-
-
 
 -- Insert Favorite Recipes
 INSERT INTO Favorites (email, r_id) VALUES

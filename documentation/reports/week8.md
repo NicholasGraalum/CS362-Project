@@ -11,6 +11,8 @@
 - made add meal to database fully functional
 - made add meal ingredients to shopping list fully functional
 - added functionality for adding ingredients to existing meals (only meal creator can add ingredients)
+- added more test: login and profile route integration tests, recipeModel unit tests 
+- made graphics for final poster
 
 #### Matt:
 
