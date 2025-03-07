@@ -2,12 +2,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // Hamburger menu handling
-  const hamburger = document.getElementById("hamburger-menu");
-  const mobileNav = document.getElementById("mobile-nav");
-
-  hamburger.addEventListener("click", function () {
+  document.getElementById("hamburger-menu").addEventListener("click", function () {
     this.classList.toggle("change");
-    mobileNav.classList.toggle("active");
+    document.getElementById("mobile-nav").classList.toggle("active");
   })
   
   // Reditect when the meals button is clicked
