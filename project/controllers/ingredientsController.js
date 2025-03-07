@@ -64,9 +64,9 @@ async function getToken() {
 
 // Function to handle fetching products by store and ingredient
 async function getProducts(req, res) {
-    if (!req.session || !req.session.userEmail) {
-        return res.redirect('/login');
-    }
+    // if (!req.session || !req.session.userEmail) {
+    //     return res.redirect('/login');
+    // }
 
     try {
         const ingredient = req.query.ingredient;
@@ -126,6 +126,10 @@ async function getProducts(req, res) {
 }
 
 function displayPage(req, res) {
+    if (!req.session || !req.session.userEmail) {
+        return res.redirect('/login');
+    }
+
     res.render('ingredientsPage'); 
   }
 

@@ -26,22 +26,22 @@ INSERT INTO Ingredient (name, store_api_id, nutrition_api_id) VALUES
 -- Insert Recipe-Ingredient Relationships (Multiple Ingredients per Recipe, Amount in Grams)
 INSERT INTO Includes (amount, r_id, i_name) VALUES
 -- Spaghetti Bolognese (Recipe 1)
-(300.0, 1, 'Tomato'),    -- 300g tomatoes
-(10.0, 1, 'Garlic'),     -- 10g garlic (about 2 cloves)
-(200.0, 1, 'Pasta'),     -- 200g pasta
-(30.0, 1, 'Olive Oil'),  -- 30g olive oil
+(1, 1, 'Tomato'),    -- 300g tomatoes
+(1, 1, 'Garlic'),     -- 10g garlic (about 2 cloves)
+(1, 1, 'Pasta'),     -- 200g pasta
+(1, 1, 'Olive Oil'),  -- 30g olive oil
 
 -- Chicken Curry (Recipe 2)
-(500.0, 2, 'Chicken'),    -- 500g chicken breast
-(15.0, 2, 'Curry Powder'),-- 15g curry powder
-(30.0, 2, 'Olive Oil'),  -- 30g olive oil
-(100.0, 2, 'Carrot'),    -- 100g carrots (about 1 medium carrot)
+(1, 2, 'Chicken'),    -- 500g chicken breast
+(1, 2, 'Curry Powder'),-- 15g curry powder
+(1, 2, 'Olive Oil'),  -- 30g olive oil
+(1, 2, 'Carrot'),    -- 100g carrots (about 1 medium carrot)
 
 -- Vegan Salad (Recipe 3)
-(100.0, 3, 'Lettuce'),    -- 100g lettuce
-(50.0, 3, 'Carrot'),     -- 50g carrots (about 1 small carrot)
-(150.0, 3, 'Chickpeas'), -- 150g canned chickpeas
-(20.0, 3, 'Olive Oil');  -- 20g olive oil
+(1, 3, 'Lettuce'),    -- 100g lettuce
+(1, 3, 'Carrot'),     -- 50g carrots (about 1 small carrot)
+(1, 3, 'Chickpeas'), -- 150g canned chickpeas
+(1, 3, 'Olive Oil');  -- 20g olive oil
 
 -- Insert Favorite Recipes
 INSERT INTO Favorites (email, r_id) VALUES
@@ -74,21 +74,21 @@ INSERT INTO Recipe_tags (tag, r_id) VALUES
 -- Insert list items (amount in grams)
 -- Alice's favorite meal is Chicken Curry (Recipe 2)
 INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
-('alice@example.com', 'Chicken', '0029082900000', 500.0),
-('alice@example.com', 'Curry Powder', '0001111002398', 15.0),
-('alice@example.com', 'Olive Oil', '0007321000011', 30.0),
-('alice@example.com', 'Carrot', '0000000004562', 100.0);
+('alice@example.com', 'Chicken', '0029082900000', 1),
+('alice@example.com', 'Curry Powder', '0001111002398', 1),
+('alice@example.com', 'Olive Oil', '0007321000011', 1),
+('alice@example.com', 'Carrot', '0000000004562', 1);
 
 -- Bob's favorite meal is Spaghetti Bolognese (Recipe 1)
 INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
-('bob@example.com', 'Tomato', '0000000004799', 300.0),
-('bob@example.com', 'Garlic', '0000000004608', 10.0),
-('bob@example.com', 'Pasta', '0001111085004', 200.0),
-('bob@example.com', 'Olive Oil', '0007321000011', 30.0);
+('bob@example.com', 'Tomato', '0000000004799', 1),
+('bob@example.com', 'Garlic', '0000000004608', 1),
+('bob@example.com', 'Pasta', '0001111085004', 1),
+('bob@example.com', 'Olive Oil', '0007321000011', 1);
 
 -- Charlie's favorite meal is Vegan Salad (Recipe 3)
 INSERT INTO On_list (email, i_name, store_api_id, amount) VALUES
-('charlie@example.com', 'Lettuce', '0000000004640', 100.0),
-('charlie@example.com', 'Carrot', '0000000004562', 50.0),
-('charlie@example.com', 'Chickpeas', '0001111084769', 150.0),
-('charlie@example.com', 'Olive Oil', '0007321000011', 20.0);
+('charlie@example.com', 'Lettuce', '0000000004640', 1),
+('charlie@example.com', 'Carrot', '0000000004562', 1),
+('charlie@example.com', 'Chickpeas', '0001111084769', 1),
+('charlie@example.com', 'Olive Oil', '0007321000011', 1);
