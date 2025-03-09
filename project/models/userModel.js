@@ -30,14 +30,14 @@ function verifyUser(email, password, db = defaultDb) {
 }
 
 // create new user
-function addUser(email, password, username, zipcode, db = defaultDb) {
+function addUser(email, password, username, zipcode, storeID, db = defaultDb) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO User (email, password, username, zipcode)
-          VALUES (?, ?, ?, ?)
+          INSERT INTO User (email, password, username, zipcode, storeID)
+          VALUES (?, ?, ?, ?, ?)
       `);
 
-      return stmt.run(email, password, username, zipcode);
+      return stmt.run(email, password, username, zipcode, storeID);
 
   } catch (err) {
       console.error('Error adding user:', err.message);
