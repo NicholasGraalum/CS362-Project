@@ -110,11 +110,11 @@ async function displayPage(req, res) {
     // Retrieve the user's storeID from the profile
     const user = userModel.getUserByEmail(req.session.userEmail);
     const storeId = user.storeID;
+    const token = await getToken();
   
     // Process each list item: fetch its product data, extract price, and attach an extra note if needed.
     list = await Promise.all(
       list.map(async (item) => {
-        const token = await getToken();
         const url = `https://api.kroger.com/v1/products?filter.productId=${encodeURIComponent(item.store_api_id)}&filter.locationId=${storeId}`;
         const response = await fetch(url, {
           headers: {
