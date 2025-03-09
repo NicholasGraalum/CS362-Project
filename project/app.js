@@ -25,6 +25,7 @@ const ingredientsRoutes = require('./routes/ingredientsRoutes');
 const dbIngredientsRoutes = require('./routes/dbIngredientsRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const listRoutes = require('./routes/listRoutes');
+const createProfileRoutes = require('./routes/createProfileRoutes');
 
 // Middleware
 app.use(express.json());
@@ -54,8 +55,8 @@ app.use('/login', loginRoutes);
 app.use('/ingredients', ingredientsRoutes);
 app.use('/db-ingredients', dbIngredientsRoutes);
 app.use('/profile', profileRoutes);
+app.use('/create-profile', createProfileRoutes);
 app.use('/list', listRoutes);
-
 app.use(express.static('static'))   // Static folder used for express-handlebars
 
 // 404 Page

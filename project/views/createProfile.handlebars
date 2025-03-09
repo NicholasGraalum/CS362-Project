@@ -4,20 +4,35 @@
         <div class="profile-page-header">
             <h1>Create a Profile</h1>
         </div>
-
-        {{!-- Text boxes for creating a profile --}}
-        <div class="profile-details">
-                <p>Create a Username: </p> 
-                <input type="text" class="text-box" aria-label="enter-username"></input> 
-                <p>Create a Password: </p> 
-                <input type="text" class="text-box" aria-label="enter-password"></input>    
-                <p>Add a a Email: </p> 
-                <input type="text" class="text-box" aria-label="enter-email"></input>
-                <p>Add a Zipcode: </p> 
-                <input type="text" class="text-box" aria-label="enter-zipcode"></input>
+        
+        {{#if error}}
+        <div class="error-message">
+            <p>{{error}}</p>
         </div>
-        <div class="submit-button">
-            <button class="edit-button" aria-label="create-login">Create Profile</button>
+        {{/if}}
+        
+        {{!-- Form for creating a profile --}}
+        <form action="/users/create" method="POST" class="profile-form">
+            <div class="profile-details">
+                <p>Create a Username: </p> 
+                <input type="text" name="username" class="text-box" aria-label="enter-username" value="{{formData.username}}" required></input> 
+                
+                <p>Add an Email: </p> 
+                <input type="email" name="email" class="text-box" aria-label="enter-email" value="{{formData.email}}" required></input>
+                
+                <p>Create a Password: </p> 
+                <input type="password" name="password" class="text-box" aria-label="enter-password" required></input>    
+                
+                <p>Add a Zipcode: </p> 
+                <input type="text" name="zipcode" class="text-box" aria-label="enter-zipcode" value="{{formData.zipcode}}"></input>
+            </div>
+            <div class="submit-button">
+                <button type="submit" class="edit-button" aria-label="create-login">Create Profile</button>
+            </div>
+        </form>
+        
+        <div class="login-link">
+            <p>Already have an account? <a href="/login">Log in here</a></p>
         </div>
     </div>
 </main>
