@@ -19,8 +19,11 @@
       <div class="ingredient-item" style="display: flex; align-items: center;">
         <button onclick="window.location.href='/list/delete?ingredient={{this.i_name}}'" style="margin-right: 10px;">X</button>
         {{!-- <button class="remove-ingredient" data-ingredient="{{this.i_name}}" style="margin-right: 10px;">X</button> --}}
-        <span class="ingredient-amount" style="margin-right: 10px;">{{this.amount}} G</span>
+        {{!-- <span class="ingredient-amount" style="margin-right: 10px;">{{this.amount}} G</span> --}}
         <span class="ingredient-name">{{this.i_name}}</span>
+        {{#if this.extraNote}}
+          <span class="extra-note" style="margin-left: 10px; color: red;">{{this.extraNote}}</span>
+        {{/if}}
       </div>
     {{/each}}
   </div>

@@ -80,8 +80,8 @@ async function setStore(req, res) {
         console.log("Change successful. ID:", storeID)
         userModel.updateZipcode(req.session.userEmail, zip);
         console.log("Change successful. zip:", zip)    
-            
-        res.json({ message: "Store updated successfully", storeID });
+        
+        res.json({message: "Login successful" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

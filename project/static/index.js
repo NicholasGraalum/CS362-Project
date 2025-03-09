@@ -516,9 +516,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(`/profile/setStore?zip=${zip}`);
         const data = await response.json();
         console.log('Store update response:', data);
+
+        if (!response.ok) {
+          throw new Error("Changing store failed. Please check your zipcode.");
+        }
+
+        alert("Zipcode successfully changed");
+        window.location.href = "/profile";
         
       } catch (error) {
         console.error('Error updating store:', error);
+        alert("Changing store failed. Please check your zipcode.");
       }
     });
     //   try {
@@ -595,5 +603,55 @@ document.querySelectorAll(".add-to-meal-button").forEach(button => {
         console.error("Error sending request:", error);
       });
     }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all add-to-list buttons on the ingredients page.
+  document.querySelectorAll('.add-ingredients-button').forEach(button => {
+    button.addEventListener('click', async () => {
+      // Get the product id from the button's data-id attribute.
+      const store_api_id = button.getAttribute('data-id');
+      
+      // Find the parent ingredient box to extract name and price.
+      const box = button.closest('.ingredient-box');
+      if (!box) {
+        console.error('Ingredient box not found.');
+        return;
+      }
+      
+      // Assume the first <p> is the name and the second <p> contains the price.
+      const nameElem = box.querySelector('p:nth-of-type(1)');
+      const priceElem = box.querySelector('p:nth-of-type(2)');
+      
+      // Extract the product name.
+      const i_name = nameElem ? nameElem.textContent.trim() : '';
+      console.log(i_name);
+      
+      // Extract and clean the price value.
+      let price = priceElem ? priceElem.textContent.trim() : '';
+      // Remove the "Price: $" part
+      price = price.replace(/^Price:\s*\$/, '');
+      console.log(price);
+      
+      // For this functionality, we'll set amount to 1.
+      const amount = 1;
+      
+      try {
+        const response = await fetch('/ingredients/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ i_name, store_api_id, price, amount })
+        });
+        const data = await response.json();
+        console.log('Add to list response:', data);
+        // // Reload the page to refresh the list display.
+        // window.location.reload();
+      } catch (error) {
+        console.error('Error adding ingredient to list:', error);
+      }
+    });
   });
 });

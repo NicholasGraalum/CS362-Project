@@ -24,7 +24,7 @@ CREATE TABLE Recipe
 
 CREATE TABLE Ingredient
 (
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(200) NOT NULL,
   store_api_id VARCHAR(20) NOT NULL,
   nutrition_api_id INT,
   PRIMARY KEY (name)
@@ -69,7 +69,7 @@ CREATE TABLE On_list
 (
   amount FLOAT NOT NULL,
   email VARCHAR(320) NOT NULL,
-  i_name VARCHAR(100) NOT NULL,
+  i_name VARCHAR(200) NOT NULL,
   store_api_id VARCHAR(20) NOT NULL,
   PRIMARY KEY (email, i_name),
   FOREIGN KEY (email) REFERENCES User(email) ON DELETE CASCADE,
