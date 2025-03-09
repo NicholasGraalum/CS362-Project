@@ -36,6 +36,7 @@
 const userModel = require('../models/userModel');
 const listModel = require('../models/listModel');
 const ingredientModel = require('../models/ingredientModel');
+const recipeModel = require('../models/recipeModel');
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -72,6 +73,7 @@ async function getProducts(req, res) {
 
     try {
         const ingredient = req.query.ingredient;
+        const mealId = req.params.mealId;
         if (!ingredient) {
             return res.render('ingredientsPage', { 
                 products: [], 
@@ -120,6 +122,7 @@ async function getProducts(req, res) {
         res.render('ingredientsPage', { 
             //products: data.data, 
             products,
+            mealId,
             //searchTerm: ingredient 
         });
     } catch (error) {
@@ -132,7 +135,10 @@ function displayPage(req, res) {
         return res.redirect('/login');
     }
 
-    res.render('ingredientsPage'); 
+    const mealId = req.params.mealId;
+    console.log("Meal ID: ", mealId);
+
+    res.render('ingredientsPage', { mealId }); 
 }
 
 async function addIngredientToList(req, res) {
@@ -161,5 +167,37 @@ async function addIngredientToList(req, res) {
     }
 }
 
+async function addIngredientToMeal(req, res) {
+    try {
+        const { i_name, store_api_id, mealId, amount } = req.body;
+        if (!i_name || !store_api_id || !mealId) {
+            return res.status(400).json({ error: 'Missing ingredient data.' });
+        }
+
+        const user_email = req.session.userEmail;
+        const meal = recipeModel.getRecipeById(mealId);
+    
+        // check if user logged in and created the meal
+        if (user_email && user_email === meal.creator_email) {   // if so add
+            // Check if the ingredient exists
+            const existingIngredient = ingredientModel.getIngredient(i_name);
+            if (!existingIngredient) {
+                // If ingredient does not exist, add it
+                ingredientModel.addIngredient(i_name, store_api_id);
+            }
+
+            recipeModel.addIngredientToRecipe(mealId, i_name, amount);
+            res.status(200).json({ message: 'Ingredient added successfully!' });
+
+        } else {    // if not logged in, redirect to login page
+            console.log("not logged in");
+            res.redirect(`/login`); 
+        }
+    } catch (error) {
+        console.error('Error adding ingredient to meal:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // Export the functions so they can be used in your routes file
-module.exports = {displayPage, getProducts, addIngredientToList};
+module.exports = {displayPage, getProducts, addIngredientToList, addIngredientToMeal};

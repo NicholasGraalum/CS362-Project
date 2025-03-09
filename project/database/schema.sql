@@ -26,7 +26,6 @@ CREATE TABLE Ingredient
 (
   name VARCHAR(200) NOT NULL,
   store_api_id VARCHAR(20) NOT NULL,
-  nutrition_api_id INT,
   PRIMARY KEY (name)
 );
 

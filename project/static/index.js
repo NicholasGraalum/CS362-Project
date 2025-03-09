@@ -545,67 +545,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Select all buttons with the class "add-ingredients-button"
-document.querySelectorAll(".add-to-meal-button").forEach(button => {
-  // Add a click event listener to each button
-  button.addEventListener("click", function () {
-    // Find the meal id stored on the page
-    const page = document.getElementById("page");
-    const ingredient = this.closest(".ingredient")
-
-    if (page && ingredient) {
-      // Retrieve the meal ID from 'data-mealID' attribute
-      const mealId = page.getAttribute("data-mealID");
-
-      // Get the ingredient name from the data attribute
-      const ingredientName = ingredient.dataset.name;
-
-      // Get the input field inside the current ingredient div
-      const quantityInput = ingredient.querySelector("input[type='number']").value;
-
-      // Ensure that a valid meal ID exists before sending the request
-      if (!mealId || !ingredientName || !quantityInput) {
-        console.error("Couldn't find request data in dom.");
-        return;
-      }
-
-      // Send an HTTP POST request to the backend to add ingredient to meal
-      fetch("/db-ingredients/add-to-meal", {   // The endpoint where the request is sent
-        method: "POST",   // POST request
-        headers: {
-          "Content-Type": "application/json", // Request body contains JSON data
-        },
-          body: JSON.stringify({ id: mealId, i_name: ingredientName, amount: quantityInput }), 
-      })
-
-      .then(response => {
-        // check if redirected for not logged in 
-        if (response.status === 302 || response.redirected) {
-          // If redirected, manually redirect to the login page
-          window.location.href = '/login';  // This redirects the browser to the login page
-          return;  // Exit from the promise chain since the redirect is handled
-        }
-
-        // Check if the response status is OK
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        } else {
-          window.location.href = `/meals/${mealId}`;
-        }
-      })
-      .then(data => {
-        // Log the successful response data to the console for debugging
-        console.log("Server response:", data);
-
-      })
-      .catch(error => {
-        // Catch and log any errors that occur during the fetch request
-        console.error("Error sending request:", error);
-      });
-    }
-  });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   // Select all add-to-list buttons on the ingredients page.
   document.querySelectorAll('.add-ingredient-button').forEach(button => {
@@ -653,5 +592,81 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error adding ingredient to list:', error);
       }
     });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all add-to-list buttons on the ingredients page.
+  document.querySelectorAll('.add-to-meal-button').forEach(button => {
+    button.addEventListener('click', async () => {
+      // Get the product id from the button's data-id attribute.
+      const store_api_id = button.getAttribute('data-id');
+      
+      // Find the parent ingredient box to extract name and price.
+      const box = button.closest('.ingredient-box');
+      if (!box) {
+        console.error('Ingredient box not found.');
+        return;
+      }
+      
+      // Assume the first <p> is the name and the second <p> contains the price.
+      const nameElem = box.querySelector('p:nth-of-type(1)');
+      const priceElem = box.querySelector('p:nth-of-type(2)');
+      
+      // Extract the product name.
+      const i_name = nameElem ? nameElem.textContent.trim() : '';
+      console.log(i_name);
+      
+      // Extract and clean the price value.
+      let price = priceElem ? priceElem.textContent.trim() : '';
+      // Remove the "Price: $" part
+      price = price.replace(/^Price:\s*\$/, '');
+      console.log(price);
+      
+      // get grams amount
+      const amount = box.querySelector(".quantity-input").value.trim();
+
+      if (!amount || isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid quantity in grams.");
+        return; // Stop the fetch request
+      }
+
+      // get meal id 
+      const page = document.getElementById("page");
+      const mealId = page.getAttribute("data-mealID");
+
+      fetch('/ingredients/meal/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ i_name, store_api_id, price, amount, mealId })
+        })
+
+      .then(response => {
+        // check if redirected for not logged in 
+        if (response.status === 302 || response.redirected) {
+          // If redirected, manually redirect to the login page
+          window.location.href = '/login';  // This redirects the browser to the login page
+          return;  // Exit from the promise chain since the redirect is handled
+        }
+
+        // Check if the response status is OK
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        } else {
+          window.location.href = `/meals/${mealId}`;
+        }
+      })
+      .then(data => {
+        // Log the successful response data to the console for debugging
+        console.log("Server response:", data);
+
+      })
+      .catch(error => {
+        // Catch and log any errors that occur during the fetch request
+        console.error("Error sending request:", error);
+      });
+    })
   });
 });

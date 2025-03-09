@@ -34,12 +34,19 @@
   </div>
 </main> --}}
 
-<main>
+<main id="page" data-mealId={{mealId}}>
   <div class="ingredient-search" style="display: flex; align-items: center; margin-bottom: 20px;">
-    <form action="/ingredients/search" method="GET" style="display: flex; width: 100%;">
-      <input type="text" name="ingredient" id="ingredient-search-input" placeholder="Enter ingredient" style="flex: 1; padding: 8px;">
-      <button type="submit" id="ingredient-search-button" style="padding: 8px 16px; margin-left: 10px;">Search</button>
-    </form>
+    {{#if mealId}}
+      <form action="/ingredients/meal/{{mealId}}/search" method="GET" style="display: flex; width: 100%;">
+        <input type="text" name="ingredient" id="ingredient-search-input" placeholder="Enter ingredient" style="flex: 1; padding: 8px;">
+        <button type="submit" id="ingredient-search-button" style="padding: 8px 16px; margin-left: 10px;">Search</button>
+      </form>
+    {{else}}
+      <form action="/ingredients/search" method="GET" style="display: flex; width: 100%;">
+        <input type="text" name="ingredient" id="ingredient-search-input" placeholder="Enter ingredient" style="flex: 1; padding: 8px;">
+        <button type="submit" id="ingredient-search-button" style="padding: 8px 16px; margin-left: 10px;">Search</button>
+      </form>
+    {{/if}}
   </div>
 
   <div class="ingredient-results">
@@ -49,7 +56,12 @@
           <img src="{{image_link}}" alt="Picture of {{name}}" style="max-width: 100px; display: block; margin-bottom: 10px;">
           <p style="font-weight: bold;">{{name}}</p>
           <p>Price: ${{price}}</p>
-          <button class="add-ingredient-button" data-id="{{id}}" style="padding: 6px 12px;">Add to List</button>
+          {{#if ../mealId}}
+            <button class="add-to-meal-button" data-id="{{id}}" style="padding: 6px 12px;">Add to Recipe</button>
+            <input type="number" class="quantity-input" placeholder="Grams" min="1" style="padding: 6px; width: 80px;">
+          {{else}}
+            <button class="add-ingredients-button" data-id="{{id}}" style="padding: 6px 12px;">Add to List</button>
+          {{/if}}
         </div>
       {{/each}}
     {{else}}

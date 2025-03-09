@@ -28,14 +28,14 @@ function getIngredientsInRecipe(id, db = defaultDb) {
 }
 
 // add ingredient
-function addIngredient(name, store_api_id = null, nutrition_api_id = null, db = defaultDb) {
+function addIngredient(name, store_api_id = null, db = defaultDb) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO Ingredient (name, store_api_id, nutrition_api_id)
-          VALUES (?, ?, ?)
+          INSERT INTO Ingredient (name, store_api_id)
+          VALUES (?, ?)
       `);
 
-      return stmt.run(name, store_api_id, nutrition_api_id);
+      return stmt.run(name, store_api_id);
 
   } catch (err) {
       console.error('Error adding ingredient:', err.message);
@@ -60,23 +60,6 @@ function updateIngredientStoreId(name, newStoreApiId, db = defaultDb) {
   }
 }
 
-// update nutrition api id
-function updateIngredientNutId(name, newNutritionApiId, db = defaultDb) {
-  try {
-      const stmt = db.prepare(`
-          UPDATE Ingredient
-          SET nutrition_api_id = ?
-          WHERE name = ?
-      `);
-
-      return stmt.run(newNutritionApiId, name);
-
-  } catch (err) {
-      console.error('Error updating nutrition API ID:', err.message);
-      throw err;  
-  }
-}
-
 /*
 Search for ingredient by name 
 Return list of matching ingredient name objects
@@ -97,4 +80,4 @@ function searchIngredientsByName(searchTerm, db = defaultDb) {
   }
 
 
-module.exports = { getIngredient, getAllIngredients, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, updateIngredientNutId, searchIngredientsByName };
+module.exports = { getIngredient, getAllIngredients, getIngredientsInRecipe, addIngredient, updateIngredientStoreId, searchIngredientsByName };
