@@ -29,75 +29,129 @@ async function getToken() {
 }
 
 // Function to handle fetching products by store and ingredient
-async function getPrice(req) {
-    const list = listModel.getUserList(req.session.userEmail);
-    console.log(list);
-    // if (!list || list.length === 0) {
-    //     return 0;
-    // }
+// async function getPrice(req) {
+//     const list = listModel.getUserList(req.session.userEmail);
+//     console.log(list);
+//     // if (!list || list.length === 0) {
+//     //     return 0;
+//     // }
     
-    // Retrieve the user's store ID.
-    const user = userModel.getUserByEmail(req.session.userEmail);
+//     // Retrieve the user's store ID.
+//     const user = userModel.getUserByEmail(req.session.userEmail);
 
-    // if (!user || !user.storeID) {
-    //     // If there is no store ID, you may choose to return 0 or handle this case differently.
-    //     return 0;
-    // }
-    const storeId = user.storeID;
+//     // if (!user || !user.storeID) {
+//     //     // If there is no store ID, you may choose to return 0 or handle this case differently.
+//     //     return 0;
+//     // }
+//     const storeId = user.storeID;
 
-    // For each ingredient, call the Products API using the ingredient's ID.
-    const pricePromises = list.map(async (item) => {
+//     // For each ingredient, call the Products API using the ingredient's ID.
+//     const pricePromises = list.map(async (item) => {
 
-        // // Assume item.ingredient_id contains the Kroger product id (13-digit string).
-        // if (!item.ingredient_id) {
-        //     return 0;
-        // }
+//         // // Assume item.ingredient_id contains the Kroger product id (13-digit string).
+//         // if (!item.ingredient_id) {
+//         //     return 0;
+//         // }
 
-        const token = await getToken();
-        const response = await fetch(
-            `https://api.kroger.com/v1/products?filter.productId=${item.store_api_id}&filter.locationId=${storeId}`,
-            { 
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-        );
-        const data = await response.json();
-        console.log(data);
-        // If no product is found, assume price 0 for that ingredient.
-        // if (!data.data || data.data.length === 0) {
-        //     return 0;
-        // }
+//         const token = await getToken();
+//         const response = await fetch(
+//             `https://api.kroger.com/v1/products?filter.productId=${item.store_api_id}&filter.locationId=${storeId}`,
+//             { 
+//                 headers: {
+//                     'Accept': 'application/json',
+//                     'Authorization': `Bearer ${token}`
+//                 }
+//             }
+//         );
+//         const data = await response.json();
+//         console.log(data);
+//         // If no product is found, assume price 0 for that ingredient.
+//         // if (!data.data || data.data.length === 0) {
+//         //     return 0;
+//         // }
 
-        const product = data.data[0];
+//         const product = data.data[0];
 
-        const priceObj = product.items[0].price.regular
-        console.log(priceObj);
-        return priceObj //* item.amount;
-    });
+//         const priceObj = product.items[0].price.regular
+//         console.log(priceObj);
+//         return priceObj //* item.amount;
+//     });
 
     
-    // Wait for all prices to resolve and sum them.
-    const prices = await Promise.all(pricePromises);
-    const total = prices.reduce((acc, curr) => acc + curr, 0);
-    return total.toFixed(2); // Returns a string with two decimals, e.g., "12.34"
-}
+//     // Wait for all prices to resolve and sum them.
+//     const prices = await Promise.all(pricePromises);
+//     const total = prices.reduce((acc, curr) => acc + curr, 0);
+//     return total.toFixed(2); // Returns a string with two decimals, e.g., "12.34"
+// }
 
+
+// async function displayPage(req, res) {
+//     if (!req.session || !req.session.userEmail) {
+//         return res.redirect('/login');
+//     }
+
+//     const list = listModel.getUserList(req.session.userEmail);
+//     const totalPrice = await getPrice(req);
+//     // if (!list) {
+//     //     return res.status(404).send('There are no ');
+//     // }
+
+//     res.render('listPage', {list: list, totalPrice: totalPrice}); 
+// }
 
 async function displayPage(req, res) {
     if (!req.session || !req.session.userEmail) {
-        return res.redirect('/login');
+      return res.redirect('/login');
     }
-
-    const list = listModel.getUserList(req.session.userEmail);
-    const totalPrice = await getPrice(req);
-    // if (!list) {
-    //     return res.status(404).send('There are no ');
-    // }
-
-    res.render('listPage', {list: list, totalPrice: totalPrice}); 
-}
+  
+    // Get the user's shopping list
+    let list = listModel.getUserList(req.session.userEmail);
+    
+    // Retrieve the user's storeID from the profile
+    const user = userModel.getUserByEmail(req.session.userEmail);
+    const storeId = user.storeID;
+  
+    // Process each list item: fetch its product data, extract price, and attach an extra note if needed.
+    list = await Promise.all(
+      list.map(async (item) => {
+        const token = await getToken();
+        const url = `https://api.kroger.com/v1/products?filter.productId=${encodeURIComponent(item.store_api_id)}&filter.locationId=${storeId}`;
+        const response = await fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+  
+        let unitPrice = "N/A";
+        if (data.data && data.data.length > 0) {
+          const product = data.data[0];
+          if (product.items && product.items.length > 0 && product.items[0].price) {
+            unitPrice = product.items[0].price.regular;
+          }
+        }
+        
+        // If the unitPrice is "N/A", we want to display a note, and for calculation purposes, treat it as 0.
+        let extraNote = "";
+        if (unitPrice === "N/A") {
+          extraNote = "Not calculated in final price";
+          unitPrice = 0;
+        }
+        
+        // Attach the computed price and note to the item
+        item.price = unitPrice;
+        item.extraNote = extraNote;
+        return item;
+      })
+    );
+  
+    // Calculate the total price by summing each item's price (multiplied by amount if needed)
+    const totalPrice = list.reduce((acc, item) => acc + Number(item.price), 0).toFixed(2);
+  
+    // Render the Handlebars template with the updated list and total price.
+    res.render('listPage', { list, totalPrice });
+  }
 
 async function deleteItem(req,res) {
     const i_name = req.query.ingredient;

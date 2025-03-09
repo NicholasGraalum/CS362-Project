@@ -34,6 +34,8 @@
 // module.exports = { getAllIngredients, getSingleIngredient };
 
 const userModel = require('../models/userModel');
+const listModel = require('../models/listModel');
+const ingredientModel = require('../models/ingredientModel');
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -131,7 +133,33 @@ function displayPage(req, res) {
     }
 
     res.render('ingredientsPage'); 
-  }
+}
+
+async function addIngredientToList(req, res) {
+    try {
+        const { i_name, store_api_id } = req.body;
+        if (!i_name || !store_api_id) {
+            return res.status(400).json({ error: 'Missing ingredient data.' });
+        }
+
+        const amount = 1;
+
+        // Check if the ingredient exists
+        const existingIngredient = ingredientModel.getIngredient(i_name);
+        if (!existingIngredient) {
+            // If ingredient does not exist, add it
+            ingredientModel.addIngredient(i_name, store_api_id);
+        }
+
+        // Add to the user's ingredient list
+        listModel.addToList(req.session.userEmail, i_name, amount, store_api_id);
+
+        res.status(200).json({ message: 'Ingredient added successfully!' });
+    } catch (error) {
+        console.error('Error adding ingredient to list:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+}
 
 // Export the functions so they can be used in your routes file
-module.exports = {displayPage, getProducts};
+module.exports = {displayPage, getProducts, addIngredientToList};
