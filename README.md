@@ -23,6 +23,7 @@ project/ : contains all term project code
 ### Building and Testing the System
 - Clone this repository to your local machine ```git clone https://github.com/NicholasGraalum/CS362-Project.git```
 - Navigate to the project/ directory inside the local repository ```cd CS362-Project/project/```
+- Ensure you have node.js installed: ```https://nodejs.org/en/download```
 - Install dependencies ```npm i```
 - Run tests ```npm t```
 
