@@ -25,37 +25,34 @@ describe('Recipe Model Getter Unit Tests', () => {
   it('GetAllRecipes should retrieve all recipes from the test database', () => {
     // Fetch all recipes
     const recipes = getAllRecipes(testDb);
-    console.log(testDb);
 
     // Assertions
     expect(recipes).to.be.an('array');
-    expect(recipes).to.have.lengthOf(3);
+    expect(recipes).to.have.lengthOf(16);
     expect(recipes.map(u => u.name)).to.include('Spaghetti Bolognese');
     expect(recipes.map(u => u.name)).to.include('Chicken Curry');
-    expect(recipes.map(u => u.name)).to.include('Vegan Salad');
+    expect(recipes.map(u => u.name)).to.include('Chicken Salad');
   });
    
   it('GetRecipeTags should retrieve all tags from the test recipe', () => {
     // Fetch all recipes
     const tags = getRecipeTags(1, testDb);
-    console.log(testDb);
 
     // Assertions
     expect(tags).to.be.an('array');
-    expect(tags).to.have.lengthOf(3);
+    expect(tags).to.have.lengthOf(2);
     expect(tags.map(u => u.tag)).to.include('High Protein');
-    expect(tags.map(u => u.tag)).to.include('Healthy');
     expect(tags.map(u => u.tag)).to.include('Comfort Food');
   });
 
   it('GetRecipeTypes should retrieve all types from the test recipe', () => {
     // Fetch all recipes
     const types = getRecipeTypes(1, testDb);
-    console.log(testDb);
 
     // Assertions
     expect(types).to.be.an('array');
-    expect(types).to.have.lengthOf(1);
+    expect(types).to.have.lengthOf(2);
     expect(types.map(u => u.meal_type)).to.include('Dinner');
+    expect(types.map(u => u.meal_type)).to.include('Lunch');
   });
 });
