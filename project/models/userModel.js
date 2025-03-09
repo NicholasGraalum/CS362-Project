@@ -1,10 +1,10 @@
-const { db } = require('../database/db'); 
+const { db: defaultDb } = require('../database/db'); 
 // const bcrypt = require('bcrypt'); // use later for secure password hashing
 
 /* 
 Returns array with an object for each user
 */
-function getAllUsers() {
+function getAllUsers(db = defaultDb) {
   const stmt = db.prepare('SELECT * FROM User');
   return stmt.all(); 
 }
@@ -13,7 +13,7 @@ function getAllUsers() {
 Returns user object with matching email
 Returns null if no matching user
 */
-function getUserByEmail(email) {
+function getUserByEmail(email, db = defaultDb) {
   const stmt = db.prepare('SELECT * FROM User WHERE email = ?');
   return stmt.get(email) || null; 
 }
@@ -23,21 +23,21 @@ function getUserByEmail(email) {
 Returns true if user exists with matching email and password
 Returns false otherwise
 */
-function verifyUser(email, password) {
+function verifyUser(email, password, db = defaultDb) {
     const stmt = db.prepare('SELECT * FROM User WHERE email = ? AND password = ?'); 
     const user = stmt.get(email, password); 
     return !!user;  // Return truthy or falsy value
 }
 
 // create new user
-function addUser(email, password, username, zipcode, storeID = null) {
+function addUser(email, password, username, zipcode, db = defaultDb) {
   try {
       const stmt = db.prepare(`
-          INSERT INTO User (email, password, username, zipcode, storeID)
-          VALUES (?, ?, ?, ?, ?)
+          INSERT INTO User (email, password, username, zipcode)
+          VALUES (?, ?, ?, ?)
       `);
 
-      return stmt.run(email, password, username, zipcode, storeID);
+      return stmt.run(email, password, username, zipcode);
 
   } catch (err) {
       console.error('Error adding user:', err.message);
@@ -46,7 +46,7 @@ function addUser(email, password, username, zipcode, storeID = null) {
 }
 
 // favorite a recipe
-function addFavoriteRecipe(email, r_id) {
+function addFavoriteRecipe(email, r_id, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           INSERT INTO Favorites (email, r_id)
@@ -61,7 +61,7 @@ function addFavoriteRecipe(email, r_id) {
   }
 }
 
-function removeFavoriteRecipe(email, r_id) {
+function removeFavoriteRecipe(email, r_id, db = defaultDb) {
   try {
       const stmt = db.prepare(`
           DELETE FROM Favorites
@@ -76,7 +76,7 @@ function removeFavoriteRecipe(email, r_id) {
   }
 }
 
-function updateZipcode(email, newZipcode) {
+function updateZipcode(email, newZipcode, db = defaultDb) {
   try {
       // Ensure zipcode is an integer
     //   if (!Number.isInteger(newZipcode)) {
@@ -97,7 +97,7 @@ function updateZipcode(email, newZipcode) {
   }
 }
 
-function updateStoreID(email, storeID) {
+function updateStoreID(email, storeID, db = defaultDb) {
   try {
       // Ensure storeID is an integer
       if (!Number.isInteger(storeID)) {

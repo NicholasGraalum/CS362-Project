@@ -53,8 +53,9 @@ function searchMeals(req, res) {
         let { mealName, mealTypes, categoryTags } = req.query; // Get query parameters
 
         // turn param strings into param lists
-        mealTypes = mealTypes.length === 0 ? [] : mealTypes.split(',');
-        categoryTags = categoryTags.length === 0 ? [] : categoryTags.split(',');
+        mealTypes = mealTypes.length === 0 ? [] : mealTypes.replace(/-/g, ' ').split(',');
+        categoryTags = categoryTags.length === 0 ? [] : categoryTags.replace(/-/g, ' ').split(',');
+        console.log(categoryTags);
 
         const meals = recipeModel.searchRecipes(mealName, categoryTags, mealTypes);
      

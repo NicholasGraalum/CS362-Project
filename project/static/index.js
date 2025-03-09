@@ -1,6 +1,12 @@
 // Event listener for main handlebar buttons
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Hamburger menu handling
+  document.getElementById("hamburger-menu").addEventListener("click", function () {
+    this.classList.toggle("change");
+    document.getElementById("mobile-nav").classList.toggle("active");
+  })
+  
   // Reditect when the meals button is clicked
   document.getElementById("meals-viewer").addEventListener("click", function () {
     window.location.href = "/meals"
@@ -20,11 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("list-viewer").addEventListener("click", function () {
     window.location.href = "/list"
   })
-
-  // Redirect when settings button is clicked
-  document.getElementById("settings-viewer").addEventListener("click", function () {
-    window.location.href = "/settings"
-  })
+  
 });
 
 // Event listener for the meals page and the meal modal
@@ -53,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const mealId = meal.getAttribute('data-id');
       window.location.href = `/meals/${mealId}`;
     });
+    
   });
 
   // Select all buttons with the class "add-ingredients-button"
@@ -548,7 +551,7 @@ document.querySelectorAll(".add-to-meal-button").forEach(button => {
 
       // Get the ingredient name from the data attribute
       const ingredientName = ingredient.dataset.name;
-      
+
       // Get the input field inside the current ingredient div
       const quantityInput = ingredient.querySelector("input[type='number']").value;
 

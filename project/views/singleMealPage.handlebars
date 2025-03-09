@@ -7,6 +7,7 @@
 
     <div class="meal-page-header">
       <h1>{{name}}</h1>
+      <p><a href="/favorite/{{id}}">Favorite Meal</a></p>
     </div>
 
     <img class="meal-page-image" src="{{image}}" alt="Picture of {{name}}">
@@ -16,7 +17,6 @@
 
     <div class="meal-page-details">
       <p>Servings: {{servings}}</p>
-      <p>Calories/Serving: {{calories}}</p>
       <p>Meal type: {{#each mealType}} {{#properCase this}} {{/properCase}}{{#unless @last}},  {{/unless}}{{/each}}</p>
     </div>
 
@@ -29,7 +29,7 @@
           <a href="/db-ingredients/{{id}}"><button class="add-db-ingredients-button" >+</button></a>
         {{/if}}
         
-
+        
         <h2>Ingredients</h2>
       </div>
       <ul>
