@@ -608,7 +608,7 @@ document.querySelectorAll(".add-to-meal-button").forEach(button => {
 
 document.addEventListener('DOMContentLoaded', () => {
   // Select all add-to-list buttons on the ingredients page.
-  document.querySelectorAll('.add-ingredients-button').forEach(button => {
+  document.querySelectorAll('.add-ingredient-button').forEach(button => {
     button.addEventListener('click', async () => {
       // Get the product id from the button's data-id attribute.
       const store_api_id = button.getAttribute('data-id');
