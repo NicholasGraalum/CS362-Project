@@ -410,6 +410,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutButton = document.getElementById("logout-viewer");
+
+  if (logoutButton) {
+      logoutButton.addEventListener("click", function () {
+          fetch("/users/logout", { method: "POST" })
+              .then(response => {
+                  if (response.ok) {
+                      window.location.href = "/login"; // Redirect to login page
+                  } else {
+                      alert("Logout failed. Please try again.");
+                  }
+              })
+              .catch(error => console.error("Error logging out:", error));
+      });
+  }
+});
+
+
 // Event listener for the profile page
 document.addEventListener("DOMContentLoaded", function () {   
 
