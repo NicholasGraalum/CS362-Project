@@ -10,9 +10,9 @@
       <p>
         <a href="/meals/favorite/{{id}}">
           {{#if favorited}}
-            ⭐ Favorite Meal  <!-- Filled star if favorited -->
+            <button class="star-button" title="Favorite Meal">&#9733;</button>
           {{else}}
-            ☆ Favorite Meal  <!-- Unfilled star if not favorited -->
+            <button class="star-button" title="Favorite Meal">&#9733;</button>
           {{/if}}
         </a>
       </p>
