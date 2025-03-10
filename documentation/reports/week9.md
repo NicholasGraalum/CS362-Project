@@ -2,7 +2,10 @@
 #### Overview:
 
 #### Aaryan:
-
+- Fixed bug in creating an account
+- Completed functionality for logging out
+- Made test cases for creating an account and logging out
+- 
 #### Andrew:
 - Worked on small features and fixing bugs
 - Added feature so that closest store is updated when creating an account
