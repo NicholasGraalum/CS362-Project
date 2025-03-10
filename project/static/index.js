@@ -357,58 +357,58 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Event listener for the create profile page
-document.addEventListener("DOMContentLoaded", function () {   
+// document.addEventListener("DOMContentLoaded", function () {   
 
-  /*** PROFILE CREATION PAGE EVENTS ***/
-  const createProfileButton = document.querySelector("[aria-label='create-login']");
-  const usernameInput = document.querySelector("[aria-label='enter-username']");
-  const passwordInput = document.querySelector("[aria-label='enter-password']");
-  const emailInput = document.querySelector("[aria-label='enter-email']");
-  const zipcodeInput = document.querySelector("[aria-label='enter-zipcode']");
+//   /*** PROFILE CREATION PAGE EVENTS ***/
+//   const createProfileButton = document.querySelector("[aria-label='create-login']");
+//   const usernameInput = document.querySelector("[aria-label='enter-username']");
+//   const passwordInput = document.querySelector("[aria-label='enter-password']");
+//   const emailInput = document.querySelector("[aria-label='enter-email']");
+//   const zipcodeInput = document.querySelector("[aria-label='enter-zipcode']");
 
-  if (createProfileButton && usernameInput && passwordInput && emailInput && zipcodeInput) {
-    console.log("Profile creation page detected. Setting up event listeners.");
+//   if (createProfileButton && usernameInput && passwordInput && emailInput && zipcodeInput) {
+//     console.log("Profile creation page detected. Setting up event listeners.");
 
-    // Create Profile Function
-    createProfileButton.addEventListener("click", function () {
-      const username = usernameInput.value.trim();
-      const password = passwordInput.value.trim();
-      const email = emailInput.value.trim();
-      const zipcode = zipcodeInput.value.trim();
+//     // Create Profile Function
+//     createProfileButton.addEventListener("click", function () {
+//       const username = usernameInput.value.trim();
+//       const password = passwordInput.value.trim();
+//       const email = emailInput.value.trim();
+//       const zipcode = zipcodeInput.value.trim();
 
-      // Validate input fields
-      if (!username || !password || !email || !zipcode) {
-        alert("All fields are required.");
-        return;
-      }
+//       // Validate input fields
+//       if (!username || !password || !email || !zipcode) {
+//         alert("All fields are required.");
+//         return;
+//       }
 
-      // Send create profile request
-      fetch("/createProfile/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, email, zipcode }),
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Profile creation failed. Please try again.");
-        }
-        return response.json();
-      })
-      .then(data => {
-        alert("Profile created successfully!");
-        window.location.href = "/meals"; // Redirect after creation
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert(error.message);
-      });
-    });
+//       // Send create profile request
+//       fetch("/users/create", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ username, password, email, zipcode }),
+//       })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error("Profile creation failed. Please try again.");
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         alert("Profile created successfully!");
+//         window.location.href = "/login"; // Redirect after creation
+//       })
+//       .catch(error => {
+//         console.error("Error:", error);
+//         alert(error.message);
+//       });
+//     });
 
-  } else {
-    console.log("Profile creation elements not found. Skipping setup.");
-  }
+//   } else {
+//     console.log("Profile creation elements not found. Skipping setup.");
+//   }
 
-});
+// });
 
 // Event listener for the profile page
 document.addEventListener("DOMContentLoaded", function () {   
