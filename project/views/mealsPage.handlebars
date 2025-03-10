@@ -6,9 +6,13 @@
       <h2><a href="/meals/favorites"><button >Favorites</button></a></h2>
     </div>
     <div class="meal-grid" id="all-meal-grid">
+      {{#if meals}}
         {{#each meals}}
         {{> meal}}
         {{/each}}
+      {{else}}
+        <p>No meals found. Please try a different search.</p>
+      {{/if}}
     </div>
 </main>
 
