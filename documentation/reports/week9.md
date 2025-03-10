@@ -15,7 +15,7 @@
   + 16 meals
   + 70 Ingredients
 - Integration test for createMeals
-- Unit test for listModel
+- Unit tests for listModel and ingredientModel
 
 #### Nick:
 
