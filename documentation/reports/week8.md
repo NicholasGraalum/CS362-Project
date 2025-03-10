@@ -2,7 +2,8 @@
 #### Overview:
 
 #### Aaryan:
-
+- Completed routing for creating an account and made it functional
+- Added the methadology for final poster
 #### Andrew:
 -Full functionality and UI of grocery list page
 - Displaying items and calculating prices functionality added
