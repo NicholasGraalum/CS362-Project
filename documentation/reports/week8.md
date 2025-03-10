@@ -4,7 +4,12 @@
 #### Aaryan:
 
 #### Andrew:
-
+-Full functionality and UI of grocery list page
+    - Displaying items and calculating prices functionality added
+- Added functionality to the profile page so that users can change their zip code which updates their closest store
+- Worked on creating final poster. Addded text to abstract and features.
+- Full functionality and UI of store page
+    - Allowing users to search up individual products and add to their list 
 #### Kylan:
 - made meal filtering and search fully functional
     - added validation test for meal filtering
