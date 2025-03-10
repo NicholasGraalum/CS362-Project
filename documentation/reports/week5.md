@@ -1,6 +1,6 @@
 ### Week 5:
 #### Aaryan:
-
+- Worked on our slides for the mid-term presentation
 
 #### Andrew:
 - Worked on our slides for the mid-term presentation
