@@ -376,13 +376,15 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   width: calc(100% - 20px);
-  padding: 10px, 10px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 
 input[type="checkbox"] {
   margin-right: 5px;
