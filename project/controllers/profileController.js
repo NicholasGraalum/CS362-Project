@@ -17,6 +17,7 @@ function displayPage(req, res) {
     }
 
     res.render('profilePage', {
+        isLoginPage : false,
         username: user.username,
         email: user.email,
         zipcode: user.zipcode,

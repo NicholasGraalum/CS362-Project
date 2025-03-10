@@ -13,6 +13,7 @@ function getAllMeals(req, res) {
         }
         else {
             res.render('mealsPage', {
+                    isLoginPage : false,
                     meals,
                     username: user.username,
                     email: user.email,

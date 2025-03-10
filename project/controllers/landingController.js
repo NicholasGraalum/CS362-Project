@@ -8,6 +8,7 @@ function displayPage(req, res)
     }
     else{
         res.render('landingPage', {
+            isLoginPage : false,
             username: user.username,
             email: user.email,
             zipcode: user.zipcode,

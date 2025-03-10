@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel');
 
 function displayPage(req, res) {
-  res.render('loginPage'); 
+  res.render('loginPage', {isLoginPage : true}); 
 }
 
 function loginUser(req, res) {

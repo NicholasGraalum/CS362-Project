@@ -151,6 +151,7 @@ async function displayPage(req, res) {
   
     // Render the Handlebars template with the updated list and total price.        
     res.render('listPage', {
+      isLoginPage : false,
       list,
       totalPrice,
       username: user.username,
