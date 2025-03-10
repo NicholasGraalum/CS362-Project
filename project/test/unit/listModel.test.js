@@ -1,5 +1,3 @@
-// test/model.test.js
-
 const chai = require('chai');
 const expect = chai.expect;
 const Database = require('better-sqlite3');   // Used for in-memory database
