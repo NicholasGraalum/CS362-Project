@@ -154,11 +154,15 @@ async function displayPage(req, res) {
   }
 
 async function deleteItem(req,res) {
-    const i_name = req.query.ingredient;
+    let i_name = req.query.ingredient;
     if (!i_name) {
         return res.status(400).send('Ingredient name is required for deletion.');
     }
 
+    // Fix malformed percent sign (replace lone `%` with its encoded version `%25`)
+ 
+    i_name = decodeURIComponent(i_name.replace(/%(?![0-9A-Fa-f]{2})/g, "%25"));
+    
     try {
         // Remove the ingredient from the list using the model function
         // This function should remove the entire record from the On_list table for this user and ingredient.
