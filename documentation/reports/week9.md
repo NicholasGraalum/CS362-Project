@@ -11,8 +11,13 @@
 - fixed bugs and polished website interactions
 
 #### Matt:
-
+- Expanded initial filler for database
+  + 16 meals
+  + 70 Ingredients
+- Integration test for createMeals
+- Unit test for listModel
 
 #### Nick:
+
 
 #### Ryan:
