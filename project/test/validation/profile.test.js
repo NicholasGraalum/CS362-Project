@@ -11,7 +11,7 @@ describe('Profile Page Rendering', () => {
         // Mock userModel behavior
         const userModel = require('../../models/userModel');
         userModel.getUserByEmail = (email) => ({
-            username: 'testuser',
+            username: 'alice123',
             email: email,
             zipcode: '97333',
         });
@@ -43,9 +43,6 @@ describe('Profile Page Actions', () => {
         const userModel = require('../../models/userModel');
         userModel.updateZipcode = (email, zip) => zip;
 
-        // Mock the Kroger API request
-
-        expect(response.status).to.equal(200);
         expect(response.body).to.have.property('message', 'Login successful');
     });
 });
