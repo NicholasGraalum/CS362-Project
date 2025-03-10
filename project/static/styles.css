@@ -427,8 +427,19 @@ input[type="checkbox"] {
   margin-left: 8px; /* space between the name and the star */
   background: none;
   border: none;
-  font-size: 36px;
+  font-size: 64px;
   color: #ffcc00; /* yellow color */
+  cursor: pointer;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+.empty-star-button {
+  margin-left: 8px; /* space between the name and the star */
+  background: none;
+  border: none;
+  font-size: 64px;
+  color: #000000; 
   cursor: pointer;
   line-height: 1;
   transform: translateY(-2px);
