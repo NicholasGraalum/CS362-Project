@@ -13,7 +13,7 @@
 #### Matt:
 - Expanded initial filler for database
   + 16 meals
-  + 70 Ingredients
+  + 42 Ingredients
 - Integration test for createMeals
 - Unit tests for listModel and ingredientModel
 
