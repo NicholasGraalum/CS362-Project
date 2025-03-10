@@ -1,99 +1,72 @@
+// Verify data access model functions work on the filler data
+const { initializeDatabase } = require('../../database/db');
 const chai = require('chai');
-const expect = chai.expect;
-const Database = require('better-sqlite3');   // Used for in-memory database
+const fs = require('fs');
+const path = require('path');
+const { expect } = chai;
 
-// Import the functions to test
-const { getUserList, addToList, removeFromList } = require('../../models/listModel.js');
+// Import list model functions
+const { getUserList, addToList, removeFromList } = require('../../models/listModel');
 
-describe('Shopping List Model', function() {
-  let db;
+describe('List Model Unit Tests', function () {
+  const tempDbPath = path.join(__dirname, 'list-test-temp.db');
+  const testDb = initializeDatabase(tempDbPath);  // initialize test database with filler data
 
-  // Create an in-memory database and initialize the table before each test
-  beforeEach(function() {
-    db = new Database(':memory:');
-    db.exec(`
-      CREATE TABLE On_list (
-        email TEXT,
-        i_name TEXT,
-        amount INTEGER,
-        store_api_id TEXT,
-        PRIMARY KEY (email, i_name)
-      );
-    `);
+  // Cleanup after all tests run
+  after(function () {
+    if (testDb) {
+      testDb.close();
+    }
+    if (fs.existsSync(tempDbPath)) {
+      fs.unlinkSync(tempDbPath);
+    }
   });
 
-  // Close the database after each test
-  afterEach(function() {
-    db.close();
+  // Test getUserList
+  it('getUserList should retrieve the correct list for a user', function () {
+    // alice@example.com has 7 ingredients on her list.
+    const aliceList = getUserList('alice@example.com', testDb);
+    expect(aliceList).to.be.an('array');
+    expect(aliceList).to.have.lengthOf(7);
+
+    // Verify expected items (Spaghetti Bolognese ingredients)
+    const itemNames = aliceList.map(item => item.i_name);
+    expect(itemNames).to.include('Tomato');
+    expect(itemNames).to.include('Garlic');
+    expect(itemNames).to.include('Spaghetti');
   });
 
-  // Initial test: empty list
-  describe('getUserList', function() {
-    it('should return an empty array if the user has no ingredients', function() {
-      const result = getUserList('test@example.com', db);
-      expect(result).to.be.an('array').that.is.empty;
-    });
+  // Test addToList
+  it('addToList should add a new ingredient to a user list if not already present', function () {
+    // bob@example.com initially has one item: 'Chicken Breast'
+    addToList('bob@example.com', 'Olive Oil', 20, '0007321000011', testDb);
+    const bobList = getUserList('bob@example.com', testDb);
+    // Now bob should have 2 items.
+    expect(bobList).to.be.an('array').with.lengthOf(2);
+    const oliveOilItem = bobList.find(item => item.i_name === 'Olive Oil');
+    expect(oliveOilItem).to.exist;
+    expect(oliveOilItem.amount).to.equal(20);
   });
 
-  // Add ingredient to list test
-  describe('addToList', function() {
-    it('should add a new ingredient to the list', function() {
-      const email = 'test@example.com';
-      const ingredient = 'Tomato';
-      const amount = 2;
-      const storeApiId = 'store123';
-
-      // Add ingredient to list
-      const runResult = addToList(email, ingredient, amount, storeApiId, db);
-      
-      // Check that the ingredient was inserted
-      const list = getUserList(email, db);
-      expect(list).to.be.an('array').with.lengthOf(1);
-      expect(list[0]).to.include({
-        i_name: ingredient,
-        amount: amount,
-        store_api_id: storeApiId
-      });
-    });
-
-    // If the ingredient is already in the list, it should increase the amount
-    it('should update the amount if the ingredient already exists', function() {
-      const email = 'test@example.com';
-      const ingredient = 'Tomato';
-      const storeApiId = 'store123';
-
-      // Add the ingredient twice; second call should update (add to) the amount
-      addToList(email, ingredient, 2, storeApiId, db);
-      addToList(email, ingredient, 3, storeApiId, db);
-
-      const list = getUserList(email, db);
-      expect(list).to.be.an('array').with.lengthOf(1);
-      // The amount should now be 2 + 3 = 5
-      expect(list[0]).to.include({
-        i_name: ingredient,
-        amount: 5,
-        store_api_id: storeApiId
-      });
-    });
+  // Test addToList for existing ingredient
+  it('addToList should update the amount if the ingredient is already in the user list', function () {
+    // alice@example.com has 300 of Tomato
+    // Adding an extra 50 should update the amount to 350.
+    addToList('alice@example.com', 'Tomato', 50, '0000000004799', testDb);
+    const aliceList = getUserList('alice@example.com', testDb);
+    const tomatoItem = aliceList.find(item => item.i_name === 'Tomato');
+    expect(tomatoItem).to.exist;
+    expect(tomatoItem.amount).to.equal(350); 
   });
 
-  // Removing the ingredient should remove it from the list
-  describe('removeFromList', function() {
-    it('should remove an ingredient from the list', function() {
-      const email = 'test@example.com';
-      const ingredient = 'Tomato';
-      const amount = 2;
-      const storeApiId = 'store123';
-
-      // First, add an ingredient
-      addToList(email, ingredient, amount, storeApiId, db);
-      let list = getUserList(email, db);
-      expect(list).to.have.lengthOf(1);
-
-      // Remove the ingredient
-      removeFromList(email, ingredient, db);
-      list = getUserList(email, db);
-      expect(list).to.be.an('array').that.is.empty;
-    });
+  // Test removeFromList, Alice has Garlic in her list
+  it('removeFromList should remove an ingredient from the user list', function () {
+    // For alice@example.com, remove 'Garlic' from her list.
+    removeFromList('alice@example.com', 'Garlic', testDb);
+    const aliceList = getUserList('alice@example.com', testDb);
+    const garlicItem = aliceList.find(item => item.i_name === 'Garlic');
+    expect(garlicItem).to.be.undefined;
+    // The list should now have 6 items instead of 7.
+    expect(aliceList).to.have.lengthOf(6);
   });
 });
