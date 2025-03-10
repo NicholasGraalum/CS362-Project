@@ -1,6 +1,7 @@
 const recipeModel = require('../models/recipeModel');
 const ingredientModel = require('../models/ingredientModel');
 const listModel = require('../models/listModel');
+const userModel = require('../models/userModel');
 
 function getAllMeals(req, res) {
     try {
@@ -13,6 +14,25 @@ function getAllMeals(req, res) {
     }
 }
 
+function getFavoriteMeals(req, res) {
+    try {
+        const user_email = req.session.userEmail;
+
+        if (user_email) {
+            const meals = recipeModel.getFavoriteRecipes(user_email);  
+            res.render('mealsPage', { meals }); 
+            
+        } else {
+            console.log("not logged in");
+            return res.status(303).redirect(`/login`); 
+        }
+        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
+    }
+}
+
 function getSingleMeal(req, res) {
     try {
         const mealId = req.params.id;
@@ -20,6 +40,7 @@ function getSingleMeal(req, res) {
         const ingredients = ingredientModel.getIngredientsInRecipe(mealId); // Fetch ingredients
         const tags = recipeModel.getRecipeTags(mealId);
         const types = recipeModel.getRecipeTypes(mealId);
+        const favorited = recipeModel.isFavorite(req.session.userEmail, mealId);
 
         if (!meal) {
             return res.status(404).render('404'); // If meal not found, show 404 page
@@ -37,7 +58,8 @@ function getSingleMeal(req, res) {
             ingredients: ingredients.map(i => i.name), // Pass only ingredient names
             categoryTags: tags.map(i => i.tag),     // turn to list
             mealType: types.map(i => i.meal_type),
-            editable: editable
+            editable: editable,
+            favorited: favorited
         });
 
     } catch (error) {
@@ -131,10 +153,48 @@ function addMealToList(req, res) {
     }
 }
 
+// Toggle favorite on a single meal (on to off, or off to on)
+function toggleFavorite(req, res) {
+    try {
+        const user_email = req.session.userEmail;
+
+        // check if user logged in 
+        if (user_email) {   // if so favorite
+            const mealId = req.params.id;
+
+            // check if user has meal favorited
+            const isFavorite = recipeModel.isFavorite(user_email, mealId);
+            
+            console.log("favorited?: ", isFavorite);
+            
+            // add if not in favorites, remove if in favorites
+            if (isFavorite) {
+                console.log("Meal removed from favorites");
+                userModel.removeFavoriteRecipe(user_email, mealId);
+                res.redirect(`/meals/${mealId}`);
+            } else {
+                console.log("meal added to favorites");
+                userModel.addFavoriteRecipe(user_email, mealId);
+                res.redirect(`/meals/${mealId}`);
+            }
+        
+        } else {    // if not logged in, redirect to login page
+            console.log("not logged in");
+            res.redirect(`/login`); 
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 module.exports = { 
     getAllMeals, 
+    getFavoriteMeals,
     getSingleMeal, 
     searchMeals, 
     createMeal, 
-    addMealToList 
+    addMealToList,
+    toggleFavorite 
 };

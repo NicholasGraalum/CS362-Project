@@ -62,6 +62,13 @@ function getFavoriteRecipes(email, db = defaultDb) {
   return stmt.all(email); 
 }
 
+/* 
+Returns true if a recipe is favorited by user, otherwise false
+*/
+function isFavorite(email, r_id, db = defaultDb) {
+  const stmt = db.prepare('SELECT 1 FROM Favorites WHERE email = ? AND r_id = ? LIMIT 1');
+  return !!stmt.get(email, r_id); // Returns true if a result exists, otherwise false
+}
 
 // create new recipe
 function addRecipe(image_link = null, description = null, visibility, servings, creator_email, name, tags, types, db = defaultDb) {
@@ -212,5 +219,6 @@ module.exports = {
                   getAllRecipes, getRecipeTags, getRecipeTypes, getRecipeById, getRecipesByTag, getRecipesByType, getFavoriteRecipes, 
                   addRecipe, addIngredientToRecipe, addTagToRecipe, addTypeToRecipe,
                   removeIngredientFromRecipe,
-                  searchRecipesByName, searchRecipes 
+                  searchRecipesByName, searchRecipes,
+                  isFavorite 
                 };
