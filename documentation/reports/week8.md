@@ -15,7 +15,8 @@
 - made graphics for final poster
 
 #### Matt:
-
+- Added new checkboxes to search and create modals
+- 
 
 #### Nick:
 - Added landing page to the handlebars as well as the routing and controllers for the landing page
