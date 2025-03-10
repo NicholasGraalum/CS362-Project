@@ -7,7 +7,13 @@
 
     <div class="meal-page-header">
       <h1>{{name}}</h1>
-      <button class="star-button" title="Favorite Meal">&#9733;</button>
+      <a href="/meals/favorite/{{id}}">
+        {{#if favorited}}
+          <button class="star-button" title="Favorite Meal">&#9733;</button>
+        {{else}}
+          <button class="empty-star-button" title="Favorite Meal"> &#9734;</button>
+        {{/if}}
+      </a>
     </div>
 
     <img class="meal-page-image" src="{{image}}" alt="Picture of {{name}}">
