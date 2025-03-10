@@ -670,3 +670,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const starButtons = document.querySelectorAll('.star-button');
+
+  starButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Get the closest parent element with the full-meal class
+      const fullMeal = button.closest('.full-meal');
+      if (fullMeal && fullMeal.dataset.id) {
+        const id = fullMeal.dataset.id;
+        // Redirect to /favorites/{{id}}
+        window.location.href = `/favorites/${id}`;
+      } 
+    });
+  });
+});
