@@ -16,6 +16,12 @@ app.use(session({
   cookie: { secure: false } // Set true if using HTTPS
 }));
 
+app.use((req, res, next) => {
+  // Set a local variable "username" for every view.
+  res.locals.username = req.session && req.session.userEmail ? req.session.userEmail : null;
+  next();
+});
+
 // Import routes
 const landingRoutes = require('./routes/landingRoutes')
 const userRoutes = require('./routes/userRoutes');

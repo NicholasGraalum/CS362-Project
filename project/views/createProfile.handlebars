@@ -7,7 +7,7 @@
         
         {{#if error}}
         <div class="error-message">
-            <p>{{error}}</p>
+           <p style="color: red;">{{error}}</p>
         </div>
         {{/if}}
         
@@ -24,7 +24,7 @@
                 <input type="password" name="password" class="text-box" aria-label="enter-password" required></input>    
                 
                 <p>Add a Zipcode: </p> 
-                <input type="text" name="zipcode" class="text-box" aria-label="enter-zipcode" value="{{formData.zipcode}}"></input>
+                <input type="text" name="zipcode" class="text-box" aria-label="enter-zipcode" value="{{formData.zipcode}}" required></input>
             </div>
             <div class="submit-button">
                 <button type="submit" class="edit-button" aria-label="create-login">Create Profile</button>

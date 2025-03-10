@@ -42,3 +42,12 @@
         <a href="/create-profile"><p>Dont have an account?<button class="edit-button" id="create-profile">Signup</button></p></a>
     </div>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('accountCreated') === '1') {
+    alert('Account successfully created!');
+  }
+});
+</script>

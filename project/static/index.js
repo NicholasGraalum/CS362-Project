@@ -605,6 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const data = await response.json();
         console.log('Add to list response:', data);
+        alert("Item added successfully");
         // // Reload the page to refresh the list display.
         // window.location.reload();
       } catch (error) {
