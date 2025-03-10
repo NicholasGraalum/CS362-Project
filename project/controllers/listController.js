@@ -149,8 +149,15 @@ async function displayPage(req, res) {
     // Calculate the total price by summing each item's price (multiplied by amount if needed)
     const totalPrice = list.reduce((acc, item) => acc + Number(item.price), 0).toFixed(2);
   
-    // Render the Handlebars template with the updated list and total price.
-    res.render('listPage', { list, totalPrice });
+    // Render the Handlebars template with the updated list and total price.        
+    res.render('listPage', {
+      list,
+      totalPrice,
+      username: user.username,
+      email: user.email,
+      zipcode: user.zipcode,
+      storeID: user.storeID
+    });
   }
 
 async function deleteItem(req,res) {

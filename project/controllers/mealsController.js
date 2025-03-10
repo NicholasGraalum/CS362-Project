@@ -1,12 +1,25 @@
 const recipeModel = require('../models/recipeModel');
 const ingredientModel = require('../models/ingredientModel');
 const listModel = require('../models/listModel');
+const userModel = require('../models/userModel');
 
 function getAllMeals(req, res) {
     try {
         console.log('current logged in user is %s', req.session.userEmail);
         const meals = recipeModel.getAllRecipes();  // Fetch all recipes
-        res.render('mealsPage', { meals }); // Render mealsPage.handlebars
+        const user = userModel.getUserByEmail(req.session.userEmail);
+        if (!user) {
+            res.render('mealsPage', {meals,});
+        }
+        else {
+            res.render('mealsPage', {
+                    meals,
+                    username: user.username,
+                    email: user.email,
+                    zipcode: user.zipcode,
+                    storeID: user.storeID 
+                }); // Render mealsPage.handlebars
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -20,6 +33,7 @@ function getSingleMeal(req, res) {
         const ingredients = ingredientModel.getIngredientsInRecipe(mealId); // Fetch ingredients
         const tags = recipeModel.getRecipeTags(mealId);
         const types = recipeModel.getRecipeTypes(mealId);
+        const user = userModel.getUserByEmail(req.session.userEmail);
 
         if (!meal) {
             return res.status(404).render('404'); // If meal not found, show 404 page
@@ -37,7 +51,11 @@ function getSingleMeal(req, res) {
             ingredients: ingredients.map(i => i.name), // Pass only ingredient names
             categoryTags: tags.map(i => i.tag),     // turn to list
             mealType: types.map(i => i.meal_type),
-            editable: editable
+            editable: editable,
+            username: user.username,
+            email: user.email,
+            zipcode: user.zipcode,
+            storeID: user.storeID 
         });
 
     } catch (error) {

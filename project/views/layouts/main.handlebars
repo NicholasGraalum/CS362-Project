@@ -13,6 +13,9 @@
       <div class="topbar">
         {{!-- Profile button with people icon --}}
         {{#unless isLoginPage}}
+          {{#if username}}
+          <div class="username"> {{username}} </div>
+          {{/if}}
           <button id="profile-viewer" class="action-button">
             <svg class="profile-icon" width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
               {{!-- Left Person --}}

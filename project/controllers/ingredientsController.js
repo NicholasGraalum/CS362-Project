@@ -72,16 +72,25 @@ async function getProducts(req, res) {
     // }
 
     try {
+        const user = userModel.getUserByEmail(req.session.userEmail);
         const ingredient = req.query.ingredient;
         const mealId = req.params.mealId;
-        if (!ingredient) {
+        if (!ingredient && !user) {
             return res.render('ingredientsPage', { 
                 products: [], 
-                error: "Please enter an ingredient." 
+                error: "Please enter an ingredient."  
             });
         }
-
-        const user = userModel.getUserByEmail(req.session.userEmail);
+        else if(!ingredient) {
+            return res.render('ingredientsPage', {
+                products: [],
+                error: "Please enter an ingredient",
+                username: user.username,
+                email: user.email,
+                zipcode: user.zipcode,
+                storeID: user.storeID
+            });
+        }
 
         const storeId = user.storeID;
 
@@ -118,27 +127,40 @@ async function getProducts(req, res) {
           });
 
 
-
-        res.render('ingredientsPage', { 
-            //products: data.data, 
-            products,
-            mealId,
-            //searchTerm: ingredient 
-        });
+        if(!user) {
+            res.render('ingredientsPage', {
+                //products: data.data,
+                products,
+                mealId,
+                //searchTerm: ingredient,
+                username: user.username,
+                email: user.email,
+                zipcode: user.zipcode,
+                storeID: user.storeID
+            });
+        }
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
 
 function displayPage(req, res) {
+    const user = userModel.getUserByEmail(req.session.userEmail);
     if (!req.session || !req.session.userEmail) {
         return res.redirect('/login');
     }
 
     const mealId = req.params.mealId;
-    console.log("Meal ID: ", mealId);
+    console.log("Meal ID: ",
+        mealId);
 
-    res.render('ingredientsPage', { mealId }); 
+    res.render('ingredientsPage', {
+        mealId,
+        username: user.username,
+        email: user.email,
+        zipcode: user.zipcode,
+        storeID: user.storeID
+    }); 
 }
 
 async function addIngredientToList(req, res) {
