@@ -1,0 +1,7 @@
+- name: my-web-service
+  type: web
+  env: node
+  plan: free
+  region: oregon
+  buildCommand: npm install
+  startCommand: npm start
