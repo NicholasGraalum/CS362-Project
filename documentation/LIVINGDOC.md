@@ -438,7 +438,9 @@ We are using GitHub Actions for continuious integration. Every time a pull reque
 
 
 #### Matt:
-
+- I learned that it can be difficult to split work into front and backend developers instead of doing each use case end-to-end.
+- I learned how to use Mocha and github actions to integrate different tests.
+- I learned more about how to use a database inside of a test.
 
 #### Nick:
 
