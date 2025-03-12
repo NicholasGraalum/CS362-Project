@@ -132,7 +132,7 @@ Database:
 - Our database for the software will most likely be mysql, as that is the only resource that we know of at the moment. Another thing is that this is the database toolset that we have used the most. 
 
 APIs:
-- We will be using two APIs for our software, the food nutrition info under the usda, as well as the Fredmeyer  API giving us the ability to show the prices and items at the specific store. This is a part of the general basis of our software. If we are able to we would like to add some more store APIs that are public domain to give more offering of price and items.
+- We will be using one API for our software: the Fredmeyer  API giving us the ability to show the prices and items at the specific store. This is a part of the general basis of our software. If we are able to we would like to add some more store APIs that are public domain to give more offering of price and items.
 ### Team roles
 Team lead:
 - Nick: This role is needed due to the increase in need of organization and coherence within the team. Nick fills this role due to his monitoring and use of organizational programs, as well as his communication with the team.
@@ -173,18 +173,7 @@ Feedback will be most useful for testing our UI to make sure it is user friendly
 3. Item code Integration issues:
 - Risk: We will have different team members working with different apis that use different codes to refer to items. This could cause issues matching items when we try to connect all of our features with one database.
 - Mitigation: We will come up with a system to match item codes across apis and within our own database before getting too far into development. 
-### Major features:
-1: Users can create profiles and add meals to a Database of recipes. 
-- Searches or adds to database of recipes
-- Get recommendation of recipes based on user’s dietary restrictions and likes
-- Recipes can be added to a list of favorite recipes. 
-2: Can create a shopping list based on meals in the following week in addition to other groceries.
-- Users can list what meals they plan to eat each day. Then ingredients for each meal are automatically added to the shopping list. 
-- Can set frequently bought items to have them automatically added to the shopping list based on how frequently they are purchased. 
-3: Give the total cost of a meal or the total cost of a shopping list
-- Uses the store api to calculate costs
-4: Calorie and macro calculator 
-- Calculates the total macros of a meal using nutrition api
+
 ### Stretch goals:
 1: Map/route for shopping at your local store
 - Uses kroger api to get location of items in store
@@ -253,9 +242,7 @@ b. Filter bar to search for specific ingredients.
 5. **Shopping list page**: Displays all ingredients added to cart and the estimated total cost.  
 a. ‘-’ button on each ingredient: allows the user to remove ingredients from the shopping list.  
 b. ‘+’ button on each ingredient: allows the user to increase the amount of the ingredient.  
-6. **Meal recommendation page**
-a. Simple text input field to enter meal request prompt  
-b. “View meal” appears after entering meal request that will take user to the meal page  
+
 7. Profile page (tentative)
 8. Login/logout
 
@@ -265,7 +252,6 @@ b. “View meal” appears after entering meal request that will take user to th
 - The one exception is that the login page and landing page will be the same page, routed differently depending on if logged in.
 
 #### computation functions (business layer)
-- Meal macro calculator function: calls fdc nutrition api to calculate total macros for ingredients in meal.
 - Grocery list price calculator function: calls Kroger api to calculate total price for all items on list. 
 
 #### DAL (data access layer)
@@ -286,8 +272,7 @@ Attribute specifications:
 -- Image (link)  
 -- Number of servings (float)  
 -- Meal type (multivalued: breakfast, lunch, dinner) (varchar(20))  
--- Category tags: (multivalued: vegan, vegetarian, gluten free, etc.) (varchar(20))  
--- Macronutrients (Tentative. Will be derived for now. Might add to database later to save api calls)  
+-- Category tags: (multivalued: vegan, vegetarian, gluten free, etc.) (varchar(20))   
 -- Ingredients (relation)  
 -- Visibility (public or private)  
 -- Description (varchar(200))  
@@ -298,7 +283,6 @@ Attribute specifications:
 - Ingredients   
 -- Name (varchar(100))  
 -- Store_api_id (item id in kroger api) (int)  
--- Nutrition_api_id (item id in usda fdc api) (int)  
 
   
 ### Software Design
@@ -394,13 +378,11 @@ Any available member is available to help and test wherever needed along the way
 #### Test Plan and Bugs
 Track all bugs on **GitHub Issues**  
 **Functional Requirements:**
-  - **Unit Testing:** Verify meal macronutrient calculation functions. Verify shopping list price calculation functions. Test rendering of individual handlebars by hardcoding data in the test. Verify data access models pull correct data. 
+  - **Unit Testing:** Verify shopping list price calculation functions. Test rendering of individual handlebars by hardcoding data in the test. Verify data access models pull correct data. 
   - **Integration Testing:** Test interactions between components (Verify all HTTP requests and API calls render)  
 
   - **Validation Testing:** Check that pages satisfy the requirements by checking the html response for required data 
-  - **System Testing:** Check that the system works as a whole by using the Cypress library to write a test to simulate user flow through the website.
-
-  - **Black Box Testing: (probably won't do this anymore)** Create a variety of personas to verify all functional requirements by testing as they would use the website
+  - **System Testing:** End to End testing to check that the system works as a whole by using the Cypress library to write a test to simulate user flow through the website.
  
   - **Bug Tracking:** Use GitHub Issues to log and resolve bugs.  
 
@@ -413,36 +395,6 @@ Track all bugs on **GitHub Issues**
 Developer living documentation and guides for future development. This will include code structure and architecture. Implemented as we develop new features
 User guide documentation. This will go over all the UI and different features and how to use them. Implemented at the end of development and as new features are implemented
 In-app information symbols and explanations. This will explain in the app how to do different things and use different features. Implemented during development and from user feedback.
-
-#### User Documentation
-- Description: See Abstract Section.
-- Accessing the website: Currently, the website is set up to be accessed through localhost.
-- Using the website: See Web Pages under Architecture Components section.
-
-#### Developer Documentation
-- Obtaining source code: All source code is available in the github repository under the project directory.
-- Building the software:
-  + Clone the repository to your local machine
-  + Run 'npm i' in the terminal while in the project directory
-  + Run 'npm start' in the terminal while in the project directory to run the website on localhost
-
-#### Structure
-```
-documentation/ : contains all term project documents  
-    reports/ : contains weekly team progress reports  
-    LIVINGDOC  
-
-project/ : contains all term project code
-    controllers : contains controllers to handle incoming requests and send responses
-    database     : contains database for the website
-    models       : contains models for the structure of data in the database
-    routes       : defines the paths to map to the correct URL
-    static       : contains static files (html mockups and style.css)
-    views        : contains handlebar templates for webpages
-        partials    : contains partial handlebar templates
-    package.json : contains dependencies
-    server.js    : contains code for server
-```
 
 #### Test-Automation and CI 
 We will be using Mocha as our test automation infrastructure along with the Chai, Supertest, and Cypress libraries. We chose Mocha because its flexibility allows testing synchronous functions, asynchronous functions, testing our http routes using Supertest, and simulating user flow through the website with Cypress. Developers can add new tests by adding to the /test folder and using the existing tests as examples. 
