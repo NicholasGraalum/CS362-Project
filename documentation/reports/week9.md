@@ -18,6 +18,10 @@
 - improved create recipe usecase: connected kroger store page to the meal add ingredient functionality
 - implemented favorite meal usecase allowing meal favoriting and sorting by favorites
 - fixed bugs and polished website interactions
+- Setup website hosting with Render
+- made INSTALL.md
+- made SETUP.md
+- Binary distribution (Release v1.0 on Github with release notes)
 
 #### Matt:
 - Expanded initial filler for database
