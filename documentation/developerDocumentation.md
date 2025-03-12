@@ -74,5 +74,7 @@ Use Supertest to simulate express requests.
 Use Cypress for end to end testing.  
 For any tests requiring the database, use a temp better-sqlite3 database (See existing model unit tests)  
 
-Reference existing tests for formatting.   
+Reference existing tests for formatting.  
+
+**LATEST TEST RESULTS** can be found at https://github.com/NicholasGraalum/CS362-Project/actions/workflows/test.yml 
 
