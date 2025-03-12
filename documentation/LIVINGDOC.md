@@ -165,19 +165,6 @@ Schedule under roles:
 
 ### External feedback
 Feedback will be most useful for testing our UI to make sure it is user friendly and intuitive. We will get this feedback by finding potential users and performing user tests.  
-### Risks
-1. APIs: 
-- Risk: We plan to use multiple api’s that we have never used before. We could struggle with retrieving the data from the api or the api could not have the data we expected/required.
-- Mitigation: We will look into the api’s early on, learn how to use them, and make sure they will work for what we need. 
-2. Server setup:
-- Risk: We plan to have our website hosted on a server which comes with uncertainties such as uptime and teammates familiarity with developing on live servers.
-- Mitigation: We will research the best way to host the server ahead of time and make sure all teammates know how to push and test code on the server.  
-3. Item code Integration issues:
-- Risk: We will have different team members working with different apis that use different codes to refer to items. This could cause issues matching items when we try to connect all of our features with one database.
-- Mitigation: We will come up with a system to match item codes across apis and within our own database before getting too far into development.
-4. Meal Data and Creation:
-- Risk: With many users, it is possible that a user or multiple users will create many fake meals that clutter our database and make it hard for users to find actual meals
-- Mitigation: We will need to implement some way to check for real meals or have a team that checks meals inputted and verify them 
 
 ### Major features:
 1: Users can create profiles and create any meals (breakfast, lunch, dinner, or snack) to a Database of recipes that others have contributed too. 
@@ -281,7 +268,7 @@ b. ‘+’ button on each ingredient: allows the user to increase the amount of 
 #### Data Base (data layer):
 
 ER Diagram:
-![Database ERD](images/database_ERD.png)
+![Database ERD](images/updated_database_ERD.png)
 
 Attribute specifications:
 - Recipe aka Meal plan  
@@ -355,10 +342,10 @@ All of these guidelines were taken from the google AI overview, slightly modifie
 | Risk                     | Likelihood | Impact | Evidence                                                | Mitigation                                        | Detection                                             | Plan                                                                 |
 |--------------------------|------------|--------|--------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------|----------------------------------------------------------------------|
 | API Integration Issues   | High       | High   | Limited experience with Kroger APIs                    | Early exploration of the API with testing        | API testing                                         | Fallback to a static data set if the API fails                       |
-| Team Communication Issues | Low        | High   | Reliance on online communication                      | Set response expectations and standup meetings regularly | Track responses and activity from each member     | Team lead will reach out individually if there are any problems      |
+| Server issues | Medium        | High   | Reliance on free cloud server                      | Early exploration to track how many people and hours will the current free server handle | Track how many members are using the product     | Upgrade the server plan to support more people      |
 | User Scalability         | Low        | High   | API calls have a certain daily and monthly limit      | Upgrade API plan to be able to handle more calls | Track our user count and our growth                | Once we reach a certain number of users that approach API limits, upgrade the plan |
 | DB Issues               | Low        | High   | Anticipated rapid growth in the recipe data           | Optimize queries, with indexes                   | Monitor performance and scale                       | Implement scalable database infrastructure                            |
-| Document Organization    | Medium     | Medium | Between seven members and lots of files, keeping consistent code and variable tracking can be messy | Proper documentation and frequent communication | Code starts to get messy to read, duplicate function or variable declaration | Draw out our design plan, designate roles with no conflicts         |
+| Meal Creation Issues  | Medium     | Medium | Not knowing what type of users will be using our product | Only allowing users to create X meals a day  | By checking recent created meals | If we see users creating fake meals and making it hard for users to find real meals, delete the fake meals and set a limitation on meals the users can create         |
 
 
 
