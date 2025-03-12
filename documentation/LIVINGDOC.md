@@ -459,3 +459,26 @@ We are using GitHub Actions for continuious integration. Every time a pull reque
 
 **Cons of CircleCI**
 - Requires more set up configurations
+
+
+### Reflections
+
+#### Aaryan:
+
+
+#### Andrew:
+
+
+#### Kylan:
+- I learned that tasks should be specifically assigned to individuals instead of just put on the trello because then they are more likely to get completed.  
+- I learned that small deadlines should be set for smaller parts of a larger task otherwise the task will be rushed at the very end of the deadline.  
+- I learned that its important to plan and set specific requirements for a task as a team so that the team is on the same page and everyone has the same understanding of what needs to be done. 
+
+
+#### Matt:
+
+
+#### Nick:
+
+
+#### Ryan:
