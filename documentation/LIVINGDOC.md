@@ -15,17 +15,17 @@ GitHub: https://github.com/NicholasGraalum/CS362-Project
 ### Abstract
 Consider the choices of meal preparation, costs of meals and where to shop for groceries. With this we have decided to go ahead with developing a Smart Grocery List Generator. An app that creates grocery lists based on meal plans and dynamically adjusts based on user preferences and budget constraints. Users will be able to search for meals or get recommendations of meals from a database of meals entered by other users. This app is perfect for those who need extra help organizing and planning their week ahead. 
 ### Goal
-Our team goal is to develop a Smart Grocery List Generator that will help with creating grocery lists based on meal plans. Our web based application will generate the list based on the users preferences and budget. 
+Our team goal is to develop a Smart Grocery List Generator that will help with creating grocery lists based on meal plans. Our web based application will generate the list based on the user's preferences and chosen meals, as well as allowing them to search for individual products to add. 
 ### Current Practice
 Apps and websites that are currently in use primarily calculate the cost to feed certain amounts of people. Ours will solve this issue of helping maintain a meal plan based on a budget.
 ### Novelty
-This website will put meal planning and shopping lists all in one. The user will be able to pick meals for the week from their favorite meals or from new meals suggested to them. Then the ingredients from the selected meals will be added directly to their shopping list. For other groceries, the user will be able to set recurring items so that these necessities never run out. Before going shopping, the user will be able to see a price estimate for their shopping list, so they know ahead of time if it is within the budget. With this app shopping will be a breeze and no grocery will be forgotten again. 
+This website will put meal planning and shopping lists all in one. The user will be able to pick from available meals or create their own. Then the ingredients from the selected meals will be added directly to their shopping list. For other groceries, the user will be able to set recurring items so that these necessities never run out. Before going shopping, the user will be able to see a price estimate for their shopping list, so they know ahead of time if it is within the budget. With this app shopping will be a breeze and no grocery will be forgotten again. 
 ### Effect
 Overall the user base is aimed towards consumers of large grocery based companies. As well as people who struggle or need a way to help budget their spendings on food while keeping a meal plan.
 
 
 ### Use Cases
-User can create a profile and login to save their data (Kylan) (database)
+User can create a profile and login to save their data 
 - **Actors**: The user
 - **Triggers**: Clicks “Login / Sign-Up” button
 - **Preconditions**: The user must have a unique email address and username
@@ -34,25 +34,25 @@ User can create a profile and login to save their data (Kylan) (database)
 - **Extensions**: User updates profile/username after logging in
 - **Exceptions**: Invalid login details, already existing email, a bug or system failure occurs
 
-User can view ingredients, number of servings, and macronutrients for each meal plan (Ryan)
+User can view ingredients, number of servings, and a description for each meal 
 - **Actors**: The user
 - **Triggers**: Clicking on a meal
 - **Preconditions**: Must be on the page showing the meals and the user wants to see how many calories and macronutrients are in each meal prep per serving
-- **Postconditions**: Redirects to a new page showing the ingredients, number of meals, calories, and macronutrients
+- **Postconditions**: Redirects to a new page showing the ingredients, number of servings, description, picture, and tags.
 - **List of steps**: Add a listener to each meal that redirects to a meal template, the meal template takes information from the meal database, the page is rendered
 - **Extensions**: Add a pie chart showing the percentages of each macronutrient, add a hidden dropdown showing the micronutrients and percentage of daily values
 - **Exceptions**: The meal requested may not have all the needed information (shouldn’t happen if we have input verification)
 
-User can add meals to a database of recipes (Andrew)
+User can add meals to a database of recipes 
 - **Actors**: The user
-- **Triggers**: The user clicks on “Add a recipe” button 
+- **Triggers**: The user clicks on “Create Meal” button 
 - **Preconditions**: The user must have an account with our site
 - **Postconditions**: The user adds a recipe to our pre-existing database of recipes
 - **List of steps**: User logs on and adds a recipe which the user can click on and add to their shopping list the next time they use our site.
 - **Extensions**: User adds a small info paragraph about possible substitutions
 - **Exceptions**: User has a missing input such as, a list of ingredients or the name of the recipe
 
-User can create a shopping list based on meals in the DB (Nicholas Graalum)
+User can create a shopping list based on meals in the database
 - **Actors**: The user
 - **Triggers**: The user clicks add to the shopping list on the meal they want/ searched for.
 - **Preconditions**: The user must have an account, there must be meals in the DB
@@ -61,7 +61,7 @@ User can create a shopping list based on meals in the DB (Nicholas Graalum)
 - **Extensions**: The user searches for  meals in the meal page via the search bar and adds it. The user adds a meal via the recommendations page. 
 - **Exceptions**: The user adds incorrect meals to the shopping list. They search for a meal that doesn’t exist in the DB.
 
-User can search for specific types of meals (Matthew Sasten)
+User can search for specific types of meals 
 - **Actors**: The user
 - **Triggers**: Clicking the ‘Apply Filter’ button
 - **Preconditions**: All meals are shown on the page, the user wants to search by certain specifications (meal type, name, categories)
@@ -70,16 +70,25 @@ User can search for specific types of meals (Matthew Sasten)
 - **Extensions**: User updates or clears the filter conditions then correct meals are shown based on the new conditions
 - **Exceptions**: If there are no meals in the database that match the filters, no meals will be shown
 
-Users can set frequently bought items to have them automatically added to the shopping list based on how frequently they are purchased. (Aaryan)
+Users can add favorite meals to make it easier to find frequently bought ingredients
 - **Actors**: The user
-- **Triggers**: User turning on the enable feature for the auto-add.
-- **Preconditions**: User has added items to their list previously
-- **Postconditions**: Frequently bought items are automatically included in the list.
-- **List of steps**: User enables an auto-add feature, system tracks frequency of item, then adds frequent items automatically when the user generates a list.
-- **Extensions**: User can manually adjust auto-added items, system suggests frequency settings based on patterns (biweekly/monthly)
-- **Exceptions**: No past data, incorrect frequency calculation
+- **Triggers**: User clicking the star button on a single meal page
+- **Preconditions**: User is logged in
+- **Postconditions**: Meal is added to the user's favorite meals in the database and can be found by clicking the "Favoirites" button on the main meal page.
+- **List of steps**: User clicks star button, the meal is added to the database as a favorite meal, the user can then find their favorite meals by clicking the "Favorites" button.
+- **Extensions**: User can remove meals from their favorites list
+- **Exceptions**: None
 
-Ask for meal recommendations (Updated to be tentative stretch goal per ta rec)
+  Users can add misc. ingredients/products not part of any meal
+- **Actors**: The user
+- **Triggers**: User clicking the store button in the dropdown menu and searching for an ingredient/product.
+- **Preconditions**: User is logged in
+- **Postconditions**: Ingredient/product is added to the user's shopping list
+- **List of steps**: User clicks store button, searches for a product/ingredient they want to add to their list, and then it is added to the shopping list.
+- **Extensions**: User determine how much of the product/ingredient to add to their shopping list.
+- **Exceptions**: Product/ingredient is not available on the Kroger API.
+
+Ask for meal recommendations (Updated to be tentative stretch goal per TA recommendation)
 - **Actors**: The user
 - **Triggers**: The user clicks the meal recommendation button
 - **Preconditions**: The user has entered a meal recommendation request prompt describing what type of meal they want
@@ -87,11 +96,15 @@ Ask for meal recommendations (Updated to be tentative stretch goal per ta rec)
 - **List of steps**: User goes to the meal request page. User enters an appropriate meal request and clicks the request button. Gpt api generates a list of suggested meals. 
 - **Extensions**: The user leaves the page before clicking the request button: entered request is not saved.
 - **Exceptions**: The request prompt is not understood by the gpt ai: a default response is given with instructions for a correct prompt
+
 ### Functional Requirements:
 1. System provides a way for users to create an account or log in with their credentials
 2. System allows adding meals while storing all meals added
-3. System filters meals based on user preferences 
+3. System filters meals based on user input (name, meal type, and category tags)
 4. System provides an accurate price of the shopping list
+5. System allows users to add meals to their favorites list
+6. System allows users to add misc. ingredients or products to their shopping list
+
 ### Non functional Requirements:
 **Reliability**: Consistently able to perform the functions based around the users profile, shopping lists, and meal plans.  
 **Quality**: Easy to use and provides accurate information.  
