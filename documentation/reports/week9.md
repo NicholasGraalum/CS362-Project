@@ -22,6 +22,7 @@
 - made INSTALL.md
 - made SETUP.md
 - Binary distribution (Release v1.0 on Github with release notes)
+- made developerDocumentation.md
 
 #### Matt:
 - Expanded initial filler for database

@@ -15,9 +15,9 @@ Ensure the following dependencies are installed before proceeding:
 
 ### **Step 1: Download and Extract the Package**  
 1. Download the **ZIP file** from [GitHub v1.0 Release](https://github.com/NicholasGraalum/CS362-Project/releases/tag/v1.0.0).  
-2. Extract the contents and enter the project dir
+2. Extract the contents and enter the internal project dir
    ```sh 
-   cd /smart-cart-v1/project
+   cd /project
    ```
 
 ### **Step 2: Install Dependencies**  
