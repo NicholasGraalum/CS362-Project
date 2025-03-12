@@ -9,15 +9,21 @@ documentation/ : contains all term project documents
     LIVINGDOC  
 
 project/ : contains all term project code
-    controllers  : contains controllers to handle incoming requests and send responses
-    database     : contains database for the website
-    models       : contains models for the structure of data in the database
+    controllers : contains controllers to handle incoming requests and send responses
+    database     : contains database files (schema, filler, setup)
+    models       : contains functions to access data in the database
+    test         : contains all tests
+        e2e         : contains end to end tests using cypress
+        integration : contains tests for testing that routes succeed
+        unit        : contains unit tests for functions
+        validation  : contains tests validating usecase requirements
     routes       : defines the paths to map to the correct URL
     static       : contains static files (html mockups and style.css)
     views        : contains handlebar templates for webpages
         partials    : contains partial handlebar templates
     package.json : contains dependencies
-    server.js    : contains code for server
+    app.js       : contains code for server configuration
+    server.js    : contains code to run server
 ```
 
 ### Building and Testing the System
