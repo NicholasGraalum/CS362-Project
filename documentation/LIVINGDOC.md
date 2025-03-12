@@ -297,7 +297,7 @@ Handlebars (technically on server): main handlebar template will include the hea
 
 #### Server (business layer)
 
-Express routing to serve html pages rendered from handlebars to client. Routing functions are responsible for handling calling other necessary functions for computing, calling DAL functions or FDC nutrition API and Kroger API to collect necessary data, and rendering html page with data and handlebars. 
+Express routing to serve html pages rendered from handlebars to client. Routing functions are responsible for handling calling other necessary functions for computing, calling DAL functions for Kroger API to collect necessary data, and rendering html page with data and handlebars. 
 
 #### Data access layer
 
