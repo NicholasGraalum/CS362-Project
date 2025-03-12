@@ -23,6 +23,9 @@
 - made SETUP.md
 - Binary distribution (Release v1.0 on Github with release notes)
 - made developerDocumentation.md
+- made RELEASE_NOTES.md for source distribution
+- made v1.0.0 release
+- update README.md to be current
 
 #### Matt:
 - Expanded initial filler for database
