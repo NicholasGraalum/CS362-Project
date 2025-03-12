@@ -14,9 +14,9 @@ For more information, visit https://github.com/NicholasGraalum/CS362-Project/blo
 
 ## Using the website:
 When using the website there are 4 main pages:
-- '/meals': this can be accessed by clicking the **meals** button on the top nav bar of the webpage
-- '/ingredients':  this can be accessed by clicking the **ingredients** button on the top nav bar of the webpage
-- '/list': this can be accessed by clicking the **list** button on the top nav bar of the webpage
+- '/meals': this can be accessed by clicking the **meals** button after clicking the dropdown menu on the top right
+- '/ingredients':  this can be accessed by clicking the **ingredients** button after clicking the dropdown menu on the top right
+- '/list': this can be accessed by clicking the **list** button after clicking the dropdown menu on the top right
 - '/profile': this can be accessed by clicking the circle with the word **profile** in it
 
 ### Meals page:
