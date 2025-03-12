@@ -110,17 +110,19 @@ Ask for meal recommendations (Updated to be tentative stretch goal per TA recomm
 6. System allows users to add misc. ingredients or products to their shopping list
 
 ### Non functional Requirements:
-**Reliability**: Consistently able to perform the functions based around the users profile, shopping lists, and meal plans.  
-**Quality**: Easy to use and provides accurate information.  
+**Reliability**: Consistently able to perform the functions based around the users profile, shopping lists, and meal plans.   
 **Scalability**: Can handle multiple API requests without a performance decrease. Uses an sql database to store data so it can easily be scaled up.  
 **Usability**: Has a responsive, clear design that gives users feedback on actions.  
 **Security**: Stores user data in a secure manner
+**Maintainability**: The codebase is modular, well-documented, and follows industry best practices, ensuring that it can be easily updated, extended, and maintained over time without introducing errors.
 ### External Requirements
 **Error handling**: Invalid user inputs and actions are handled gracefully.  
 **Access**: Run on a server with a public URL that others can access  
 **Documentation**: Document the process for setting up the server so new servers can be created.  
 **Scope**: The scope of our project extends to a reasonable use case for each member to implement. 
 ### Technical Approach / Toolset
+#### High Level Solution
+Smart Cart is going to be a website that users will be able to access after downloading and running our product as described in the SETUP documentation. Once users run our product, they will need to sign up or sign in. After signing in with an existing account or the one they just created. They can view the user documentation on the landing page or go through our functionalities. They can go to meals to add meals to their list or add meals to the database, they can go to list to view their current grocery list and see an estimated price, or they can go to the store page to add indivudual ingredients to their list.
 #### Toolset
 *Stack*:
 - For the stack of our software, we will be using HTML, CSS and javascript. These are the industry standard for developing a stack and web based applications. Furthermore these three tools are what the team is most comfortable with.
@@ -129,7 +131,7 @@ Server:
 - When it comes to the server position of our software we will be using Node, express and handlebars. Again these are the industry standard for developing a server for web based applications. This also offers a lot of flexibility for our application.
 
 Database:
-- Our database for the software will most likely be mysql, as that is the only resource that we know of at the moment. Another thing is that this is the database toolset that we have used the most. 
+- Our database for the software will be mysql, as that is the only resource that we know of at the moment. Another thing is that this is the database toolset that we have used the most. 
 
 APIs:
 - We will be using one API for our software: the Fredmeyer  API giving us the ability to show the prices and items at the specific store. This is a part of the general basis of our software. If we are able to we would like to add some more store APIs that are public domain to give more offering of price and items.
@@ -172,7 +174,22 @@ Feedback will be most useful for testing our UI to make sure it is user friendly
 - Mitigation: We will research the best way to host the server ahead of time and make sure all teammates know how to push and test code on the server.  
 3. Item code Integration issues:
 - Risk: We will have different team members working with different apis that use different codes to refer to items. This could cause issues matching items when we try to connect all of our features with one database.
-- Mitigation: We will come up with a system to match item codes across apis and within our own database before getting too far into development. 
+- Mitigation: We will come up with a system to match item codes across apis and within our own database before getting too far into development.
+4. Meal Data and Creation:
+- Risk: With many users, it is possible that a user or multiple users will create many fake meals that clutter our database and make it hard for users to find actual meals
+- Mitigation: We will need to implement some way to check for real meals or have a team that checks meals inputted and verify them 
+
+### Major features:
+1: Users can create profiles and create any meals (breakfast, lunch, dinner, or snack) to a Database of recipes that others have contributed too. 
+- Searches or adds to database of recipes
+- Get recommendation of recipes based on user’s dietary restrictions and likes
+- Recipes can be added to a list of favorite recipes.
+2: Can create a shopping list based on meals in the following week in addition to other
+groceries.
+- Users can list what meals they plan to eat each day. Then ingredients for each meal are
+automatically added to the shopping list. Users will need to determine how much of an ingredient they would need to buy
+3: Give the total cost of a meal or the total cost of a shopping list
+- Uses the store api to calculate costs
 
 ### Stretch goals:
 1: Map/route for shopping at your local store
@@ -230,7 +247,7 @@ By week
 a. ‘Meals’ button will redirect to a page with all of the meals  
 b. ‘Ingredients’ button will redirect to a page with individual ingredients to add to the shopping list  
 c. ‘Shopping List’ button will redirect to a page with all items added to the shopping list and total cost.  
-d. Additional buttons: login/logout, profile (TBD)  
+d. Additional buttons: login/logout, profile 
 2. **All meals page**: Displays all available meals on individual cards with a picture and name. 
 a. Each photocard will direct to an individual meal page displaying information about the meal. A ‘+’ button on the card will add all ingredients to the shopping list.  
 b. Filter feature: Pop-up modal that shows filter conditions to search by (name, meal type, category tags, meal type).  
@@ -423,7 +440,9 @@ We are using GitHub Actions for continuious integration. Every time a pull reque
 
 
 #### Andrew:
-
+- I learned that proper documentation and planning is needed for a successful project because just getting started on the implementation gets messy quickly
+- I learned that frequent communication with your team is important because everybody should know where the project stand and what are the next plans of action for a successful project
+- I learned that starting early is important because there will always be conflicts and unexpected events that come up that slow your team down and provide troubles
 
 #### Kylan:
 - I learned that tasks should be specifically assigned to individuals instead of just put on the trello because then they are more likely to get completed.  
