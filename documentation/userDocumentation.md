@@ -10,7 +10,7 @@ In order to start the webpage, you must install the correct dependices as well a
 4) run **npm start** to start the npm modules
 5) access the wepage via **http://localhost:3000**
 
-This will take you to the landing page. 
+For more information, visit https://github.com/NicholasGraalum/CS362-Project/blob/main/documentation/SETUP.md
 
 ## Using the website:
 When using the website there are 4 main pages:
